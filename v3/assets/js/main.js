@@ -41,61 +41,6 @@
   });
 
   // ---------------------------------------------------------------
-  // Landing-page deck: the cards drift with the pointer.
-  //
-  // The effect is small on purpose — a few pixels of parallax, more on
-  // the cards nearer the front. It is enough to make the stack read as
-  // objects sitting on a table rather than a flat illustration.
-  //
-  // Skipped entirely on touch, on narrow screens where the cards are a
-  // flowed list, and whenever reduced motion is requested.
-  // ---------------------------------------------------------------
-
-  var deck = document.querySelector(".deck");
-  var wants = window.matchMedia;
-
-  if (
-    deck &&
-    wants &&
-    wants("(min-width: 700px)").matches &&
-    wants("(hover: hover)").matches &&
-    !wants("(prefers-reduced-motion: reduce)").matches
-  ) {
-    var cards = deck.querySelectorAll(".deck__card");
-    var frame = null;
-
-    var drift = function (x, y) {
-      Array.prototype.forEach.call(cards, function (card, i) {
-        // Front cards travel further, which is what reads as depth.
-        var depth = (i + 1) * 7;
-        card.style.setProperty("--dx", (x * depth).toFixed(2) + "px");
-        card.style.setProperty("--dy", (y * depth * 0.6).toFixed(2) + "px");
-      });
-    };
-
-    deck.addEventListener("pointermove", function (e) {
-      if (frame) return;
-      frame = requestAnimationFrame(function () {
-        frame = null;
-        var box = deck.getBoundingClientRect();
-        drift(
-          (e.clientX - box.left) / box.width - 0.5,
-          (e.clientY - box.top) / box.height - 0.5
-        );
-      });
-    });
-
-    deck.addEventListener("pointerenter", function () {
-      deck.classList.add("is-live");
-    });
-
-    deck.addEventListener("pointerleave", function () {
-      deck.classList.remove("is-live");
-      drift(0, 0);
-    });
-  }
-
-  // ---------------------------------------------------------------
   // The session track.
   //
   // Four stops that swap one panel underneath them. Progressive
@@ -272,7 +217,7 @@
         // margin has to clear #about's scroll-margin-top, or a nav jump
         // to #about lands exactly in the gap and leaves the bar
         // transparent over the last strip of artwork.
-        var past = window.scrollY > heroEl.offsetHeight - header.offsetHeight - 24;
+        var past = heroEl.getBoundingClientRect().bottom <= header.offsetHeight + 24;
         header.classList.toggle("is-stuck", past);
       };
       window.addEventListener("scroll", function () {
@@ -285,6 +230,47 @@
       window.addEventListener("resize", restick);
       restick();
     }
+  }
+
+  // ---------------------------------------------------------------
+  // Hero scroll progress.
+  //
+  // Publishes --hero-p, --reveal-badges and --reveal-cta on .hero as
+  // the pinned stage is scrolled through; the CSS in style.css reads
+  // them and falls back to the finished state if this never runs.
+  // No-op on the three pages with no hero, and under reduced motion,
+  // where the stage is not pinned at all.
+  // ---------------------------------------------------------------
+
+  var hero = document.querySelector(".hero");
+  var stage = hero && hero.querySelector(".hero__stage");
+  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (hero && stage && !still) {
+    var clamp01 = function (n) { return n < 0 ? 0 : n > 1 ? 1 : n; };
+    // Smoothstep: the beats ease in and out of each other rather than
+    // tracking the scrollbar linearly, which reads as mechanical.
+    var ease = function (t) { return t * t * (3 - 2 * t); };
+    var sub = function (p, a, b) { return clamp01((p - a) / (b - a)); };
+
+    var revealFrame = null;
+    var track = function () {
+      // Scroll room is whatever the stage does not fill. Measured, not
+      // assumed, so the 160svh/135svh breakpoint needs no mirror here.
+      var room = hero.offsetHeight - stage.offsetHeight;
+      var p = room > 0 ? clamp01(-hero.getBoundingClientRect().top / room) : 0;
+
+      hero.style.setProperty("--hero-p", p.toFixed(4));
+      hero.style.setProperty("--reveal-badges", ease(sub(p, 0.02, 0.32)).toFixed(4));
+      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.30, 0.62)).toFixed(4));
+    };
+
+    window.addEventListener("scroll", function () {
+      if (revealFrame) return;
+      revealFrame = requestAnimationFrame(function () { revealFrame = null; track(); });
+    }, { passive: true });
+    window.addEventListener("resize", track);
+    track();
   }
 
 })();
