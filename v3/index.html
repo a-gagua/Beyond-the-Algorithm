@@ -38,6 +38,7 @@
        over the top rather than text inside the SVG, so it stays selectable
        and resizes with the viewport. -->
   <section class="hero">
+    <div class="hero__stage">
     <div class="hero__lid" aria-hidden="true">
       <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -51,34 +52,42 @@
           </linearGradient>
         </defs>
 
+        <g class="lid__ground">
         <rect width="1200" height="800" fill="#f8f4ef"/>
 
         <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".4">
           <!-- The warm field, left, and the cool field, right. Each bulges
                toward the middle, leaving the paper showing top and bottom. -->
-          <path d="M0 0 H344 Q524 400 344 800 H0 Z" fill="url(#lid-warm)"/>
-          <path d="M1200 0 H856 Q676 400 856 800 H1200 Z" fill="url(#lid-cool)"/>
-          <circle cx="600" cy="400" r="332" fill="#5f82a2" stroke-opacity=".25"/>
+          <path class="lid__field lid__field--warm" d="M0 0 H344 Q524 400 344 800 H0 Z" fill="url(#lid-warm)"/>
+          <path class="lid__field lid__field--cool" d="M1200 0 H856 Q676 400 856 800 H1200 Z" fill="url(#lid-cool)"/>
+          <circle class="lid__disc" cx="600" cy="400" r="332" fill="#4e7192" stroke-opacity=".25"/>
+        </g>
         </g>
 
         <!-- Tech: the gear, upper right -->
-        <g transform="translate(904 192)">
-          <circle r="46" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+        <g class="lid__badge lid__badge--gear" transform="translate(904 192)">
+          <g class="lid__badge__in">
+          <circle class="lid__badge__disc" r="46" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+          <g class="lid__gear">
           <!-- A real cog: eight teeth on a rim with a hole through it. The
                previous version was a hub with straight spokes radiating out
                of it, which reads as a sun, not a gear. -->
           <path d="M0.0 -19.5 L2.9 -25.8 A26.0 26.0 0 0 1 7.3 -25.0 L7.5 -18.0 A19.5 19.5 0 0 1 13.8 -13.8 L20.3 -16.3 A26.0 26.0 0 0 1 22.8 -12.5 L18.0 -7.5 A19.5 19.5 0 0 1 19.5 0.0 L25.8 2.9 A26.0 26.0 0 0 1 25.0 7.3 L18.0 7.5 A19.5 19.5 0 0 1 13.8 13.8 L16.3 20.3 A26.0 26.0 0 0 1 12.5 22.8 L7.5 18.0 A19.5 19.5 0 0 1 0.0 19.5 L-2.9 25.8 A26.0 26.0 0 0 1 -7.3 25.0 L-7.5 18.0 A19.5 19.5 0 0 1 -13.8 13.8 L-20.3 16.3 A26.0 26.0 0 0 1 -22.8 12.5 L-18.0 7.5 A19.5 19.5 0 0 1 -19.5 0.0 L-25.8 -2.9 A26.0 26.0 0 0 1 -25.0 -7.3 L-18.0 -7.5 A19.5 19.5 0 0 1 -13.8 -13.8 L-16.3 -20.3 A26.0 26.0 0 0 1 -12.5 -22.8 L-7.5 -18.0 Z" fill="#7cc3bc" stroke="#2c4a63" stroke-width="1.6"
                 stroke-opacity=".5" stroke-linejoin="round"/>
           <circle r="9.5" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5"/>
+          </g>
+          </g>
         </g>
 
         <!-- Domain: the sparkles, lower left -->
-        <g transform="translate(316 602)">
-          <circle r="46" fill="#f9ead6" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+        <g class="lid__badge lid__badge--spark" transform="translate(316 602)">
+          <g class="lid__badge__in">
+          <circle class="lid__badge__disc" r="46" fill="#f9ead6" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
           <g fill="#e2a869" stroke="#c98b45" stroke-width="1.4">
-            <path d="M-8-22C-8-13-13-8-22-8-13-8-8-3-8 6-8-3-3-8 6-8-3-8-8-13-8-22Z"/>
-            <path d="M12 2C12 8 9 11 3 11 9 11 12 14 12 20 12 14 15 11 21 11 15 11 12 8 12 2Z"/>
-            <path d="M-2 14C-2 18-4 20-8 20-4 20-2 22-2 26-2 22 0 20 4 20 0 20-2 18-2 14Z"/>
+            <path class="lid__spark" d="M-8-22C-8-13-13-8-22-8-13-8-8-3-8 6-8-3-3-8 6-8-3-8-8-13-8-22Z"/>
+            <path class="lid__spark" d="M12 2C12 8 9 11 3 11 9 11 12 14 12 20 12 14 15 11 21 11 15 11 12 8 12 2Z"/>
+            <path class="lid__spark" d="M-2 14C-2 18-4 20-8 20-4 20-2 22-2 26-2 22 0 20 4 20 0 20-2 18-2 14Z"/>
+          </g>
           </g>
         </g>
       </svg>
@@ -103,6 +112,7 @@
         <a class="btn btn--ghost" href="contact.html">Host a session</a>
       </div>
 
+    </div>
     </div>
 
   </section>
