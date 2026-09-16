@@ -281,11 +281,6 @@ section {
   flex: none;
 }
 
-.brand__text {
-  font-size: 0.95rem;
-  line-height: 1.2;
-}
-
 .nav-toggle {
   display: none;
   background: transparent;
@@ -492,18 +487,6 @@ section {
   padding-block: clamp(3rem, 10vw, 7rem);
 }
 
-.hero__inner {
-  display: grid;
-  gap: clamp(2.5rem, 6vw, 4rem);
-  align-items: center;
-}
-
-@media (min-width: 900px) {
-  .hero__inner {
-    grid-template-columns: 1.05fr 0.95fr;
-  }
-}
-
 /* Set as large as the column allows and broken deliberately across lines.
    "Algorithm" drops into the mono face — the sans/mono contrast is already
    the site's one typographic idea, so the title may as well say it. */
@@ -520,162 +503,6 @@ section {
   font-family: var(--font-mono);
   font-size: 0.86em;
   letter-spacing: -0.05em;
-}
-
-.hero__sub {
-  font-style: italic;
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-  line-height: 1.3;
-  color: var(--risk-text);
-  margin: 0 0 1.6rem;
-  max-width: 30ch;
-}
-
-/* A spec line, not a summary. Facts a prospective host can read in one
-   glance, and nothing a player could use to prepare. */
-.hero__spec {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.9rem;
-  list-style: none;
-  margin: 2.25rem 0 0;
-  padding: 1rem 0 0;
-  border-top: 1px solid var(--ink-faint);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--ink-soft);
-  max-width: 34rem;
-}
-
-/* Trailing rather than leading, so a wrap leaves the separator at the end
-   of the line it belongs to instead of stranding it at the start of the
-   next one. */
-.hero__spec li:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.9rem;
-  color: var(--ink-faint);
-}
-
-/* Stacked, slightly rotated cards — the tabletop tell.
-   The offsets are tuned so each card overlaps only the padding of the one
-   above it, never its text. If you edit the card copy, re-check that. */
-.deck {
-  position: relative;
-  min-height: 480px;
-}
-
-/* Each card composes its own transform from custom properties so the
-   pointer handler in main.js can nudge --dx/--dy without clobbering the
-   rotation, and :hover can straighten a card without knowing where the
-   pointer put it. */
-.deck__card {
-  position: absolute;
-  width: min(78%, 290px);
-  border-radius: var(--radius-lg);
-  padding: 1.2rem;
-  box-shadow: var(--shadow-lift);
-  border: 1px solid #08191214;
-  transform: translate3d(var(--dx, 0px), var(--dy, 0px), 0)
-    rotate(var(--rot, 0deg)) scale(var(--scale, 1));
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
-    box-shadow 0.25s ease;
-  will-change: transform;
-}
-
-/* Picked up off the table: straightened, enlarged, brought to the front. */
-.deck__card:hover {
-  --rot: 0deg;
-  --scale: 1.045;
-  z-index: 6;
-  box-shadow: 0 4px 8px #08191214, 0 30px 60px -24px #0819124d;
-}
-
-/* While the pointer is over the deck, the parallax should track it rather
-   than easing behind it. main.js adds this class. */
-.deck.is-live .deck__card {
-  transition: transform 0.12s linear, box-shadow 0.25s ease;
-}
-
-.deck.is-live .deck__card:hover {
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
-    box-shadow 0.25s ease;
-}
-
-.deck__card h4 {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  margin-bottom: 0.45rem;
-  opacity: 0.8;
-}
-
-.deck__card p {
-  font-size: 0.92rem;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.deck__card--a {
-  --rot: -5deg;
-  top: 0;
-  left: 0;
-  background: var(--domain-bg);
-  border-color: var(--domain-accent);
-  color: #7a5620;
-}
-
-.deck__card--b {
-  --rot: 4deg;
-  top: 33%;
-  right: 0;
-  background: var(--tech-bg);
-  border-color: var(--tech-accent);
-  color: #3d6b70;
-}
-
-.deck__card--c {
-  --rot: -1.5deg;
-  bottom: 0;
-  left: 8%;
-  background: var(--data-dark);
-  border-color: #5a5f76;
-  color: #f5efec;
-}
-
-/* Below 900px the hero is a single column, so the deck gets the full page
-   width and the cards drift apart into three unrelated boxes. Cap it so
-   they still overlap and read as a stack. */
-@media (max-width: 899px) and (min-width: 700px) {
-  .deck {
-    min-height: 500px;
-    max-width: 480px;
-    margin-inline: auto;
-  }
-}
-
-/* Below 700px the absolute stack overlaps its own text, so let the
-   cards flow instead. They keep a slight tilt to stay tabletop-ish. */
-@media (max-width: 699px) {
-  .deck {
-    min-height: 0;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .deck__card {
-    position: static;
-    width: auto;
-    margin-inline: 0.4rem;
-  }
-
-  .deck__card--a {
-    --rot: -1.5deg;
-  }
-  .deck__card--b {
-    --rot: 1.2deg;
-  }
-  .deck__card--c {
-    --rot: -0.8deg;
-  }
 }
 
 /* ---------------------------------------------------------
@@ -1503,20 +1330,6 @@ h2 {
   color: #6aa9af;
 }
 
-/* ---- Hero motif ----------------------------------------- */
-
-.hero__motif {
-  margin: 0;
-}
-
-.hero__motif img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lift);
-}
-
 /* ---- The run track, in the cover blue -------------------- */
 
 .run__stop::before {
@@ -1614,40 +1427,6 @@ h2 {
    them from bleeding into the paper background. */
 .shot img {
   box-shadow: inset 0 0 0 1px #08191214;
-}
-
-/* ---- Hero photograph, presented as a mockup --------------
-   Sat slightly off-square with a long soft shadow, so the box
-   reads as an object on a surface rather than a flat picture
-   pasted into the page. Straightens on hover, as the card
-   stack used to. */
-
-.hero__motif {
-  margin: 0;
-  perspective: 1400px;
-}
-
-.hero__motif img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-lg);
-  transform: rotate(-1.4deg);
-  box-shadow: 0 2px 6px #08191214, 0 40px 60px -32px #08191259;
-  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
-}
-
-@media (hover: hover) and (min-width: 700px) {
-  .hero__motif:hover img {
-    transform: rotate(0deg) scale(1.015);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__motif img {
-    transform: none;
-    transition: none;
-  }
 }
 
 /* ---- A wide photograph between sections ------------------ */
@@ -1903,72 +1682,8 @@ h2 {
   background: var(--deep);
 }
 
-/* ---- Hero illustration -----------------------------------
-   Replaces the box photograph. A photograph of a box says
-   "here is a product"; the drawing can say what the game is
-   about — two sides, one shared board, and something landing
-   in the middle of it — before a word is read.
-
-   Drawn from the game's own parts, so the colours come from
-   the same custom properties as the rest of the site and a
-   palette change carries through. */
-
-.hero__art {
-  margin: 0;
-}
-
-.hero__art svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-/* Motion is the smallest amount that reads as alive: the card
-   hangs rather than sits, the gear turns about once a minute,
-   the sparkle breathes. Nothing loops fast enough to catch the
-   eye once you have started reading. */
-@media (prefers-reduced-motion: no-preference) {
-  .art__event {
-    animation: art-hang 6s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .art__gear {
-    animation: art-turn 54s linear infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-
-  .art__badge--spark path {
-    animation: art-breathe 5s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-}
-
-@keyframes art-hang {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-9px) rotate(-1.2deg); }
-}
-
 @keyframes art-turn {
   to { transform: rotate(360deg); }
-}
-
-@keyframes art-breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.12); }
-}
-
-/* On a phone the hero is one column and the drawing would eat
-   the whole first screen, so it is capped and centred. */
-@media (max-width: 899px) {
-  .hero__art {
-    max-width: 460px;
-    margin-inline: auto;
-  }
 }
 
 /* =========================================================
@@ -2103,21 +1818,6 @@ h2 {
   text-align: center;
 }
 
-/* The category chip, straight off the reference sites: it tells
-   you what this is in four words before the title lands. */
-.hero__chip {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cream);
-  border: 1px solid #fbf5ee59;
-  border-radius: 999px;
-  padding: 0.45rem 1.1rem;
-  margin: 0 0 clamp(1.5rem, 4vh, 2.5rem);
-}
-
 /* As large as the viewport will take. Two lines, hard-broken,
    the second in the lighter blue exactly as the box lid sets
    the wordmark. */
@@ -2136,14 +1836,6 @@ h2 {
   font-size: 1em;
   letter-spacing: -0.05em;
   color: var(--deep-light);
-}
-
-.hero__lede {
-  font-size: clamp(1.05rem, 1.9vw, 1.35rem);
-  line-height: 1.5;
-  color: #fbf5eecc;
-  max-width: 44ch;
-  margin: 0 auto clamp(1.75rem, 4vh, 2.5rem);
 }
 
 .hero .btn-row {
@@ -2171,55 +1863,6 @@ h2 {
 .hero .btn--ghost:hover {
   border-color: var(--cream);
   background: #fbf5ee1a;
-}
-
-.hero__spec {
-  justify-content: center;
-  border-top: 0;
-  color: #fbf5ee99;
-  margin: clamp(2rem, 5vh, 3rem) auto 0;
-  padding: 0;
-}
-
-.hero__spec li + li::before {
-  color: #fbf5ee59;
-}
-
-/* Tells you there is a page under this one. */
-.hero__cue {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(1.25rem, 4vh, 2.25rem);
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: #fbf5ee99;
-  text-decoration: none;
-  z-index: 1;
-}
-
-.hero__cue:hover {
-  color: var(--cream);
-}
-
-.hero__cue svg {
-  width: 15px;
-  height: 15px;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hero__cue svg {
-    animation: cue-nudge 2.4s ease-in-out infinite;
-  }
-}
-
-@keyframes cue-nudge {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
 }
 
 /* The header sits over the blue hero, so it cannot carry its
@@ -2436,21 +2079,7 @@ h2 {
   background: #ffffffb3;
 }
 
-.hero__spec,
-.hero__cue {
-  color: #22405aa6;
-}
-
-.hero__spec li + li::before {
-  color: #22405a59;
-}
-
-.hero__cue:hover {
-  color: var(--lid-ink);
-}
-
 /* The brand lockup, wherever it appears, is the box wordmark. */
-.brand__text,
 .site-footer__brand span {
   font-family: var(--font-wordmark);
   font-weight: 800;
@@ -2479,19 +2108,6 @@ h2 {
 
 .hero__foot .btn-row {
   justify-content: center;
-}
-
-.hero__spec {
-  justify-content: center;
-  margin-top: clamp(1.25rem, 3vh, 2rem);
-}
-
-/* Short and wide — a laptop in landscape — is where three rows
-   plus a cue runs out of room. Drop the cue and tighten. */
-@media (max-height: 620px) {
-  .hero__cue {
-    display: none;
-  }
 }
 
 /* ---- The lid on narrow screens ---------------------------
