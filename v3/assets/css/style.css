@@ -83,6 +83,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -2043,15 +2044,20 @@ h2 {
 
 .hero {
   position: relative;
-  min-height: 100svh;
-  display: grid;
-  align-content: center;
+  height: 160svh;                    /* 100svh pinned + 60svh of scroll room */
   background: var(--deep);
   color: var(--cream);
-  overflow: hidden;
-  padding-block: clamp(6rem, 14vh, 9rem) clamp(5rem, 12vh, 7rem);
   /* The grain sits on paper, not on this. */
   background-image: none;
+}
+
+.hero__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;                  /* was on .hero — killed the sticky above */
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
 }
 
 .hero__lid {
@@ -2072,6 +2078,19 @@ h2 {
     transform-box: fill-box;
     transform-origin: center;
   }
+
+  .lid__spark {
+    animation: lid-twinkle 9s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .lid__spark:nth-child(2) { animation-duration: 11s; animation-delay: -3s; }
+  .lid__spark:nth-child(3) { animation-duration: 7.5s; animation-delay: -5s; }
+}
+
+@keyframes lid-twinkle {
+  0%, 100% { transform: scale(1);    opacity: 0.88; }
+  50%      { transform: scale(1.06); opacity: 1; }
 }
 
 /* One centred column. The two-column hero was the most
@@ -2229,20 +2248,25 @@ h2 {
 
 .hero {
   margin-top: calc(-1 * var(--header-h, 3.5rem));
-  padding-top: calc(var(--header-h, 3.5rem) + clamp(4rem, 10vh, 7rem));
+}
+
+.hero__stage {
+  padding-top: calc(var(--header-h, 3.5rem) + clamp(2.5rem, 7vh, 4.5rem));
 }
 
 /* Over the artwork the bar is invisible and its links are cream.
    Once the hero has scrolled past, it takes its paper fill back
    so it stays readable over the content. */
 .site-header {
-  background: transparent;
-  border-bottom-color: transparent;
+  background: #f8f4efc4;
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  backdrop-filter: blur(12px) saturate(1.15);
+  border-bottom: 1px solid #22405a1f;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .site-header.is-stuck {
-  background: var(--paper-header);
+  background: #ecc2a3e6;
   border-bottom-color: #0819121a;
 }
 
@@ -2270,7 +2294,7 @@ h2 {
 /* Below the nav breakpoint the open menu needs a surface of its
    own — cream links on a transparent panel over artwork is not
    readable. */
-@media (max-width: 799px) {
+@media (max-width: 800px) {
   .site-header:not(.is-stuck) .nav.is-open {
     background: var(--deep);
     border-radius: var(--radius);
@@ -2356,8 +2380,8 @@ h2 {
 .hero__tagline {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: clamp(0.95rem, 1.7vw, 1.2rem);
-  color: var(--lid-ink);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--lid-paper);           /* was var(--lid-ink) — 2.5:1 on the disc */
   margin: 0 auto clamp(1.75rem, 4vh, 2.5rem);
   max-width: 40ch;
 }
@@ -2383,7 +2407,7 @@ h2 {
   opacity: 1;
 }
 
-@media (max-width: 799px) {
+@media (max-width: 800px) {
   .site-header:not(.is-stuck) .nav.is-open {
     background: var(--lid-paper);
     box-shadow: var(--shadow-lift);
@@ -2440,13 +2464,6 @@ h2 {
    wordmark is printed. The actions then sit in the bottom row
    without dragging the lockup upward. */
 
-.hero {
-  display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  align-content: stretch;
-  padding-bottom: clamp(3.5rem, 9vh, 5rem);
-}
-
 .hero__inner {
   grid-row: 2;
   align-self: center;
@@ -2474,9 +2491,6 @@ h2 {
 @media (max-height: 620px) {
   .hero__cue {
     display: none;
-  }
-  .hero {
-    padding-bottom: 2.5rem;
   }
 }
 
@@ -2557,10 +2571,10 @@ h2 {
 
 .hero__foot {
   align-self: start;
-  padding-top: clamp(1.75rem, 5vh, 3.25rem);
+  padding-top: clamp(0.9rem, 2.5vh, 1.6rem);   /* was clamp(1.75rem, 5vh, 3.25rem) */
 }
 
-.hero {
+.hero__stage {
   padding-bottom: clamp(2rem, 5vh, 3rem);
 }
 
@@ -2579,4 +2593,83 @@ h2 {
 #about {
   scroll-margin-top: 4.5rem;
   padding-top: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* =========================================================
+   V3c — THE HERO REVEAL
+   =========================================================
+   main.js publishes --hero-p, --reveal-badges and --reveal-cta
+   on .hero as the pinned stage is scrolled through. Every custom
+   property below falls back to the finished state, so a script
+   failure (or a browser with JS off) renders the hero complete
+   and static rather than stuck half-hidden.
+   ========================================================= */
+
+.lid__badge__in {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: var(--reveal-badges, 1);
+  transform:
+    translateY(calc((1 - var(--reveal-badges, 1)) * 26px))
+    scale(calc(0.86 + var(--reveal-badges, 1) * 0.14));
+}
+
+.hero__foot {
+  opacity: var(--reveal-cta, 1);
+  transform: translateY(calc((1 - var(--reveal-cta, 1)) * 18px));
+}
+
+/* Three planes moving at different rates. The ground scales up from
+   its centre rather than sliding — the fields are anchored to the
+   canvas edges, so a translate would open strips of bare paper. */
+.lid__ground {
+  transform-box: view-box;
+  transform-origin: center;
+  transform: scale(calc(1 + var(--hero-p, 0) * 0.06));
+}
+
+.lid__disc {                          /* composes on top of the ground scale */
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translateY(calc(var(--hero-p, 0) * -20px));
+}
+
+/* The badge groups carry their position as an SVG translate() attribute,
+   which a CSS transform here would replace rather than compose with —
+   so the parallax rides on .lid__badge__in's own translate property
+   instead, which composes with the transform above it. */
+.lid__badge--gear .lid__badge__in {
+  translate: 0 calc(var(--hero-p, 0) * -34px);
+}
+.lid__badge--spark .lid__badge__in {
+  translate: 0 calc(var(--hero-p, 0) * 26px);
+}
+
+/* The title drifts and dims slightly, so the release into the
+   storyline below is not abrupt. */
+.hero__inner {
+  transform: translateY(calc(var(--hero-p, 0) * -26px));
+  opacity: calc(1 - var(--hero-p, 0) * 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero { height: auto; min-height: 100svh; }
+  .hero__stage { position: static; height: auto; min-height: 100svh; }
+  .lid__ground, .lid__disc, .lid__badge__in, .hero__inner, .hero__foot {
+    transform: none; translate: none; opacity: 1;
+  }
+}
+
+/* Frosted glass needs a fallback surface for the handful of browsers
+   without backdrop-filter — otherwise the nav sits directly on the
+   artwork again, which is the bug this phase fixes. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header          { background: var(--lid-paper); }
+  .site-header.is-stuck { background: var(--paper-header); }
+}
+
+/* 60svh of extra scroll before any content is a lot on a phone.
+   Shorten the pinned stage's scroll room, keep the behaviour. */
+@media (max-width: 760px) {
+  .hero { height: 135svh; }
 }
