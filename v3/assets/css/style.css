@@ -251,12 +251,23 @@ section {
    5. Header / navigation
    --------------------------------------------------------- */
 
+/* Fixed rather than sticky. Sticky reserves a strip of layout at the top
+   of the page, which is why the hero used to need a negative top margin to
+   climb back under it; fixed takes the bar out of flow entirely, so the
+   opening screen simply starts at the top of the window. The pages with no
+   hero get that strip back as padding below. */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   background: var(--paper-header);
   border-bottom: 1px solid #0819121a;
+}
+
+body:not(:has(.hero)) #main {
+  padding-top: var(--header-h, 3.5rem);
 }
 
 .site-header__inner {
@@ -483,9 +494,7 @@ section {
    8. Hero
    --------------------------------------------------------- */
 
-.hero {
-  padding-block: clamp(3rem, 10vw, 7rem);
-}
+/* The hero's own padding lives on .hero__stage; see the V3b block. */
 
 /* Set as large as the column allows and broken deliberately across lines.
    "Algorithm" drops into the mono face — the sans/mono contrast is already
@@ -1759,7 +1768,12 @@ h2 {
 
 .hero {
   position: relative;
-  height: 160svh;                    /* 100svh pinned + 60svh of scroll room */
+  height: 200svh;                    /* 100svh pinned + 100svh of scroll room */
+  /* The generic `section` rule and the original .hero rule both set
+     padding-block. All of the hero's real padding lives on .hero__stage
+     now, and because box-sizing is border-box any padding here is taken
+     out of the height above — that is, out of the scroll room. */
+  padding: 0;
   background: var(--deep);
   color: var(--cream);
   /* The grain sits on paper, not on this. */
@@ -1787,25 +1801,35 @@ h2 {
   display: block;
 }
 
+/* These started at 90s and a 6% pulse, which turned out to be below the
+   threshold of being noticed at all rather than pleasantly subtle. The
+   gear now turns at 15°/sec — plainly moving if you look at it, still
+   slow enough to ignore while reading. */
 @media (prefers-reduced-motion: no-preference) {
   .lid__gear {
-    animation: art-turn 90s linear infinite;
+    animation: art-turn 24s linear infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
 
+  /* Each sparkle blinks on its own clock. The durations are deliberately
+     not multiples of one another, so the three never sync up into a
+     single pulsing blob. */
   .lid__spark {
-    animation: lid-twinkle 9s ease-in-out infinite;
+    animation: lid-twinkle 4s ease-in-out infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
-  .lid__spark:nth-child(2) { animation-duration: 11s; animation-delay: -3s; }
-  .lid__spark:nth-child(3) { animation-duration: 7.5s; animation-delay: -5s; }
+  .lid__spark:nth-child(2) { animation-duration: 5.7s; animation-delay: -1.9s; }
+  .lid__spark:nth-child(3) { animation-duration: 3.1s; animation-delay: -2.4s; }
 }
 
+/* A blink, not a pulse: the sparkle shrinks back and dims most of the way
+   out before coming up again. Holding the bright end briefly (45–60%) is
+   what makes it read as twinkling rather than breathing. */
 @keyframes lid-twinkle {
-  0%, 100% { transform: scale(1);    opacity: 0.88; }
-  50%      { transform: scale(1.06); opacity: 1; }
+  0%, 100%  { transform: scale(0.82); opacity: 0.35; }
+  45%, 60%  { transform: scale(1.1);  opacity: 1; }
 }
 
 /* One centred column. The two-column hero was the most
@@ -1889,10 +1913,9 @@ h2 {
    --header-h is measured and set by main.js; the fallback only
    has to be close enough for the first paint. */
 
-.hero {
-  margin-top: calc(-1 * var(--header-h, 3.5rem));
-}
-
+/* The bar is fixed, so it reserves no layout and the hero already starts
+   at the top of the window — no negative margin needed. The stage still
+   has to keep its own content clear of the bar, though. */
 .hero__stage {
   padding-top: calc(var(--header-h, 3.5rem) + clamp(2.5rem, 7vh, 4.5rem));
 }
@@ -2235,6 +2258,14 @@ h2 {
   transform: translateY(calc((1 - var(--reveal-cta, 1)) * 18px));
 }
 
+/* opacity: 0 does not take an element out of the tab order, so without
+   this a keyboard user tabbing off the nav lands on an invisible "How
+   to play". Focusing anything in the row brings it in early. */
+.hero__foot:focus-within {
+  opacity: 1;
+  transform: none;
+}
+
 /* Three planes moving at different rates. The ground scales up from
    its centre rather than sliding — the fields are anchored to the
    canvas edges, so a translate would open strips of bare paper. */
@@ -2247,18 +2278,30 @@ h2 {
 .lid__disc {                          /* composes on top of the ground scale */
   transform-box: fill-box;
   transform-origin: center;
-  transform: translateY(calc(var(--hero-p, 0) * -20px));
+  transform: translate(
+    calc(var(--mx, 0) * 7px),
+    calc(var(--hero-p, 0) * -20px + var(--my, 0) * 5px)
+  );
 }
 
 /* The badge groups carry their position as an SVG translate() attribute,
    which a CSS transform here would replace rather than compose with —
    so the parallax rides on .lid__badge__in's own translate property
-   instead, which composes with the transform above it. */
+   instead, which composes with the transform above it.
+
+   Both the scroll drift and the pointer drift ride on that one property.
+   The gear travels furthest and the disc least, which is the whole of
+   what reads as depth — if they all moved the same amount the lid would
+   just look like it was sliding about. */
 .lid__badge--gear .lid__badge__in {
-  translate: 0 calc(var(--hero-p, 0) * -34px);
+  translate:
+    calc(var(--mx, 0) * 22px)
+    calc(var(--hero-p, 0) * -34px + var(--my, 0) * 16px);
 }
 .lid__badge--spark .lid__badge__in {
-  translate: 0 calc(var(--hero-p, 0) * 26px);
+  translate:
+    calc(var(--mx, 0) * 14px)
+    calc(var(--hero-p, 0) * 26px + var(--my, 0) * 10px);
 }
 
 /* The title drifts and dims slightly, so the release into the
@@ -2284,8 +2327,8 @@ h2 {
   .site-header.is-stuck { background: var(--paper-header); }
 }
 
-/* 60svh of extra scroll before any content is a lot on a phone.
-   Shorten the pinned stage's scroll room, keep the behaviour. */
+/* A long pinned stage costs more on a phone, where a screen of scrolling
+   is a lot of thumb. Shorter here, same sequence. */
 @media (max-width: 760px) {
-  .hero { height: 135svh; }
+  .hero { height: 155svh; }
 }

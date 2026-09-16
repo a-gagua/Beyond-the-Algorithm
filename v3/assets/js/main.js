@@ -256,13 +256,16 @@
     var revealFrame = null;
     var track = function () {
       // Scroll room is whatever the stage does not fill. Measured, not
-      // assumed, so the 160svh/135svh breakpoint needs no mirror here.
+      // assumed, so the 200svh/155svh breakpoint needs no mirror here.
       var room = hero.offsetHeight - stage.offsetHeight;
       var p = room > 0 ? clamp01(-hero.getBoundingClientRect().top / room) : 0;
 
       hero.style.setProperty("--hero-p", p.toFixed(4));
-      hero.style.setProperty("--reveal-badges", ease(sub(p, 0.02, 0.32)).toFixed(4));
-      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.30, 0.62)).toFixed(4));
+      // The beats are spread across most of the range on purpose: finish
+      // them early and the rest of the pinned stage is a dead tail where
+      // scrolling does nothing visible.
+      hero.style.setProperty("--reveal-badges", ease(sub(p, 0.04, 0.40)).toFixed(4));
+      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.34, 0.78)).toFixed(4));
     };
 
     window.addEventListener("scroll", function () {
@@ -271,6 +274,64 @@
     }, { passive: true });
     window.addEventListener("resize", track);
     track();
+  }
+
+  // ---------------------------------------------------------------
+  // Pointer parallax on the lid.
+  //
+  // The gear, the sparkles and the disc drift with the pointer, each
+  // by a different amount — the CSS holds the distances. Published as
+  // --mx / --my, a pair of offsets from the centre of the stage in the
+  // range -0.5 to 0.5.
+  //
+  // Pointer devices only. On touch there is no hover to track, and
+  // under reduced motion the properties are never set, so the fallback
+  // of 0 in the CSS leaves everything exactly where it was.
+  // ---------------------------------------------------------------
+
+  if (hero && stage && !still && window.matchMedia("(hover: hover)").matches) {
+    var wantX = 0;
+    var wantY = 0;
+    var atX = 0;
+    var atY = 0;
+    var driftFrame = null;
+
+    var glide = function () {
+      driftFrame = null;
+
+      // Ease toward the pointer rather than tracking it one-for-one,
+      // which is the difference between drifting and twitching.
+      atX += (wantX - atX) * 0.08;
+      atY += (wantY - atY) * 0.08;
+
+      hero.style.setProperty("--mx", atX.toFixed(4));
+      hero.style.setProperty("--my", atY.toFixed(4));
+
+      // Keep running until it has actually arrived. Without this the
+      // lid stops wherever the last pointer event left it, and leaving
+      // the hero never glides back to centre.
+      if (Math.abs(wantX - atX) > 0.0005 || Math.abs(wantY - atY) > 0.0005) {
+        driftFrame = requestAnimationFrame(glide);
+      }
+    };
+
+    var nudge = function () {
+      if (!driftFrame) driftFrame = requestAnimationFrame(glide);
+    };
+
+    stage.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var box = stage.getBoundingClientRect();
+      wantX = (e.clientX - box.left) / box.width - 0.5;
+      wantY = (e.clientY - box.top) / box.height - 0.5;
+      nudge();
+    });
+
+    stage.addEventListener("pointerleave", function () {
+      wantX = 0;
+      wantY = 0;
+      nudge();
+    });
   }
 
 })();
