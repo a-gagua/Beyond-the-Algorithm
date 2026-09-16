@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond the Algorithm — A research game about trade-offs of Responsible AI</title>
+<meta name="description" content="Beyond the Algorithm is a research game in which two teams — Domain and Tech — build an AI model for risk-based inspections over eight sprints. Players balance competing demands under real institutional pressure, then put their choices on the public record.">
+<link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html">
+      <img class="brand__mark" src="assets/img/mark.svg" alt="">
+      <span class="brand__text">Beyond the Algorithm</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About the game</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div>
+        <h1>Beyond the <span>Algorithm</span></h1>
+        <p class="hero__sub">A research game about trade-offs of Responsible AI</p>
+        <p class="lede">Beyond the Algorithm is a research game in which two teams — Domain and Tech — build an AI model for risk-based inspections over eight sprints. Players balance effectiveness, explainability, and legitimacy under real institutional pressure, then disclose their choices publicly.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#about">How to Play</a>
+          <a class="btn btn--ghost" href="contact.html">Play it at your organisation</a>
+        </div>
+        <ul class="hero__spec">
+          <li>2 teams</li>
+          <li>8 sprints</li>
+          <li>2½ hours</li>
+          <li>4 players minimum</li>
+        </ul>
+      </div>
+
+      <!-- When the box photograph exists, this whole block is what it
+           replaces. Swap the <div aria-hidden> for:
+             <figure class="shot-fig">
+               <div class="shot"><img src="assets/img/box.jpg" alt="The Beyond the Algorithm box, open on a table"></div>
+             </figure>
+           and delete the deck below. -->
+      <div aria-hidden="true">
+        <div class="deck">
+          <article class="deck__card deck__card--a">
+            <h4>Domain team</h4>
+            <p>The Domain Team consists of inspectors and their team lead, the domain expert. They bring  field expertise. Their job is to make sure the model reflects real inspection practice. Being closest to the field, they are the ones who understand how it will be used by field inspectors and how it will affect the targeted businesses.</p>
+          </article>
+          <article class="deck__card deck__card--b">
+            <h4>Tech team</h4>
+            <p> The Tech Team consists of data scientists and their team lead, a senior data scientist. They bring technical expertise. Their job is to make sure the model performs well. Being closest to how the model works, they are the ones who understand its inner logic, what it can and can't do.</p>
+          </article>
+          <article class="deck__card deck__card--c">
+            <h4>Event card</h4>
+            <p>Something lands on the table mid-build. Both teams have to answer it, in front of each other, now.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About the game used to be its own page. It is now the second half of
+       the landing page, so the site opens long rather than opening on a
+       near-empty screen. The nav item points at #about. -->
+  <div class="page-banner page-banner--bare" id="about">
+    <div class="wrap">
+      <h2>About the game</h2>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">Storyline</p>
+        <div class="spread__body">
+          <!-- The display line is the opening sentence of the supplied copy,
+               lifted out so the section has a hook. The list that followed it
+               now opens the first paragraph. -->
+          <p class="storyline">Your organisation is building an AI model to decide <em>which businesses get inspected next.</em></p>
+          <div class="spread__body--split">
+            <p>Restaurants, processors, distributors, whoever poses the most risk. It's meant to make inspections sharper and fairer. But scrutiny of algorithms is rising. There's a national Algorithm Register to register the model in. There are journalists who've already decided you're hiding something, and an inspector in the field who's about to run into a decision nobody can explain to her.</p>
+            <!-- The supplied copy named three example events here. Removed:
+                 participants read this page before playing. -->
+            <p>Over eight sprints, two teams build that model together — gathering data, refining it, mitigating risks — while unexpected events land in the middle of each sprint's stand-up. Each time, the team has to decide, on the spot, what to do about it — and what to write down.</p>
+            <p>At the end, they don't just finish the model. They have to explain it: choosing what to disclose, what to leave out, and who's answerable if it goes wrong.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spread">
+        <p class="spread__label">Who's at the table</p>
+        <div class="spread__body">
+          <div class="grid grid--2">
+            <article class="card card--domain">
+              <span class="card__tab">Domain team</span>
+              <h3>Inspectors and a domain expert (team lead)</h3>
+              <!-- The supplied copy ended each card by naming the scored
+                   dimensions. Removed, here and below. -->
+              <p>They know how inspections actually work. Their job is to provide and refine the data that goes into the model, and to check that what comes out of it still makes sense on the ground. If it doesn't, saying so is their job.</p>
+            </article>
+            <article class="card card--tech">
+              <span class="card__tab">Tech team</span>
+              <h3>Data scientists and a senior data scientist (team lead)</h3>
+              <p>They design and build the model itself, choosing what data to use and how. More complex data means a stronger model — but a harder one for anyone else in the room to follow.</p>
+            </article>
+          </div>
+          <!-- The supplied version of this paragraph listed the scored
+               dimensions by name. Rewritten to say the same thing about the
+               tension without naming them — HTML comments are readable by
+               anyone who views source, so do not restore them here either. -->
+          <p class="spread__close">Both teams are building the same model and want the same things from it, but the pressure reaches them from different directions — and that is where the game's real tension lives. What the two of them end up having to answer for, they answer for together: whether the choices they made can survive being written down and shown to someone outside the room.</p>
+        </div>
+      </div>
+
+      <div class="spread">
+        <p class="spread__label">How it runs</p>
+        <div class="spread__body">
+          <ol class="run">
+            <li class="run__stop">
+              <h3>Kickoff</h3>
+              <p>Take a side, read your brief, and say out loud what you are going for. It gets written down.</p>
+            </li>
+            <li class="run__stop run__stop--long">
+              <h3>Sprints <span class="run__count">×8</span></h3>
+              <p>Stand up, then build. Events land on the table without warning and you answer them in front of the other team.</p>
+            </li>
+            <li class="run__stop">
+              <h3>Disclosure</h3>
+              <p>The model goes on the public record. You decide together what to say about it — and you will not be able to say everything.</p>
+            </li>
+            <li class="run__stop">
+              <h3>Debrief</h3>
+              <p>Read back against what you said at kickoff. The part people remember.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="spread">
+        <p class="spread__label">In the box</p>
+        <div class="spread__body">
+          <p>Designed and produced for the table, not adapted from a workshop deck: two data decks, a deck of events, a role board and development board per team, the placemat the model gets assembled on, and the forms the teams fill in as they go.</p>
+
+          <!-- PHOTOGRAPHS NEEDED. Three shots of the real materials —
+               suggested: the two decks fanned, a role board in use, the
+               placemat mid-session. Drop files into assets/img/ and
+               replace each .shot div with:
+                 <img src="assets/img/cards.jpg" alt="...">   -->
+          <div class="grid grid--3" style="margin-top:1.75rem">
+            <figure class="shot-fig">
+              <div class="shot">photo — the decks</div>
+            </figure>
+            <figure class="shot-fig">
+              <div class="shot">photo — a role board</div>
+            </figure>
+            <figure class="shot-fig">
+              <div class="shot">photo — the placemat</div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="spread">
+        <p class="spread__label">What it needs</p>
+        <div class="spread__body">
+          <div class="facts">
+            <div class="facts__item">
+              <p class="facts__value">4 players</p>
+              <p class="facts__note">Minimum. Two per team.</p>
+            </div>
+            <div class="facts__item">
+              <p class="facts__value">Two backgrounds</p>
+              <p class="facts__note">It works when people hold the roles for real — domain on one side, technical on the other.</p>
+            </div>
+            <div class="facts__item">
+              <p class="facts__value">2½ hours</p>
+              <p class="facts__note">Start to finish, debrief included.</p>
+            </div>
+          </div>
+
+          <div class="cta">
+            <h2>Play it at your organisation</h2>
+            <p>We bring the box and run the session ourselves. Tell us roughly who would be in the room and we will take it from there.</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="contact.html">Get in touch</a>
+              <a class="btn btn--ghost" href="research.html">The research behind it</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <a class="site-footer__brand" href="index.html">
+      <img src="assets/img/mark.svg" alt="">
+      <span>Beyond the Algorithm</span>
+    </a>
+    <!-- Both logo files are placeholders. See assets/img/logos/. -->
+    <div class="site-footer__logos">
+      <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
+      <img src="assets/img/logos/serious-game-lab.svg" alt="Serious Game Lab">
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

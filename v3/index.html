@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond the Algorithm — A research game about trade-offs of Responsible AI</title>
+<meta name="description" content="Beyond the Algorithm is a research game in which two teams — Domain and Tech — build an AI model for risk-based inspections over eight sprints. Players balance competing demands under real institutional pressure, then put their choices on the public record.">
+<link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Montserrat:wght@800&family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="Beyond the Algorithm — home">
+      <img class="brand__mark" src="assets/img/mark.svg" alt="">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About the game</a>
+      <a href="research.html">Research</a>
+      <a href="team.html">Team</a>
+      <a class="nav__cta" href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- The opening screen is the box lid, redrawn to scale: the two curved
+       fields, the disc, the gear badge and the sparkle badge, in the box's
+       own colours. Nothing has been added to it. The wordmark is real HTML
+       over the top rather than text inside the SVG, so it stays selectable
+       and resizes with the viewport. -->
+  <section class="hero">
+    <div class="hero__lid" aria-hidden="true">
+      <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="lid-warm" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ecd9bd"/>
+            <stop offset="1" stop-color="#faf2e7"/>
+          </linearGradient>
+          <linearGradient id="lid-cool" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0" stop-color="#a3d2cd"/>
+            <stop offset="1" stop-color="#dbeeea"/>
+          </linearGradient>
+        </defs>
+
+        <rect width="1200" height="800" fill="#f8f4ef"/>
+
+        <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".4">
+          <!-- The warm field, left, and the cool field, right. Each bulges
+               toward the middle, leaving the paper showing top and bottom. -->
+          <path d="M0 0 H344 Q524 400 344 800 H0 Z" fill="url(#lid-warm)"/>
+          <path d="M1200 0 H856 Q676 400 856 800 H1200 Z" fill="url(#lid-cool)"/>
+          <circle cx="600" cy="400" r="332" fill="#5f82a2" stroke-opacity=".25"/>
+        </g>
+
+        <!-- Tech: the gear, upper right -->
+        <g transform="translate(904 192)">
+          <circle r="46" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+          <!-- A real cog: eight teeth on a rim with a hole through it. The
+               previous version was a hub with straight spokes radiating out
+               of it, which reads as a sun, not a gear. -->
+          <path d="M0.0 -19.5 L2.9 -25.8 A26.0 26.0 0 0 1 7.3 -25.0 L7.5 -18.0 A19.5 19.5 0 0 1 13.8 -13.8 L20.3 -16.3 A26.0 26.0 0 0 1 22.8 -12.5 L18.0 -7.5 A19.5 19.5 0 0 1 19.5 0.0 L25.8 2.9 A26.0 26.0 0 0 1 25.0 7.3 L18.0 7.5 A19.5 19.5 0 0 1 13.8 13.8 L16.3 20.3 A26.0 26.0 0 0 1 12.5 22.8 L7.5 18.0 A19.5 19.5 0 0 1 0.0 19.5 L-2.9 25.8 A26.0 26.0 0 0 1 -7.3 25.0 L-7.5 18.0 A19.5 19.5 0 0 1 -13.8 13.8 L-20.3 16.3 A26.0 26.0 0 0 1 -22.8 12.5 L-18.0 7.5 A19.5 19.5 0 0 1 -19.5 0.0 L-25.8 -2.9 A26.0 26.0 0 0 1 -25.0 -7.3 L-18.0 -7.5 A19.5 19.5 0 0 1 -13.8 -13.8 L-16.3 -20.3 A26.0 26.0 0 0 1 -12.5 -22.8 L-7.5 -18.0 Z" fill="#7cc3bc" stroke="#2c4a63" stroke-width="1.6"
+                stroke-opacity=".5" stroke-linejoin="round"/>
+          <circle r="9.5" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5"/>
+        </g>
+
+        <!-- Domain: the sparkles, lower left -->
+        <g transform="translate(316 602)">
+          <circle r="46" fill="#f9ead6" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+          <g fill="#e2a869" stroke="#c98b45" stroke-width="1.4">
+            <path d="M-8-22C-8-13-13-8-22-8-13-8-8-3-8 6-8-3-3-8 6-8-3-8-8-13-8-22Z"/>
+            <path d="M12 2C12 8 9 11 3 11 9 11 12 14 12 20 12 14 15 11 21 11 15 11 12 8 12 2Z"/>
+            <path d="M-2 14C-2 18-4 20-8 20-4 20-2 22-2 26-2 22 0 20 4 20 0 20-2 18-2 14Z"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wrap hero__inner">
+      <!-- The title plate, as printed on the lid: peach band, two lines,
+           the second in the lighter blue with the darker outline. -->
+      <div class="hero__plate">
+        <h1>Beyond the<span>Algorithm</span></h1>
+      </div>
+
+      <p class="hero__tagline">A research game about trade-offs of Responsible AI</p>
+    </div>
+
+    <!-- The actions are ours, not the lid's, so they sit below the artwork
+         rather than inside it. Keeping them out of the centred block is what
+         lets the wordmark land on the middle of the disc, as printed. -->
+    <div class="wrap hero__foot">
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#about">How to play</a>
+        <a class="btn btn--ghost" href="contact.html">Host a session</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- About the game used to be its own page. It is now the second half of
+       the landing page, so the site opens long rather than opening on a
+       near-empty screen. The nav item points at #about, which is this
+       section — there is no "About the game" banner, because the storyline
+       arriving straight after the hero says what it is without a label. -->
+  <section class="band" id="about">
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">Storyline</p>
+        <div class="spread__body">
+          <!-- The display line is the opening sentence of the supplied copy,
+               lifted out so the section has a hook. The list that followed it
+               now opens the first paragraph. -->
+          <p class="storyline">Your organisation is building an AI model to decide <em>which businesses get inspected next.</em></p>
+          <div class="spread__body--split">
+            <p>Restaurants, processors, distributors, whoever poses the most risk. It's meant to make inspections sharper and fairer. But scrutiny of algorithms is rising. There's a national Algorithm Register to register the model in. There are journalists who've already decided you're hiding something, and an inspector in the field who's about to run into a decision nobody can explain to her.</p>
+            <!-- The supplied copy named three example events here. Removed:
+                 participants read this page before playing. -->
+            <p>Over eight sprints, two teams build that model together — gathering data, refining it, mitigating risks — while unexpected events land in the middle of each sprint's stand-up. Each time, the team has to decide, on the spot, what to do about it — and what to write down.</p>
+            <p>At the end, they don't just finish the model. They have to explain it: choosing what to disclose, what to leave out, and who's answerable if it goes wrong.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band band--tint">
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">Who's at the table</p>
+        <div class="spread__body">
+          <div class="grid grid--2">
+            <article class="card card--domain">
+              <!-- Sparkle and gear are how the printed cards separate the two
+                   sides before you have read a word. Same job here. -->
+              <div class="card__head">
+                <span class="card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M13 2c0 8-3 11-11 14 8 3 11 6 11 14 3-8 6-11 14-14-8-3-11-6-14-14Z"/><path d="M25 19c0 4-1 5-5 6 4 1 5 2 5 6 1-4 2-5 6-6-4-1-5-2-6-6Z"/></svg>
+                </span>
+                <span class="card__tab">Domain team</span>
+              </div>
+              <h3>Inspectors and a domain expert (team lead)</h3>
+              <!-- The supplied copy ended each card by naming the scored
+                   dimensions. Removed, here and below. -->
+              <p>They know how inspections actually work. Their job is to provide and refine the data that goes into the model, and to check that what comes out of it still makes sense on the ground. If it doesn't, saying so is their job.</p>
+            </article>
+            <article class="card card--tech">
+              <div class="card__head">
+                <span class="card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.0 5.5 L17.5 2.1 A14.0 14.0 0 0 1 19.9 2.6 L20.0 6.3 A10.5 10.5 0 0 1 23.4 8.6 L26.9 7.2 A14.0 14.0 0 0 1 28.3 9.3 L25.7 12.0 A10.5 10.5 0 0 1 26.5 16.0 L29.9 17.5 A14.0 14.0 0 0 1 29.4 19.9 L25.7 20.0 A10.5 10.5 0 0 1 23.4 23.4 L24.8 26.9 A14.0 14.0 0 0 1 22.7 28.3 L20.0 25.7 A10.5 10.5 0 0 1 16.0 26.5 L14.5 29.9 A14.0 14.0 0 0 1 12.1 29.4 L12.0 25.7 A10.5 10.5 0 0 1 8.6 23.4 L5.1 24.8 A14.0 14.0 0 0 1 3.7 22.7 L6.3 20.0 A10.5 10.5 0 0 1 5.5 16.0 L2.1 14.5 A14.0 14.0 0 0 1 2.6 12.1 L6.3 12.0 A10.5 10.5 0 0 1 8.6 8.6 L7.2 5.1 A14.0 14.0 0 0 1 9.3 3.7 L12.0 6.3 Z"/><circle cx="16" cy="16" r="5" fill="var(--tech-bg)"/></svg>
+                </span>
+                <span class="card__tab">Tech team</span>
+              </div>
+              <h3>Data scientists and a senior data scientist (team lead)</h3>
+              <p>They design and build the model itself, choosing what data to use and how. More complex data means a stronger model — but a harder one for anyone else in the room to follow.</p>
+            </article>
+          </div>
+          <!-- The supplied version of this paragraph listed the scored
+               dimensions by name. Rewritten to say the same thing about the
+               tension without naming them — HTML comments are readable by
+               anyone who views source, so do not restore them here either. -->
+          <!-- The photographs of the two printed role cards used to sit here
+               and repeated what the cards above already say. They are in the
+               gallery under "In the box" instead. -->
+          <p class="spread__close">Both teams are building the same model and want the same things from it, but the pressure reaches them from different directions — and that is where the game's real tension lives. What the two of them end up having to answer for, they answer for together: whether the choices they made can survive being written down and shown to someone outside the room.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">How it runs</p>
+        <div class="spread__body">
+          <!-- The track is the visual; the detail lives in one panel that
+               swaps underneath it. main.js adds .is-live and the tab
+               behaviour. With no script every panel is shown and it reads
+               as a plain ordered list, so nothing is lost. -->
+          <div class="runner">
+            <ol class="run" role="tablist" aria-label="The shape of a session">
+              <li class="run__stop">
+                <button class="run__trigger" type="button" role="tab" id="run-t-1" aria-controls="run-p-1" aria-selected="true">
+                  <h3>Kickoff</h3>
+                  <span class="run__meta">15 min</span>
+                </button>
+              </li>
+              <li class="run__stop run__stop--long">
+                <button class="run__trigger" type="button" role="tab" id="run-t-2" aria-controls="run-p-2" aria-selected="false">
+                  <h3>Sprints <span class="run__count">×8</span></h3>
+                  <span class="run__meta">85 min</span>
+                </button>
+              </li>
+              <li class="run__stop">
+                <button class="run__trigger" type="button" role="tab" id="run-t-3" aria-controls="run-p-3" aria-selected="false">
+                  <h3>Disclosure</h3>
+                  <span class="run__meta">20 min</span>
+                </button>
+              </li>
+              <li class="run__stop">
+                <button class="run__trigger" type="button" role="tab" id="run-t-4" aria-controls="run-p-4" aria-selected="false">
+                  <h3>Debrief</h3>
+                  <span class="run__meta">30 min</span>
+                </button>
+              </li>
+            </ol>
+
+            <div class="runner__panels">
+              <div class="runner__panel is-current" id="run-p-1" role="tabpanel" aria-labelledby="run-t-1">
+                <h3>Kickoff</h3>
+                <p>Teams split, read their briefs and say out loud what they are going for. It gets written down, and it comes back out at the end. Neither team has seen the other one's brief.</p>
+              </div>
+              <div class="runner__panel" id="run-p-2" role="tabpanel" aria-labelledby="run-t-2">
+                <h3>Sprints <span class="run__count">×8</span></h3>
+                <p>Each sprint opens with a stand-up — what you did, what you are doing next, what is in your way — and then you build. Partway through, something lands on the table that neither team planned for, and it has to be answered before the sprint closes.</p>
+              </div>
+              <div class="runner__panel" id="run-p-3" role="tabpanel" aria-labelledby="run-t-3">
+                <h3>Disclosure</h3>
+                <p>The model goes on the public record. The two teams have to agree, in writing, what to say about it — and they will not have room to say everything.</p>
+              </div>
+              <div class="runner__panel" id="run-p-4" role="tabpanel" aria-labelledby="run-t-4">
+                <h3>Debrief</h3>
+                <p>What each team wrote down at kickoff comes back out, and they read it against what they actually built. This is the part people remember.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band band--tint">
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">In the box</p>
+        <div class="spread__body">
+          <p>Designed and produced for the table, not adapted from a workshop deck: two data decks, a deck of events, a role board and development board per team, the placemat the model gets assembled on, and the forms the teams fill in as they go.</p>
+
+          <!-- Sources in order: DSCF6664, DSCF6641, DSCF6674, DSCF6646,
+               DSCF6687, DSCF6685. To add a photograph, add an <li> — the
+               dots and the arrows are built from whatever is here. -->
+          <div class="gallery" data-gallery style="margin-top:1.75rem">
+            <div class="gallery__viewport">
+              <ul class="gallery__track">
+                <li class="gallery__slide"><img src="assets/img/photos/box.jpg" alt="The Beyond the Algorithm box standing on a table" data-caption="The box. It arrives with us and goes home with us."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/table.jpg" alt="The box, the model board and the card decks set out on a table" data-caption="Everything out of the box and on the table."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/decks.jpg" alt="The open box with the card decks stacked in front of it" data-caption="The decks. Data, events and the forms teams fill in as they go."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/board.jpg" alt="A database board laid flat on a table" data-caption="A database board. One per team, and they do not hold the same things."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/role-cards.jpg" alt="The two role cards resting in the open box" data-caption="The two role cards, and the form the teams end the session on."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/domain-card.jpg" alt="The Domain Team role card standing in front of its board" data-caption="Domain team: what they can do, and what it costs them."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/tech-card.jpg" alt="The Tech Team role card standing in front of its board" data-caption="Tech team: the same card, a different set of moves."></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+
+      <div class="spread">
+        <p class="spread__label">What it needs</p>
+        <div class="spread__body">
+          <div class="facts">
+            <div class="facts__item">
+              <p class="facts__value">4 players</p>
+              <p class="facts__note">Minimum. Two per team.</p>
+            </div>
+            <div class="facts__item">
+              <p class="facts__value">Two backgrounds</p>
+              <p class="facts__note">It works when people hold the roles for real — domain on one side, technical on the other.</p>
+            </div>
+            <div class="facts__item">
+              <p class="facts__value">2½ hours</p>
+              <p class="facts__note">Start to finish, debrief included.</p>
+            </div>
+          </div>
+
+          <div class="cta">
+            <h2>Play it at your organisation</h2>
+            <p>We bring the box and run the session ourselves. Tell us roughly who would be in the room and we will take it from there.</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="contact.html">Get in touch</a>
+              <a class="btn btn--ghost" href="research.html">The research behind it</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <a class="site-footer__brand" href="index.html">
+      <img src="assets/img/mark.svg" alt="">
+      <span>Beyond the Algorithm</span>
+    </a>
+    <!-- Both logo files are placeholders. See assets/img/logos/. -->
+    <div class="site-footer__logos">
+      <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
+      <img src="assets/img/logos/serious-game-lab.svg" alt="Serious Game Lab">
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

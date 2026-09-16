@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -R '/Users/agagua/Desktop/beyond the algoritm/*.html' /private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview/)",
+      "Bash(cp -R '/Users/agagua/Desktop/beyond the algoritm/assets' /private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview/)",
+      "Bash(cp '/Users/agagua/Desktop/beyond the algoritm/*.html' /private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview/)",
+      "Bash(sed -i '' 's|^ROOT = .*|ROOT = \"/private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview\"|' /private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/serve.py)",
+      "Bash(SP=\"/private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview\"; cp \"/Users/agagua/Desktop/beyond the algoritm/\"*.html \"$SP/\"; echo ok)",
+      "Bash(SP=\"/private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/preview\"; cp \"/Users/agagua/Desktop/beyond the algoritm/\"*.html \"$SP/\"; grep -c \"wrap--narrow\" \"$SP\"/*.html)",
+      "Bash(python3 -)",
+      "Bash(xargs -r kill)",
+      "Bash(cd \"/Users/agagua/Desktop/beyond the algoritm\" && find . -type f \\\\\\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" -o -iname \"*.heic\" -o -iname \"*.webp\" \\\\\\) | head -40; echo \"--- count:\"; find . -type f \\\\\\( -iname \"*.jpg\" -o -iname \"*.png\" -o -iname \"*.heic\" \\\\\\) | wc -l; echo \"--- Desktop/Downloads:\"; ls -t ~/Desktop 2>/dev/null | head -20)",
+      "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")"
+    ]
+  }
+}

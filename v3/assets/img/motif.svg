@@ -1,0 +1,41 @@
+<!--
+  An echo of the box cover, not a reproduction of it: the two wedges
+  converging on the central disc, with the Domain sparkle and the Tech gear
+  in their badges. It holds the hero until the real box photograph is in.
+
+  When the photo is ready, replace the whole <figure> in index.html rather
+  than editing this file.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" role="img" aria-label="">
+  <rect width="600" height="420" rx="10" fill="#fbf6f2"/>
+
+  <!-- Warm wedge, left. Widest at the corners, pinched at the middle. -->
+  <path d="M0 0 L258 0 Q138 210 258 420 L0 420 Z" fill="#f7e6cf"/>
+  <!-- Cool wedge, right. -->
+  <path d="M600 0 L342 0 Q462 210 342 420 L600 420 Z" fill="#b3ddd9"/>
+
+  <circle cx="300" cy="210" r="152" fill="#5c7fa3"/>
+
+  <!-- The title plate the wordmark sits on. -->
+  <rect x="140" y="176" width="320" height="74" fill="#f2cdab"/>
+  <text x="300" y="207" text-anchor="middle" font-family="'Source Sans 3',sans-serif"
+        font-size="26" font-weight="700" letter-spacing="0.5" fill="#2f4d6b">BEYOND THE</text>
+  <text x="300" y="240" text-anchor="middle" font-family="'Source Sans 3',sans-serif"
+        font-size="30" font-weight="700" letter-spacing="0.5" fill="#7fa8c9">ALGORITHM</text>
+
+  <!-- Tech badge: the gear. -->
+  <g transform="translate(455 118)">
+    <circle r="27" fill="#eef7f5"/>
+    <g fill="none" stroke="#6aa9af" stroke-width="3.4" stroke-linecap="round">
+      <circle r="7.5"/>
+      <path d="M0-15.5V-11M0 11v4.5M-15.5 0H-11M11 0h4.5M-11-11l3.2 3.2M7.8 7.8l3.2 3.2M11-11L7.8-7.8M-7.8 7.8l-3.2 3.2"/>
+    </g>
+  </g>
+
+  <!-- Domain badge: the sparkle. -->
+  <g transform="translate(145 312)">
+    <circle r="27" fill="#fdf1e0"/>
+    <path d="M-3-14C-3-6-6-3-14 0-6 3-3 6-3 14 0 6 3 3 11 0 3-3 0-6-3-14Z" fill="#e79a54"/>
+    <path d="M9 4C9 8 8 9 4 11 8 12 9 14 9 17 10 14 11 12 15 11 11 9 10 8 9 4Z" fill="#e79a54"/>
+  </g>
+</svg>
