@@ -202,18 +202,19 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   The lab is **TU Delft Gamelab**. The two older
   copies of the site carried the old name and the dashed-box placeholders;
   both have been deleted, so the correct name is now the only one present.
-- **Contact form.** `contact.html` posts to `https://formspree.io/f/FORM_ID`.
-  Create a free [Formspree](https://formspree.io) form and paste the real
-  endpoint. GitHub Pages is static, so a form needs an external handler. Until
-  that is done the form silently fails — the address above it still works.
-- **Ana's social links.** `contact.html` has two `href="#"` links that go
-  nowhere. Add the real URLs or delete the "Elsewhere" spread.
-- **Photographs.** Six empty `.shot` slots: three of the materials on
-  the landing page, one playtest and two session shots on `research.html`,
-  plus the box photo in the hero (see the comment in `index.html` — it
-  replaces the card illustration). They render as visible dashed gaps on purpose.
-- **Where it has been played.** `research.html` describes the sessions vaguely
-  because the conference name and dates are not confirmed.
+- **No contact form.** `contact.html` was a form once; it had no endpoint set
+  and none was coming soon, so it came out rather than sit there as one
+  accidental submit away from losing a real message. The page is now the
+  address plus a mailto CTA — both work today, with nothing to wire up.
+- **Photographs.** Every placeholder `.shot` slot on the site is filled. The
+  one thing still sitting outside the repo is a second photo for "Where it has
+  been played" — a festival shot at
+  `~/Desktop/bta-original-photos/research/fest.JPG`, processed the same way
+  `game-development.jpg` was (resized, EXIF stripped) but not yet added, since
+  only one photo was asked for.
+- **Where it has been played.** `research.html` now names Toezichtfestival
+  2026, linked, alongside "Dutch inspection authorities" — that line is
+  supplied text, not a placeholder.
 
   The **host organisations are a settled question, not an open one**: they are
   not named anywhere on the site and will not be. The acknowledgement on
