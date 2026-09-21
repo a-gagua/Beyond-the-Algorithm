@@ -111,6 +111,29 @@ Originals are kept outside the repo at `~/Desktop/bta-original-photos/`. If a
 photograph ever needs recropping, go back to those rather than upscaling what
 is in here.
 
+**The same two rules cover `v3/assets/img/team/`**, and it is worth saying why:
+three of the five headshots arrived capitalised (`Ana-gagua.jpg`) and one
+arrived as a PNG. Both were normalised before the first commit, because a
+capitalised filename is invisible on macOS and only fails once published.
+Team photographs are capped at 800px rather than 1600px — a card renders them
+under 400px wide — and only images larger than that are resampled, since
+enlarging a small headshot invents detail. The whole folder is 344 KB.
+
+**The blue on the team photographs is CSS, not the files.** The images on disk
+are ordinary colour headshots. `.person__figure` paints `var(--deep)` and
+`.person__photo` sits on it with `mix-blend-mode: luminosity`, so the portrait
+keeps its lightness and takes its colour from the token — which means the
+treatment follows the palette instead of hardcoding a hex, and deleting those
+two declarations returns the page to plain photographs. `isolation: isolate` on
+the figure is load-bearing; without it the blend escapes the card. Hovering a
+card lifts the tint, gated behind `prefers-reduced-motion: no-preference`.
+
+The slot is `4/5`, not the `4/3` the rest of the site uses for photographs. All
+five headshots are portrait or square with the face high in the frame, and a
+landscape crop of a 3:4 portrait keeps barely half its height — it cut into the
+tops of heads. If a future headshot is landscape, crop it to portrait rather
+than changing the ratio, or the row stops aligning.
+
 ## What the site deliberately does not say
 
 Participants can read this site before playing, so it holds back anything that
@@ -174,6 +197,13 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   the Gamelab for a transparent PNG or an SVG, drop it in, and delete that
   rule — it is marked INTERIM in the stylesheet.
 
+  It also **overflows the viewport at around 768px**, pushing the document to
+  776px and giving every page a horizontal scrollbar on a tablet — the footer
+  is duplicated, so this is site-wide, not one page. Measured, not guessed.
+  Replacing the asset is likely to fix it on its own, since most of the file's
+  width is empty padding; if the real logo still overruns, the INTERIM rule
+  needs a `max-width` rather than a fixed one.
+
   The lab is **TU Delft Gamelab**, not "Serious Game Lab". The root and
   `v2/` copies still carry the old name and the dashed-box placeholders;
   they follow whenever a version is promoted.
@@ -190,11 +220,11 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
 - **Where it has been played.** `research.html` describes the sessions vaguely
   because the conference name and dates are not confirmed, and because each
   host organisation should be asked before being named.
-- **Team headshots.** The bios themselves are done — all five are supplied
-  text, not drafts, so do not paraphrase them or extend anyone's title beyond
-  what their own bio states. Only the photographs are missing: drop images in
-  `assets/img/team/` and replace each `.person__photo` div with
-  `<img class="person__photo" src="assets/img/team/name.jpg" alt="Name">`.
+- **The team page is done** — bios and headshots both. It is listed here only
+  for the rules that govern editing it.
+
+  The bios are supplied text, not drafts, so do not paraphrase them or extend
+  anyone's title beyond what their own bio states.
 
   **The two lines on a card do different jobs.** `.person__role` is the
   person's role *on this project* — lead researcher, game designer, PhD

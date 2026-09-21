@@ -51,14 +51,19 @@
            the same sentence twice, and left the page unable to say why any
            given person was on it.
 
-           Swap .person__photo for
-           <img class="person__photo" src="assets/img/team/name.jpg"
-           alt="Name"> once you have headshots. -->
+           The photographs are ordinary colour headshots. The blue is a
+           CSS blend over .person__figure, not baked into the files, so
+           it stays in step with the palette and can be removed without
+           touching an image. alt is empty on purpose: the name is in
+           the h3 directly below, and alt="Name" would make a screen
+           reader announce each person twice. -->
 
       <div class="grid grid--3">
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true">A</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/ana-gagua.jpg" alt="">
+          </div>
           <div class="person__body">
             <h3>Ana Gagua</h3>
             <p class="person__role">PhD researcher</p>
@@ -67,7 +72,9 @@
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--domain-accent)">G</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/gracia-bovenberg-murris.jpg" alt="">
+          </div>
           <div class="person__body">
             <h3>Gracia Bovenberg-Murris</h3>
             <p class="person__role">Game designer</p>
@@ -76,7 +83,9 @@
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--data-light)">H</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/haiko-van-der-voort.jpg" alt="">
+          </div>
           <div class="person__body">
             <h3>Haiko van der Voort</h3>
             <p class="person__role">PhD supervisor</p>
@@ -85,7 +94,9 @@
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--data-light)">A</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/alexander-verbraeck.jpg" alt="">
+          </div>
           <div class="person__body">
             <h3>Alexander Verbraeck</h3>
             <p class="person__role">PhD supervisor</p>
@@ -94,7 +105,9 @@
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--tech-accent)">N</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/nihit-goyal.jpg" alt="">
+          </div>
           <div class="person__body">
             <h3>Nihit Goyal</h3>
             <p class="person__role">PhD supervisor</p>

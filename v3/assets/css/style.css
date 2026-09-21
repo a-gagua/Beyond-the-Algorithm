@@ -582,16 +582,49 @@ body:not(:has(.hero)) #main {
   overflow: hidden;
 }
 
+/* The headshots are duotoned in CSS, not baked into the files. The
+   images on disk are ordinary colour photographs; the blue comes from
+   --deep on the figure beneath them, so the treatment follows the
+   palette like everything else rather than hardcoding a hex. Deleting
+   mix-blend-mode and the figure's background returns the page to plain
+   headshots — nothing here is destructive.
+
+   isolation: isolate is load-bearing. Without it the blend reaches past
+   the card to whatever is painted behind it. */
+.person__figure {
+  background: var(--deep);
+  isolation: isolate;
+}
+
+/* 4/5, not the 4/3 this slot used to reserve. All five supplied
+   headshots are portrait or square with the face high in the frame, and
+   a landscape crop of a 3:4 portrait keeps barely half its height —
+   it cropped into the tops of heads. 4/5 sits close to all five source
+   ratios, so every one is trimmed only slightly.
+
+   object-position favours the upper frame for the same reason: where a
+   crop has to fall, it should fall below the chin, not above the hair. */
 .person__photo {
-  aspect-ratio: 4 / 3;
-  background: var(--data-light);
-  display: grid;
-  place-items: center;
-  font-family: var(--font-mono);
-  font-size: 1.8rem;
-  color: #ffffffcc;
-  object-fit: cover;
+  aspect-ratio: 4 / 5;
   width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 30%;
+  mix-blend-mode: luminosity;
+  filter: contrast(1.05);
+}
+
+/* Hover lifts the duotone and shows the real photograph. A nicety only:
+   there is no hover on touch, and the reduced-motion gate means anyone
+   who has asked for less movement simply keeps the tinted version. */
+@media (prefers-reduced-motion: no-preference) {
+  .person__photo {
+    transition: filter 0.35s ease;
+  }
+
+  .person:hover .person__photo {
+    mix-blend-mode: normal;
+  }
 }
 
 .person__body {
