@@ -2823,3 +2823,38 @@ h2 {
 .contact__social a:hover {
   background: #ffffff99;
 }
+
+/* ---------------------------------------------------------
+   26. Photograph slots that actually hold a photograph
+
+   .shot is a placeholder: a dashed outline on a warm ground
+   with the words "photo — ..." inside it, so an unfilled page
+   reads as unfinished-by-design rather than broken. Once a
+   real image lands, all of that has to come off, or the
+   photograph sits inside a dashed box announcing that it is
+   missing.
+
+   At the end of the file deliberately. The placeholder look is
+   re-declared in a later stratum than the base .shot rule, and
+   this is a single class like both of them, so order is the
+   only thing that settles it.
+   --------------------------------------------------------- */
+
+.shot--photo {
+  background: none;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.shot--photo img {
+  display: block;
+}
+
+/* This photograph is a 4:3 phone frame whose top third is suspended
+   ceiling. Shown whole it is mostly ceiling; in the 16/9 slot the crop
+   takes that off, and pulling the focal point down the frame keeps the
+   table, the boards and the people rather than centring on empty air. */
+.shot--wide.shot--photo img {
+  object-position: center 72%;
+}
