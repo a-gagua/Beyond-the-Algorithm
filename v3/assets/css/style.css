@@ -1221,9 +1221,14 @@ figure.shot-fig figcaption {
 
 /* Dimmed rather than transparent: an alpha here would blend toward the
    blue behind it and land under 4.5:1. This is a measured 5:1. */
+/* 46ch here was tuned to a two-sentence panel. The copy is now a
+   question plus an explanation, and at 46ch it wrapped to six lines
+   inside a cell nearly twice that wide — a narrow ribbon of text with
+   a column of dead space beside it. 68ch stays inside the comfortable
+   reading measure while actually using the cell. */
 .cta p {
   color: #e8e2da;
-  max-width: 46ch;
+  max-width: 68ch;
   margin-bottom: 0;
 }
 
