@@ -812,6 +812,16 @@ body:not(:has(.hero)) #main {
   color: var(--ink);
 }
 
+/* .site-footer a is a class-plus-type selector, which beats a plain
+   .btn--primary on specificity regardless of which comes later in the
+   file — so without this, the one button inside the merged footer
+   silently lost its cream text back to ink the moment .invite's own
+   colour override was removed. This restores it to the same cream on
+   deep blue every other primary button on the site uses. */
+.site-footer .btn--primary {
+  color: #f7f2ee;
+}
+
 /* Centred, because the footer now holds one thing. This was
    space-between when the Beyond the Algorithm mark sat opposite the two
    institutional logos; with the mark gone, space-between has nothing to
@@ -829,6 +839,29 @@ body:not(:has(.hero)) #main {
   margin: 0;
   color: var(--ink-soft);
   max-width: none;
+}
+
+/* Home page only. .invite sits directly in the footer's .wrap here
+   instead of .site-footer__inner, because the two rows need different
+   alignment: the invite reads left, the logos read centred, and
+   forcing both through the same flex container fights the layout that
+   suits either one. */
+.site-footer--invite {
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.75rem;
+}
+
+/* A hairline rather than a second band of colour — the invite and the
+   logos already share one background, so the divider only needs to
+   mark where the ask ends and the credits begin, not separate two
+   surfaces. */
+.site-footer--invite .invite {
+  padding-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-footer--invite .site-footer__logos {
+  justify-content: center;
 }
 
 .site-footer__logos {
@@ -1326,18 +1359,18 @@ figure.shot-fig figcaption {
 }
 
 /* ---------------------------------------------------------
-   21a. Invite — the closing section
+   21a. Invite — merged into the footer
 
-   Was .cta, a blue box inside "What it needs", which filed the page's
-   one ask as a fourth requirement. It is a full-width band now, so the
-   page ends on it. The .cta rules below are kept because contact.html
-   still uses that pattern.
-   --------------------------------------------------------- */
+   Was its own full-bleed blue band between "What it needs" and the
+   footer: one blue strip for the ask, one peach strip for the logos
+   right after it, with the blue never actually relating to the marks
+   it sat beside. Ana asked for the two to merge, and pointed out the
+   blue was the wrong choice for that anyway — the institutional logos
+   need a pale ground to read on, which blue isn't.
 
-.band--invite {
-  background: var(--deep);
-  color: var(--cream);
-}
+   So .invite now lives inside .site-footer--invite (see section 15)
+   instead of its own band, on the peach the footer already used. No
+   .band--invite left to style: it had no other callers. */
 
 .invite {
   max-width: 62ch;
@@ -1345,21 +1378,21 @@ figure.shot-fig figcaption {
 
 /* Bigger than the .cta h2 it replaces, and in the mono face at caps —
    the rest of the site uses that treatment for section labels, so it
-   reads as a heading for the whole band rather than for a panel. */
+   reads as a heading for the whole band rather than for a panel.
+   Coloured like every other heading on the site now that the ground
+   is peach, not white-on-blue. */
 .invite h2 {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: clamp(1.3rem, 3vw, 1.9rem);
   line-height: 1.2;
-  color: var(--cream);
+  color: var(--deep);
   margin: 0 0 1rem;
 }
 
-/* #e8e2da rather than an alpha: a transparent cream blends toward the
-   blue behind it and lands under 4.5:1. This is a measured 5:1. */
 .invite p {
-  color: #e8e2da;
+  color: var(--ink-soft);
   font-size: 1.02rem;
   max-width: 62ch;
   margin: 0;
@@ -1369,20 +1402,10 @@ figure.shot-fig figcaption {
   margin-top: 1.75rem;
 }
 
-/* The button has to invert on this ground. .btn--primary resolves to
-   var(--deep), which is the band itself — left alone it renders as
-   blue-on-blue and the only action on the page disappears. Same
-   treatment .cta and the hero already use. */
-.invite .btn--primary {
-  background: var(--cream);
-  border-color: var(--cream);
-  color: var(--deep);
-}
-
-.invite .btn--primary:hover {
-  background: #fff;
-  border-color: #fff;
-}
+/* No colour override needed here any more. .btn--primary is already
+   deep blue on cream, which was only invisible against the old blue
+   band — against peach it's the strongest thing in the footer, which
+   is what the one action on the page should be. */
 
 /* ---------------------------------------------------------
    21. Call to action
