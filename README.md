@@ -177,8 +177,6 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   The lab is **TU Delft Gamelab**, not "Serious Game Lab". The root and
   `v2/` copies still carry the old name and the dashed-box placeholders;
   they follow whenever a version is promoted.
-- **Nihit's role and bio.** The card in `team.html` is a placeholder and says
-  so on the page.
 - **Contact form.** `contact.html` posts to `https://formspree.io/f/FORM_ID`.
   Create a free [Formspree](https://formspree.io) form and paste the real
   endpoint. GitHub Pages is static, so a form needs an external handler. Until
@@ -192,10 +190,18 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
 - **Where it has been played.** `research.html` describes the sessions vaguely
   because the conference name and dates are not confirmed, and because each
   host organisation should be asked before being named.
-- **Team bios and photographs.** Roles are accurate; the sentences are drafts
-  and each person should approve their own. Drop images in `assets/img/team/`
-  and replace each `.person__photo` div with
+- **Team headshots.** The bios themselves are done — all five are supplied
+  text, not drafts, so do not paraphrase them or extend anyone's title beyond
+  what their own bio states. Only the photographs are missing: drop images in
+  `assets/img/team/` and replace each `.person__photo` div with
   `<img class="person__photo" src="assets/img/team/name.jpg" alt="Name">`.
+
+  Two things on that page still want a decision. The cards no longer say who
+  supervises the PhD — Haiko's and Alexander's cards previously read "PhD
+  supervisor", and that fact is not in either supplied bio, so it was dropped
+  rather than reinstated from memory. And Gracia's bio says **TBM Gamelab**
+  while the footer logo is captioned **TU Delft Gamelab**; TBM is the Dutch
+  name for the same faculty, but the site currently uses both.
 - **Publications.** `research.html` has an empty publications section.
 
 ## Design
