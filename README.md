@@ -116,9 +116,17 @@ is in here.
 Participants can read this site before playing, so it holds back anything that
 would spoil a session. Keep this in mind when adding copy:
 
-- **No scoring axes.** The three scored dimensions are not named anywhere as
-  the things being measured — not in the copy, and not in HTML comments
-  either, which anyone can read via view-source.
+- **No scoring axes — with one settled exception.** The scored dimensions are
+  not named as the things being *measured*, in copy or in HTML comments, which
+  anyone can read via view-source. But **effectiveness and explainability do
+  appear**, in the Sprints stop of "How it runs", and that is deliberate: they
+  are also the goal the teams are openly briefed on at kickoff, so a
+  participant learns them in the first ten minutes of a session. Naming them
+  spoils nothing. What stays hidden is that they are scored, and how.
+
+  The Sprints copy is phrased as a direction of travel, not a menu — "rarely a
+  clean split between the two" — because presenting it as a binary choice
+  would imply a scoring model that the site should not be describing.
 - **No disclosure detail.** The site says the model goes on the public record
   and that you cannot say everything. It does not mention six fields, or
   choosing three.
@@ -135,7 +143,13 @@ Copy supplied for the About and Research sections crossed this line in three
 places — the scored dimensions in both team cards and in the closing paragraph
 of "Who's at the table", and three named example events in the storyline. All
 were rewritten to say the same thing without the spoilers. If that copy is
-pasted in again from the original source, re-check those spots.
+pasted in again from the original source, re-check those spots. Note that the
+Sprints exception above does **not** extend to them: naming the dimensions as
+a shared goal is fine, naming them as a team's score is not.
+
+"How it runs" also used to say the teams agree "how ambitious to be" at
+kickoff. That was changed to "what the goal is" — the original sat too close
+to the Ambition Card, which is listed as hidden two bullets up.
 
 One deliberate exception: "explainability tools" survives in the Research
 standfirst, as one item in a list of checklist artefacts (registers,
