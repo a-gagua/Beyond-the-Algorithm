@@ -48,31 +48,6 @@ python3 -m http.server 8000
 If you change CSS and the page looks unchanged, hard-refresh (Cmd-Shift-R) —
 the browser caches the stylesheet.
 
-## Two things that disagree with the printed box
-
-**Player count and duration.** The box lid states **2–8 players** and **90m**.
-Both are wrong. The correct figures are **4–8 players** and **2 hours**, and
-that is what the site now says. The site is the authority; anyone comparing it to
-a printed box will find the box lower on players and shorter on time.
-
-The per-stop durations that used to sit in "How it runs" (15 + 85 + 20 + 30)
-totalled 150 minutes — the old, also-wrong 2½ hours. They were removed rather
-than re-guessed. The total is stated once, in "What it needs".
-
-**The print pack is not in this repository, deliberately.** There was briefly a
-`assets/brandbook/` holding sixteen Illustrator PDFs with
-`/Separation /ContourCut` die-cut channels — the files a printer is sent. It
-was 280 MB and has been removed: git history is permanent, GitHub rejects
-single files over 100 MB, and the site loaded none of it.
-
-Worth recording what it did *not* contain, so nobody goes looking again: no
-logo-usage page, no colour swatch page, no type specimen, and no SVG, PNG, EPS
-or AI files at all. The clock and player-count icons on the lid are anonymous
-vector paths inside `4xBoxDesign_ResponsibleAI.pdf` and are not extractable
-without Illustrator. The icons in "What it needs" are therefore drawn by hand
-to match, as the gear and sparkle in `assets/img/motif.svg` already were. Keep
-the print pack somewhere outside this repo — it belongs with the printer.
-
 Worth knowing: the box's real typefaces are **Agenda**, **Aller Display** and
 **Fredericka the Greatest**. The site uses Fraunces and Montserrat — neither is
 a box face. Agenda and Aller Display are licensed desktop fonts with no web
@@ -157,9 +132,8 @@ would spoil a session. Keep this in mind when adding copy:
   participant learns them in the first ten minutes of a session. Naming them
   spoils nothing. What stays hidden is the measurement model behind them.
 
-  The Sprints copy is phrased as a direction of travel, not a menu — "rarely a
-  clean split between the two" — because presenting it as a binary choice
-  would imply a scoring model that the site should not be describing.
+  The Sprints copy is phrased as a direction of travel, not a menu.
+  
 - **No disclosure detail.** The site says the model goes on the public record
   and that you cannot say everything. It does not describe the form itself.
 - **No event card names.** The site says events interrupt the build, not which
@@ -225,7 +199,7 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   TU Delft mark as much as you like; never pull it rightward past the
   container.
 
-  The lab is **TU Delft Gamelab**, not "Serious Game Lab". The two older
+  The lab is **TU Delft Gamelab**. The two older
   copies of the site carried the old name and the dashed-box placeholders;
   both have been deleted, so the correct name is now the only one present.
 - **Contact form.** `contact.html` posts to `https://formspree.io/f/FORM_ID`.
@@ -278,8 +252,7 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
 
 ## Design
 
-Type follows [criticalinfralab.net](https://www.criticalinfralab.net):
-**Source Sans 3** for everything and **Source Code Pro** for labels, buttons and
+Type follows **Source Sans 3** for everything and **Source Code Pro** for labels, buttons and
 inputs, both loaded from Google Fonts. Headings sit at normal weight — hierarchy
 comes from size and the sans/mono contrast, not from bold. Both faces are
 open-source, so there is no licensing question.
