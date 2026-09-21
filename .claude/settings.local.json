@@ -11,7 +11,9 @@
       "Bash(xargs -r kill)",
       "Bash(cd \"/Users/agagua/Desktop/beyond the algoritm\" && find . -type f \\\\\\( -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.png\" -o -iname \"*.heic\" -o -iname \"*.webp\" \\\\\\) | head -40; echo \"--- count:\"; find . -type f \\\\\\( -iname \"*.jpg\" -o -iname \"*.png\" -o -iname \"*.heic\" \\\\\\) | wc -l; echo \"--- Desktop/Downloads:\"; ls -t ~/Desktop 2>/dev/null | head -20)",
       "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
-      "Bash(awk 'BEGIN{d=0;n=0} {line=$0; while\\(match\\(line,/\\\\/\\\\*|\\\\*\\\\//\\)\\){tok=substr\\(line,RSTART,2\\); if\\(tok==\"/*\"\\){d++} else {d--; if\\(d<0\\){print \"STRAY */ at line \" NR; d=0}}; line=substr\\(line,RSTART+2\\)}} END{print \\(d==0 ? \"comments balanced\" : \"UNCLOSED comment, depth \" d\\)}' assets/css/style.css)"
+      "Bash(awk 'BEGIN{d=0;n=0} {line=$0; while\\(match\\(line,/\\\\/\\\\*|\\\\*\\\\//\\)\\){tok=substr\\(line,RSTART,2\\); if\\(tok==\"/*\"\\){d++} else {d--; if\\(d<0\\){print \"STRAY */ at line \" NR; d=0}}; line=substr\\(line,RSTART+2\\)}} END{print \\(d==0 ? \"comments balanced\" : \"UNCLOSED comment, depth \" d\\)}' assets/css/style.css)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
