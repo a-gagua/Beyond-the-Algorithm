@@ -168,7 +168,7 @@
   // ---------------------------------------------------------------
   // Hero scroll progress.
   //
-  // Publishes --hero-p, --reveal-badges and --reveal-cta on .hero as
+  // Publishes --hero-p and --reveal-badges on .hero as
   // the pinned stage is scrolled through; the CSS in style.css reads
   // them and falls back to the finished state if this never runs.
   // No-op on the three pages with no hero, and under reduced motion,
@@ -196,11 +196,15 @@
       hero.style.setProperty("--hero-p", p.toFixed(4));
 
       // --field-in is the main event: the two coloured fields closing on
-      // the disc. The badges follow it in and the buttons arrive early,
-      // so the call to action is there long before the sequence ends.
+      // the disc. The badges follow it in.
+      //
+      // --reveal-cta is gone. It faded the two buttons in from opacity 0
+      // between 12% and 40% of the hero's scroll, which meant the only
+      // two actions on the opening screen did not exist until you had
+      // already started scrolling past them. They are now always visible
+      // and nothing here needs to drive them.
       hero.style.setProperty("--field-in", ease(sub(p, 0.00, 0.45)).toFixed(4));
       hero.style.setProperty("--reveal-badges", ease(sub(p, 0.10, 0.42)).toFixed(4));
-      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.12, 0.40)).toFixed(4));
     };
 
     window.addEventListener("scroll", function () {
@@ -266,6 +270,48 @@
       wantX = 0;
       wantY = 0;
       nudge();
+    });
+  }
+
+  // ---- Run track -------------------------------------------------
+  // Clicking a stop emphasises it and dims the other three. Nothing is
+  // revealed or hidden: all four paragraphs are in the markup and stay
+  // readable, so a visitor who never clicks — or who has JS off — sees
+  // the whole section at equal weight, which is the default state.
+  //
+  // .is-selecting only goes on after the first click. Without it the
+  // page would load with three quarters of the section greyed out,
+  // which reads as a rendering fault rather than as a choice.
+  //
+  // Clicking the selected stop again clears the selection, so there is
+  // always a way back to the default view without reloading.
+  var run = document.querySelector("[data-run]");
+
+  if (run) {
+    var stops = Array.prototype.slice.call(run.querySelectorAll(".run__stop"));
+
+    var select = function (stop) {
+      var clearing = stop === null || stop.classList.contains("is-current");
+
+      stops.forEach(function (s) {
+        var on = !clearing && s === stop;
+        s.classList.toggle("is-current", on);
+        var trigger = s.querySelector(".run__trigger");
+        if (trigger) trigger.setAttribute("aria-pressed", String(on));
+      });
+
+      run.classList.toggle("is-selecting", !clearing);
+    };
+
+    run.addEventListener("click", function (e) {
+      var trigger = e.target.closest(".run__trigger");
+      if (!trigger) return;
+      select(trigger.closest(".run__stop"));
+    });
+
+    // Escape returns to the default view, matching the toggle-off click.
+    run.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") select(null);
     });
   }
 

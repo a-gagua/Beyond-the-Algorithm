@@ -1021,6 +1021,9 @@ body:not(:has(.hero)) #main {
    17. Storyline — the opening statement on About
    --------------------------------------------------------- */
 
+/* Note: the font-size and max-width here are both overridden by the
+   later .storyline rule in the type stratum. Change that one, not this
+   one — editing these has no effect on the rendered page. */
 .storyline {
   font-size: clamp(1.35rem, 3.2vw, 2.05rem);
   line-height: 1.25;
@@ -1059,13 +1062,20 @@ body:not(:has(.hero)) #main {
     gap: 1.75rem;
   }
 
-  /* Each stop draws the segment to its right, so the line stops at the
-     last dot instead of running off the end of the row. */
-  .run__stop:not(:last-child)::after {
+  /* Every stop draws the segment to its right, including the last one,
+     which now runs to the end of its own column instead of stopping at
+     the final dot. The track used to end in mid-air above Debrief's
+     text; it now finishes where that text finishes, so the line reads
+     as spanning the session rather than trailing off.
+
+     left: 0 rather than 18px puts the start of the line on the same
+     vertical as the text below it. The dot sits on the line instead of
+     the line starting after the dot. */
+  .run__stop::after {
     content: "";
     position: absolute;
     top: 6px;
-    left: 18px;
+    left: 0;
     right: -1.75rem;
     height: 1px;
     background: repeating-linear-gradient(
@@ -1073,6 +1083,15 @@ body:not(:has(.hero)) #main {
       var(--ink-faint) 0 6px,
       transparent 6px 12px
     );
+  }
+
+  .run__stop:last-child::after {
+    right: 0;
+  }
+
+  /* Above the line, so the dashes do not run through it. */
+  .run__stop::before {
+    z-index: 1;
   }
 }
 
@@ -1088,6 +1107,9 @@ body:not(:has(.hero)) #main {
   }
 }
 
+/* All four dots are filled and identical. Sprints used to be the only
+   solid one, which made it read as the single marker on the track
+   rather than one stop of four. */
 .run__stop::before {
   content: "";
   position: absolute;
@@ -1096,7 +1118,7 @@ body:not(:has(.hero)) #main {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--ink-faint);
   border: 1px solid var(--ink-faint);
 }
 
@@ -1107,15 +1129,57 @@ body:not(:has(.hero)) #main {
 }
 
 /* The stop you actually spend the session inside gets filled in. */
-.run__stop--long::before {
-  background: var(--paper-accent);
-  border-color: var(--paper-accent);
-}
-
 .run__stop h3 {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   margin: 0 0 0.5rem;
+}
+
+/* The heading is a button. Strip the control's own appearance so the
+   track looks exactly as it did, and inherit type from the h3 around
+   it rather than restating it. */
+.run__trigger {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.18s ease;
+}
+
+.run__trigger:focus-visible {
+  outline: 2px solid var(--deep);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+/* Selection state. Only applied once a stop has actually been chosen —
+   .is-selecting goes on the list on first click — so the default view
+   is all four at equal weight and nobody who never clicks sees three
+   quarters of the section greyed out. */
+.run.is-selecting .run__stop:not(.is-current) .run__trigger,
+.run.is-selecting .run__stop:not(.is-current) p {
+  opacity: 0.45;
+}
+
+.run.is-selecting .run__stop:not(.is-current)::before {
+  opacity: 0.4;
+}
+
+.run__stop.is-current .run__trigger {
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .run__stop::before,
+  .run__stop p {
+    transition: opacity 0.18s ease;
+  }
 }
 
 .run__stop p {
@@ -1242,6 +1306,65 @@ figure.shot-fig figcaption {
   color: var(--ink-soft);
   margin: 0;
   max-width: 30ch;
+}
+
+/* ---------------------------------------------------------
+   21a. Invite — the closing section
+
+   Was .cta, a blue box inside "What it needs", which filed the page's
+   one ask as a fourth requirement. It is a full-width band now, so the
+   page ends on it. The .cta rules below are kept because contact.html
+   still uses that pattern.
+   --------------------------------------------------------- */
+
+.band--invite {
+  background: var(--deep);
+  color: var(--cream);
+}
+
+.invite {
+  max-width: 62ch;
+}
+
+/* Bigger than the .cta h2 it replaces, and in the mono face at caps —
+   the rest of the site uses that treatment for section labels, so it
+   reads as a heading for the whole band rather than for a panel. */
+.invite h2 {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  line-height: 1.2;
+  color: var(--cream);
+  margin: 0 0 1rem;
+}
+
+/* #e8e2da rather than an alpha: a transparent cream blends toward the
+   blue behind it and lands under 4.5:1. This is a measured 5:1. */
+.invite p {
+  color: #e8e2da;
+  font-size: 1.02rem;
+  max-width: 62ch;
+  margin: 0;
+}
+
+.invite .btn-row {
+  margin-top: 1.75rem;
+}
+
+/* The button has to invert on this ground. .btn--primary resolves to
+   var(--deep), which is the band itself — left alone it renders as
+   blue-on-blue and the only action on the page disappears. Same
+   treatment .cta and the hero already use. */
+.invite .btn--primary {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--deep);
+}
+
+.invite .btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
 }
 
 /* ---------------------------------------------------------
@@ -1481,8 +1604,12 @@ h2 {
   margin-bottom: 0.85rem;
 }
 
+/* The tab is an <h3> on the team cards, so the card keeps a heading in
+   the document outline now that the composition line has moved into the
+   prose. Zero the heading margins the element inherits as a heading —
+   the flex head supplies the spacing. */
 .card__head .card__tab {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .card__icon {
@@ -1514,9 +1641,6 @@ h2 {
 
 .run__stop::before {
   border-color: var(--deep-mid);
-}
-
-.run__stop--long::before {
   background: var(--deep-mid);
 }
 
@@ -1868,15 +1992,25 @@ h2 {
 
 /* The opening statement spans the full width of the spread body rather
    than sitting as a narrow block above the left-hand column — it is a
-   headline over the two columns, so it should measure like one. */
-/* Half of what it was — it was running to 3rem, which on a page this
-   quiet read as a banner rather than an opening sentence. Line-height
-   opens up to suit: 1.04 is display leading and would look cramped at
-   this size. */
+   headline over the two columns, so it should measure like one.
+
+   This is the rule that wins; the earlier .storyline block is dead on
+   both of these properties.
+
+   One size up from the 1.5rem cap it sat at. That was set when the line
+   was shorter and was half of an earlier 3rem, which had read as a
+   banner; between the two, 1.85rem is a headline over two columns
+   without shouting.
+
+   text-wrap: balance is switched off here. Balancing evens the line
+   lengths, which on a two-line headline pulls both lines in from the
+   right and makes a full-width element look like a narrow centred
+   block — the thing this rule exists to prevent. */
 .storyline {
-  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
   line-height: 1.3;
   max-width: none;
+  text-wrap: pretty;
 }
 
 /* Out of the display face altogether. These are figures, not a
@@ -2287,7 +2421,33 @@ h2 {
 
 .hero__foot {
   align-self: start;
-  padding-top: clamp(0.9rem, 2.5vh, 1.6rem);   /* was clamp(1.75rem, 5vh, 3.25rem) */
+  /* Was clamp(0.9rem, 2.5vh, 1.6rem). Lifted again, and only a little:
+     these two are the only things on the opening screen a visitor can
+     act on, so they should sit closer to the lockup than to the fold
+     without crowding the artwork. */
+  padding-top: clamp(0.4rem, 1.4vh, 0.9rem);
+}
+
+/* Bigger than the site's default button. Everywhere else a button sits
+   beside prose that has already made the case; here it IS the case, on
+   a screen with nothing else to read. */
+.hero__foot .btn {
+  font-size: 0.92rem;
+  padding: 0.95rem 1.7rem;
+}
+
+/* The ghost variant is near-invisible at this size on the lid artwork —
+   it read as a caption rather than a second option. Giving it a solid
+   ground and a full-strength border makes the pair read as two choices,
+   which is what they are. */
+.hero__foot .btn--ghost {
+  background: #fffffff0;
+  border-color: var(--lid-ink);
+  font-weight: 600;
+}
+
+.hero__foot .btn--ghost:hover {
+  background: #ffffff;
 }
 
 .hero__stage {
@@ -2314,7 +2474,7 @@ h2 {
 /* =========================================================
    V3c — THE HERO REVEAL
    =========================================================
-   main.js publishes --hero-p, --reveal-badges and --reveal-cta
+   main.js publishes --hero-p and --reveal-badges
    on .hero as the pinned stage is scrolled through. Every custom
    property below falls back to the finished state, so a script
    failure (or a browser with JS off) renders the hero complete
@@ -2330,15 +2490,18 @@ h2 {
     scale(calc(0.86 + var(--reveal-badges, 1) * 0.14));
 }
 
-.hero__foot {
-  opacity: var(--reveal-cta, 1);
-  transform: translateY(calc((1 - var(--reveal-cta, 1)) * 18px));
-}
+/* These two used to fade in on scroll, off --reveal-cta, which meant
+   that at rest — the state every visitor sees first — the only two
+   things on the opening screen you can act on were at opacity 0. You
+   had to scroll a pinned hero 12% before they existed. That is the
+   opposite of prominent, so the reveal is gone and they are simply
+   present.
 
-/* opacity: 0 does not take an element out of the tab order, so without
-   this a keyboard user tabbing off the nav lands on an invisible "How
-   to play". Focusing anything in the row brings it in early. */
-.hero__foot:focus-within {
+   The badges still animate; the lockup still builds. The actions just
+   no longer wait their turn. This also retires a focus-within hack that
+   existed only because opacity: 0 leaves an element in the tab order,
+   so a keyboard user could land on an invisible "How to play". */
+.hero__foot {
   opacity: 1;
   transform: none;
 }

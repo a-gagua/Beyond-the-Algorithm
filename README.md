@@ -173,13 +173,20 @@ The line drawn: mechanics and scoring stay hidden, what the experience is like
 and why it is worth doing stays open, because that is what convinces an
 organisation to book a session.
 
-Copy supplied for the About and Research sections crossed this line in three
-places — the scored dimensions in both team cards and in the closing paragraph
-of "Who's at the table", and three named example events in the storyline. All
-were rewritten to say the same thing without the spoilers. If that copy is
-pasted in again from the original source, re-check those spots. Note that the
-Sprints exception above does **not** extend to them: naming the dimensions as
-a shared goal is fine, naming them as a team's score is not.
+**The team cards may now describe what each team is for.** They used to be
+scrubbed of anything resembling the scored dimensions, on the rule that naming
+them as a shared goal was fine but naming them as a team's objective was not.
+That rule has been relaxed by decision: the Tech card says its job is to make
+sure the model *performs well* and the Domain card that its job is to make sure
+the model *reflects real inspection practice*. Both are vaguer than the scored
+terms, and a participant is briefed on the dimensions at kickoff regardless.
+What still stays out is any statement that these are **scored**, and how.
+
+The one thing that has never been allowed back is **named example events**. The
+supplied storyline once listed three; they stay out. The storyline describes the
+pressure — rising scrutiny, the Algorithm Register, oversight queries and public
+information requests, and that you cannot know when they will land — without
+naming a single card. Describing the weather is fine; printing the deck is not.
 
 "How it runs" also used to say the teams agree "how ambitious to be" at
 kickoff. That was changed to "what the goal is" — the original sat too close
@@ -298,6 +305,29 @@ Other pieces worth knowing: `.run` is the four-stop session track on
 the landing page, `.facts` is the requirements strip, `.shot` is a photograph slot,
 `.hero__spec` is the spec line under the landing-page buttons, and `--grain` is
 an inlined noise texture over the flat paper fill.
+
+`.run` is clickable. Each stop's heading is a `<button>`; clicking one emphasises
+it and dims the other three, and clicking it again clears the selection. **It
+reveals nothing** — all four paragraphs are always in the markup, so the section
+reads whole with JavaScript off and for anyone who never clicks. That is why the
+dimming class `.is-selecting` goes on the list only after the first click:
+without it the page would load with three quarters of the section greyed out,
+which reads as a fault rather than a choice. All four dots are identical now;
+Sprints used to be the only filled one, which made it look like the single
+marker on the track rather than one stop of four.
+
+`.band--invite` is the closing blue section. It was `.cta`, a box inside "What it
+needs", which filed the page's one ask as a fourth requirement. `.cta` still
+exists because `contact.html` uses it. Note that `.btn--primary` resolves to
+`var(--deep)`, the same blue as the band, so both patterns have to invert the
+button to cream — leave that out and the only action on the page disappears.
+
+The hero's two buttons are **always visible**. They used to fade in from
+`opacity: 0` on a `--reveal-cta` variable driven by scroll position, which meant
+the only two actions on the opening screen did not exist until you had scrolled
+12% through a pinned hero — and it needed a `:focus-within` hack so keyboard
+users did not land on an invisible button. The variable is gone. The badges and
+the closing fields still animate; the actions do not wait their turn.
 
 The landing-page cards drift with the pointer, and straighten and lift when
 one is hovered. Each card composes its transform from `--dx`, `--dy`, `--rot`
