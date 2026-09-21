@@ -582,48 +582,68 @@ body:not(:has(.hero)) #main {
   overflow: hidden;
 }
 
-/* The headshots are duotoned in CSS, not baked into the files. The
-   images on disk are ordinary colour photographs; the blue comes from
-   --deep on the figure beneath them, so the treatment follows the
-   palette like everything else rather than hardcoding a hex. Deleting
-   mix-blend-mode and the figure's background returns the page to plain
-   headshots — nothing here is destructive.
+/* The frame lives on the figure, NOT on the photograph.
 
-   isolation: isolate is load-bearing. Without it the blend reaches past
-   the card to whatever is painted behind it. */
+   filter applies to an element's own border and outline as well as to
+   its content, so a coloured border drawn on .person__photo comes out
+   greyscaled along with the face — tried it, the five colours rendered
+   as five near-identical greys. The wrapper sits outside the filter,
+   which is the whole reason .person__figure still exists.
+
+   width: fit-content shrinks the frame to the photograph rather than
+   the card, which is what makes it read as a frame and not a panel. */
 .person__figure {
-  background: var(--deep);
-  isolation: isolate;
+  width: fit-content;
+  margin: 1.5rem 1.35rem 0;
+  padding: 6px;
+  border: 2px solid var(--frame);
+  border-radius: 14px;
 }
 
-/* 4/5, not the 4/3 this slot used to reserve. All five supplied
-   headshots are portrait or square with the face high in the frame, and
-   a landscape crop of a 3:4 portrait keeps barely half its height —
-   it cropped into the tops of heads. 4/5 sits close to all five source
-   ratios, so every one is trimmed only slightly.
+/* Inset and square, rather than spanning the card. The photographs were
+   the first and loudest thing on the page; at 168px the card drops from
+   778px to roughly 537px and the names lead instead.
 
-   object-position favours the upper frame for the same reason: where a
-   crop has to fall, it should fall below the chin, not above the hair. */
+   object-position favours the upper frame: a square crop is tighter at
+   the top than the old 4/5 was, and where a crop has to fall it should
+   fall below the chin, not above the hair. */
 .person__photo {
-  aspect-ratio: 4 / 5;
-  width: 100%;
+  width: 168px;
+  aspect-ratio: 1 / 1;
   display: block;
   object-fit: cover;
-  object-position: center 30%;
-  mix-blend-mode: luminosity;
-  filter: contrast(1.05);
+  object-position: center 25%;
+  border-radius: 8px;
+  filter: grayscale(1) contrast(1.05);
 }
 
-/* Hover lifts the duotone and shows the real photograph. A nicety only:
-   there is no hover on touch, and the reduced-motion gate means anyone
-   who has asked for less movement simply keeps the tinted version. */
+/* Frame colours, in card order. Greyscale portraits are what make this
+   work — the colour has somewhere to live now that the faces have none.
+
+   Tying these to :nth-child rather than a modifier class keeps the
+   markup clean. The cost is that reordering the cards reshuffles the
+   colours, which is harmless: none of them means anything, they are
+   five palette tokens chosen to sit well together. */
+.person:nth-child(1) { --frame: var(--deep); }
+.person:nth-child(2) { --frame: var(--domain-accent); }
+.person:nth-child(3) { --frame: var(--tech-accent); }
+.person:nth-child(4) { --frame: var(--just-text); }
+.person:nth-child(5) { --frame: var(--risk-text); }
+
+/* Hover drops the greyscale and shows the photograph in colour. A
+   nicety only: there is no hover on touch, and the reduced-motion gate
+   means anyone who asked for less movement keeps the still version.
+
+   This used to swap mix-blend-mode, which is not an animatable
+   property, so the transition beside it had nothing to act on and the
+   change snapped. filter animates, so it now actually fades. */
 @media (prefers-reduced-motion: no-preference) {
   .person__photo {
     transition: filter 0.35s ease;
   }
 
   .person:hover .person__photo {
-    mix-blend-mode: normal;
+    filter: none;
   }
 }
 
@@ -633,6 +653,15 @@ body:not(:has(.hero)) #main {
 
 .person__body h3 {
   margin-bottom: 0.1rem;
+}
+
+/* The 0.1rem above is tuned to sit tight against the mono role line.
+   The three supervisors have no role line — their project role is a
+   sentence in the bio instead — so on those cards the bio would collide
+   with the name. This restores the breathing room only where the role
+   line is absent. */
+.person__body h3 + p:not(.person__role) {
+  margin-top: 0.6rem;
 }
 
 .person__role {
@@ -846,12 +875,21 @@ body:not(:has(.hero)) #main {
    survive the blend. The negative margin pulls the surviving whitespace
    back in so the two logos sit at a sensible distance.
 
+   That margin is start-only, deliberately. A negative margin shrinks an
+   element's layout slot but not the box it actually paints, so a
+   -1.75rem on the END edge put this logo's right edge 28px past the
+   wrap — 8px beyond the viewport — and gave every page in the site a
+   horizontal scrollbar. It stayed hidden while the footer wordmark
+   forced the logos onto their own wrapped line; removing the wordmark
+   exposed it. Pull it leftward toward the TU Delft mark all you like;
+   never pull it rightward past the container.
+
    Delete this whole rule the moment a transparent PNG or an SVG lands. */
 .site-footer__logos .logo--raster {
   height: 72px;
   mix-blend-mode: multiply;
   clip-path: inset(4% 0 6% 0);
-  margin-inline: -1.75rem;
+  margin-inline: -1.75rem 0;
 }
 
 /* ---------------------------------------------------------
@@ -2146,13 +2184,6 @@ h2 {
 .hero .btn--ghost:hover {
   border-color: var(--lid-ink);
   background: #ffffffb3;
-}
-
-/* The brand lockup, wherever it appears, is the box wordmark. */
-.site-footer__brand span {
-  font-family: var(--font-wordmark);
-  font-weight: 800;
-  letter-spacing: -0.01em;
 }
 
 /* ---- Hero rows -------------------------------------------

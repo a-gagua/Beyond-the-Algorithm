@@ -119,20 +119,31 @@ Team photographs are capped at 800px rather than 1600px — a card renders them
 under 400px wide — and only images larger than that are resampled, since
 enlarging a small headshot invents detail. The whole folder is 344 KB.
 
-**The blue on the team photographs is CSS, not the files.** The images on disk
-are ordinary colour headshots. `.person__figure` paints `var(--deep)` and
-`.person__photo` sits on it with `mix-blend-mode: luminosity`, so the portrait
-keeps its lightness and takes its colour from the token — which means the
-treatment follows the palette instead of hardcoding a hex, and deleting those
-two declarations returns the page to plain photographs. `isolation: isolate` on
-the figure is load-bearing; without it the blend escapes the card. Hovering a
-card lifts the tint, gated behind `prefers-reduced-motion: no-preference`.
+**The team photographs are greyscale by CSS, not in the files.** The images on
+disk are ordinary colour headshots; `.person__photo` carries
+`filter: grayscale(1) contrast(1.05)`. Hovering a card drops the filter and
+shows the photograph in colour, gated behind
+`prefers-reduced-motion: no-preference`. Delete one declaration and the page is
+back to plain colour headshots.
 
-The slot is `4/5`, not the `4/3` the rest of the site uses for photographs. All
-five headshots are portrait or square with the face high in the frame, and a
-landscape crop of a 3:4 portrait keeps barely half its height — it cut into the
-tops of heads. If a future headshot is landscape, crop it to portrait rather
-than changing the ratio, or the row stops aligning.
+Each portrait sits in a 2px line frame in a different game colour — blue, sand,
+teal, green, terracotta, assigned by `:nth-child` in card order. The colours
+mean nothing; reordering the cards reshuffles them harmlessly. Greyscale is what
+makes the frames work, by giving the colour somewhere to live.
+
+**The frame is on `.person__figure`, never on the photograph.** `filter` applies
+to an element's own border and outline as well as to its content, so a coloured
+border set on `.person__photo` gets greyscaled along with the face — tried it,
+the five colours rendered as five near-identical greys. That wrapper exists for
+exactly this reason; do not "simplify" it away.
+
+The slot is a **168px square inset**, not a full-width photograph. Earlier
+versions spanned the card at `4/3` and then `4/5`, and both made the photograph
+the loudest thing on the page. Inset at 168px the card is ~543px rather than
+778px and the names lead. All five headshots are portrait or square with the
+face high in the frame, so `object-position: center 25%` keeps the crop below
+the chin. Five-per-row was tried and rejected: the photos shrink but the bios
+compress to about eight words a line and the cards get *taller*.
 
 ## What the site deliberately does not say
 
@@ -197,12 +208,15 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   the Gamelab for a transparent PNG or an SVG, drop it in, and delete that
   rule — it is marked INTERIM in the stylesheet.
 
-  It also **overflows the viewport at around 768px**, pushing the document to
-  776px and giving every page a horizontal scrollbar on a tablet — the footer
-  is duplicated, so this is site-wide, not one page. Measured, not guessed.
-  Replacing the asset is likely to fix it on its own, since most of the file's
-  width is empty padding; if the real logo still overruns, the INTERIM rule
-  needs a `max-width` rather than a fixed one.
+  That rule used to give **every page a horizontal scrollbar**, 8px of overflow
+  at every width. Cause, since it is not obvious: the rule pulled the logo in
+  with `margin-inline: -1.75rem`, and a negative margin shrinks an element's
+  *layout slot* but not the box it actually paints — so its right edge sat 28px
+  past the wrap. It hid for a long time because the footer wordmark forced the
+  logos onto their own wrapped line; removing the wordmark exposed it. The
+  margin is now start-only (`-1.75rem 0`). Pull this logo leftward toward the
+  TU Delft mark as much as you like; never pull it rightward past the
+  container.
 
   The lab is **TU Delft Gamelab**, not "Serious Game Lab". The root and
   `v2/` copies still carry the old name and the dashed-box placeholders;
@@ -218,8 +232,14 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   plus the box photo in the hero (see the comment in `index.html` — it
   replaces the card illustration). They render as visible dashed gaps on purpose.
 - **Where it has been played.** `research.html` describes the sessions vaguely
-  because the conference name and dates are not confirmed, and because each
-  host organisation should be asked before being named.
+  because the conference name and dates are not confirmed.
+
+  The **host organisations are a settled question, not an open one**: they are
+  not named anywhere on the site and will not be. The acknowledgement on
+  `team.html` now says so outright — the research was carried out with Dutch
+  inspectorates, who took part on the understanding that they would stay
+  anonymous. Naming the country and the sector is fine; naming an organisation
+  is not. Do not "fill this in" later.
 - **The team page is done** — bios and headshots both. It is listed here only
   for the rules that govern editing it.
 
@@ -227,12 +247,20 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   anyone's title beyond what their own bio states.
 
   **The two lines on a card do different jobs.** `.person__role` is the
-  person's role *on this project* — lead researcher, game designer, PhD
-  supervisor. The bio underneath is who they are academically, in their own
-  words. Do not collapse these into one: putting the academic title in both
-  makes the card read as the same sentence twice, and leaves the page unable
-  to say why any given person is on it. Haiko, Alexander and Nihit are all
-  PhD supervisors.
+  person's role *on this project*; the bio underneath is who they are
+  academically, in their own words. Do not collapse these into one: putting the
+  academic title in both makes the card read as the same sentence twice, and
+  leaves the page unable to say why any given person is on it.
+
+  **A card may have no role line at all.** Only Ana ("PhD researcher") and
+  Gracia ("Game designer") carry one. Haiko, Alexander and Nihit are all PhD
+  supervisors, and a subtitle saying so three times down the page said less
+  than a sentence does — so each of their bios ends with the same line, *"He
+  supervises the PhD research behind Beyond the Algorithm."* The repetition is
+  deliberate: parallel wording is what tells a reader the three hold the same
+  role. `.person__body h3 + p:not(.person__role)` restores the spacing under
+  the name on those cards, since the `h3` margin is tuned to sit tight against
+  a role line that is not there.
 
   Gracia's bio keeps her own "TBM Gamelab" but now names the faculty in full,
   matching how Ana's bio writes it — TBM is simply the Dutch form of TPM, and
@@ -278,6 +306,13 @@ effect is off on touch, below 700px, and under `prefers-reduced-motion`. If you
 edit the card copy, re-check that the stack still overlaps only padding and
 never text — the offsets in `.deck__card--a/b/c` are tuned to the current
 wording.
+
+Both brand lockups — header and footer — are now the mark alone, with no
+wordmark text beside it. Each link therefore carries
+`aria-label="Beyond the Algorithm — home"`, and that is **not optional**: the
+`<img>` inside is `alt=""`, so without the label the link has no accessible
+name and a screen reader announces an unlabelled link. If you ever add a
+wordmark back, the label can go with it.
 
 Copy uses British spelling.
 

@@ -51,12 +51,16 @@
            the same sentence twice, and left the page unable to say why any
            given person was on it.
 
-           The photographs are ordinary colour headshots. The blue is a
-           CSS blend over .person__figure, not baked into the files, so
-           it stays in step with the palette and can be removed without
-           touching an image. alt is empty on purpose: the name is in
-           the h3 directly below, and alt="Name" would make a screen
-           reader announce each person twice. -->
+           Only Ana and Gracia carry a .person__role line. The three
+           supervisors state their project role in the last sentence of
+           their bio instead — a subtitle reading "PhD supervisor" three
+           times down the page said less than the sentence does.
+
+           The photographs are ordinary colour headshots. The greyscale
+           and the coloured frame are both CSS, not baked into the
+           files. alt is empty on purpose: the name is in the h3
+           directly below, and alt="Name" would make a screen reader
+           announce each person twice. -->
 
       <div class="grid grid--3">
 
@@ -78,7 +82,7 @@
           <div class="person__body">
             <h3>Gracia Bovenberg-Murris</h3>
             <p class="person__role">Game designer</p>
-            <p>Gracia Bovenberg-Murris is a project leader and game designer at the TBM Gamelab, in the Faculty of Technology, Policy, and Management (TPM), where she designs game concepts and their visual design together with researchers and other game designers (for board, digital, and hybrid games). Gracia also facilitates serious gaming sessions and workshops. She studied Industrial Design Engineering at the TU Delft and has a Master's degree in Design for Interaction.</p>
+            <p>Gracia Bovenberg-Murris is a project leader and game designer at the TBM Gamelab, in the Faculty of Technology, Policy, and Management (TPM), where she designs game concepts and their visual design together with researchers and other game designers (for board, digital, and hybrid games). Gracia also facilitates serious gaming sessions and workshops.</p>
           </div>
         </article>
 
@@ -88,8 +92,7 @@
           </div>
           <div class="person__body">
             <h3>Haiko van der Voort</h3>
-            <p class="person__role">PhD supervisor</p>
-            <p>Haiko van der Voort is an associate professor of organisation &amp; governance at Delft University of Technology (TU Delft). His research examines the governance of enforcement in the digital age, and how machine learning, AI, and data science are reshaping inspection work, regulatory arrangements, and the way norms develop. He is also Director of the MSc programme in Engineering and Policy Analysis.</p>
+            <p>Haiko van der Voort is an associate professor of organisation &amp; governance at Delft University of Technology (TU Delft). His research examines the governance of enforcement in the digital age, and how machine learning, AI, and data science are reshaping inspection work, regulatory arrangements, and the way norms develop. He is also Director of the MSc programme in Engineering and Policy Analysis. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
@@ -99,8 +102,7 @@
           </div>
           <div class="person__body">
             <h3>Alexander Verbraeck</h3>
-            <p class="person__role">PhD supervisor</p>
-            <p>Alexander Verbraeck is a full professor at Delft University of Technology (TU Delft). His research focuses on modelling and simulation, with applications in logistics and transportation, safety, and security, including simulation and serious games as research methods. He also holds a position as visiting professor at the R.H. Smith School of Business, University of Maryland.</p>
+            <p>Alexander Verbraeck is a full professor at Delft University of Technology (TU Delft). His research focuses on modelling and simulation, with applications in logistics and transportation, safety, and security, including simulation and serious games as research methods. He also holds a position as visiting professor at the R.H. Smith School of Business, University of Maryland. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
@@ -110,8 +112,7 @@
           </div>
           <div class="person__body">
             <h3>Nihit Goyal</h3>
-            <p class="person__role">PhD supervisor</p>
-            <p>Nihit Goyal is an assistant professor of public policy at Delft University of Technology (TU Delft). He studies the politics of policy innovation, combining qualitative, quantitative, and computational methods to examine how governments address complex societal challenges, such as the digital transformation or the energy transition, and evaluate the effectiveness, equity, and legitimacy of their policies.</p>
+            <p>Nihit Goyal is an assistant professor of public policy at Delft University of Technology (TU Delft). He studies the politics of policy innovation, combining qualitative, quantitative, and computational methods to examine how governments address complex societal challenges, such as the digital transformation or the energy transition, and evaluate the effectiveness, equity, and legitimacy of their policies. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
@@ -119,7 +120,10 @@
 
       <div class="ack">
         <h2>Acknowledgements</h2>
-        <p>Sessions are only possible because colleagues at public inspection authorities make room for them and bring the people who know the work. They are not part of the project team, and we are grateful to them.</p>
+        <!-- The site deliberately does not name the host organisations.
+             This paragraph now says so outright, and why, which settles
+             the question rather than leaving it open. -->
+        <p>Beyond the Algorithm is built on research carried out with Dutch inspectorates. The organisations that took part cannot be named, because they took part on the understanding that they would stay anonymous — but the game exists because their staff gave their time and spoke openly about how the work is really done. We are grateful to them.</p>
       </div>
 
     </div>
@@ -129,9 +133,10 @@
 
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
-    <a class="site-footer__brand" href="index.html">
+    <!-- aria-label is load-bearing: the img is alt="" and the wordmark
+         span is gone, so without it this link has no accessible name. -->
+    <a class="site-footer__brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img src="assets/img/mark.svg" alt="">
-      <span>Beyond the Algorithm</span>
     </a>
     <!-- gamelab.png is a screen capture, not a supplied asset. See the
          note in index.html. -->
