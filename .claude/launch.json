@@ -5,7 +5,7 @@
       "name": "site",
       "runtimeExecutable": "python3",
       "runtimeArgs": [
-        "/private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/serve.py"
+        "/private/tmp/claude-1192986307/-Users-agagua-Desktop-beyond-the-algoritm/7e727de4-936c-4f1c-a567-727c023726e6/scratchpad/serve_live.py"
       ],
       "port": 8123
     }

@@ -1,1 +1,7 @@
 .DS_Store
+
+# Research and print material, not website content. The print pack in
+# particular was 280 MB of Illustrator files the site never loaded, and
+# git history is permanent — keep that material outside the repo.
+brandbook/
+*.docx

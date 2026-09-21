@@ -56,6 +56,61 @@ python3 -m http.server 8000
 If you change CSS and the page looks unchanged, hard-refresh (Cmd-Shift-R) —
 the browser caches the stylesheet.
 
+## Two things that disagree with the printed box
+
+**Player count and duration.** The box lid states **2–8 players** and **90m**.
+Both are wrong. The correct figures are **4–8 players** and **2 hours**, and
+that is what `v3/` now says. The site is the authority; anyone comparing it to
+a printed box will find the box lower on players and shorter on time.
+
+The per-stop durations that used to sit in "How it runs" (15 + 85 + 20 + 30)
+totalled 150 minutes — the old, also-wrong 2½ hours. They were removed rather
+than re-guessed. The total is stated once, in "What it needs".
+
+**The print pack is not in this repository, deliberately.** There was briefly a
+`v3/assets/brandbook/` holding sixteen Illustrator PDFs with
+`/Separation /ContourCut` die-cut channels — the files a printer is sent. It
+was 280 MB and has been removed: git history is permanent, GitHub rejects
+single files over 100 MB, and the site loaded none of it.
+
+Worth recording what it did *not* contain, so nobody goes looking again: no
+logo-usage page, no colour swatch page, no type specimen, and no SVG, PNG, EPS
+or AI files at all. The clock and player-count icons on the lid are anonymous
+vector paths inside `4xBoxDesign_ResponsibleAI.pdf` and are not extractable
+without Illustrator. The icons in "What it needs" are therefore drawn by hand
+to match, as the gear and sparkle in `assets/img/motif.svg` already were. Keep
+the print pack somewhere outside this repo — it belongs with the printer.
+
+Worth knowing: the box's real typefaces are **Agenda**, **Aller Display** and
+**Fredericka the Greatest**. The site uses Fraunces and Montserrat — neither is
+a box face. Agenda and Aller Display are licensed desktop fonts with no web
+licence to assume; Fredericka is on Google Fonts. Unresolved.
+
+## Photographs: lowercase, and web-sized
+
+Two rules for `v3/assets/img/photos/`, both learned the hard way.
+
+**Filenames are lowercase `.jpg`. Always.** macOS is case-insensitive and
+GitHub Pages is not, so `box.JPG` on disk against `box.jpg` in the HTML works
+perfectly on your machine and 404s once published — the one place you cannot
+see it while developing. Worse, git on macOS reports such a file as *modified*
+rather than renamed, so it will happily commit the new bytes under the old
+name without telling you. Camera files arrive as `.JPG`; rename them on the
+way in.
+
+**They are resized before they land here.** The originals are 5–25 MB camera
+files at up to 7728px wide, served into a gallery that crops them to 3:2 at
+under 800px. They are resampled to 1600px on the long edge at quality 80,
+which is about 250–370 KB each — the whole folder is 1.6 MB rather than 87 MB.
+
+```bash
+sips -Z 1600 -s format jpeg -s formatOptions 80 SOURCE.JPG --out name.jpg
+```
+
+Originals are kept outside the repo at `~/Desktop/bta-original-photos/`. If a
+photograph ever needs recropping, go back to those rather than upscaling what
+is in here.
+
 ## What the site deliberately does not say
 
 Participants can read this site before playing, so it holds back anything that
@@ -92,10 +147,22 @@ field, not a statement that the game scores it.
 Every item below is marked with an HTML comment at the place it belongs, so
 you can also just search the source for `NEEDED` and `TO CONFIRM`.
 
-- **Logos.** `assets/img/logos/tu-delft.svg` and `serious-game-lab.svg` are
-  placeholders that draw a dashed box. Replace both files with the official
-  white/mono SVGs, keeping the filenames. Take TU Delft's from the house-style
-  portal rather than redrawing it.
+- **Logos.** In `v3/` the footer is light (peach), because both institutional
+  marks are black artwork and need a pale ground. `v3/assets/img/logos/`
+  now holds the real `tu-delft.svg` from the house-style portal — do not
+  redraw it, it is a trademark.
+
+  **`gamelab.png` still needs replacing.** It is a screen capture of a web
+  page, not a supplied asset: opaque white background, page artefacts along
+  the top and bottom edges, and mostly empty padding. It is currently held
+  on a white card by `.site-footer__logos .logo--raster`, which hides the
+  baked-in background by matching it and crops the artefact lines off. Ask
+  the Gamelab for a transparent PNG or an SVG, drop it in, and delete that
+  rule — it is marked INTERIM in the stylesheet.
+
+  The lab is **TU Delft Gamelab**, not "Serious Game Lab". The root and
+  `v2/` copies still carry the old name and the dashed-box placeholders;
+  they follow whenever a version is promoted.
 - **Nihit's role and bio.** The card in `team.html` is a placeholder and says
   so on the page.
 - **Contact form.** `contact.html` posts to `https://formspree.io/f/FORM_ID`.
