@@ -41,51 +41,6 @@
   });
 
   // ---------------------------------------------------------------
-  // The session track.
-  //
-  // Four stops that swap one panel underneath them. Progressive
-  // enhancement: the markup ships with every panel visible, and the
-  // .is-live class below is what hides all but the current one. If
-  // this script fails to load the section is still a readable list.
-  // ---------------------------------------------------------------
-
-  var runner = document.querySelector(".runner");
-
-  if (runner) {
-    var triggers = Array.prototype.slice.call(runner.querySelectorAll(".run__trigger"));
-    var panels = Array.prototype.slice.call(runner.querySelectorAll(".runner__panel"));
-
-    runner.classList.add("is-live");
-
-    // Only the selected tab is in the tab order; the arrow keys move
-    // between the rest. That is the expected behaviour for a tablist.
-    var show = function (i, focus) {
-      triggers.forEach(function (t, n) {
-        var on = n === i;
-        t.setAttribute("aria-selected", String(on));
-        t.tabIndex = on ? 0 : -1;
-        panels[n].classList.toggle("is-current", on);
-      });
-      if (focus) triggers[i].focus();
-    };
-
-    triggers.forEach(function (t, i) {
-      t.tabIndex = i === 0 ? 0 : -1;
-      t.addEventListener("click", function () { show(i, false); });
-      t.addEventListener("keydown", function (e) {
-        var to = e.key === "ArrowRight" || e.key === "ArrowDown" ? i + 1
-               : e.key === "ArrowLeft" || e.key === "ArrowUp" ? i - 1
-               : e.key === "Home" ? 0
-               : e.key === "End" ? triggers.length - 1
-               : null;
-        if (to === null) return;
-        e.preventDefault();
-        show((to + triggers.length) % triggers.length, true);
-      });
-    });
-  }
-
-  // ---------------------------------------------------------------
   // Gallery.
   //
   // The strip is a scroll-snap row, so it is already swipeable and
@@ -187,16 +142,18 @@
 
 
   // ---------------------------------------------------------------
-  // Header over the hero.
+  // Header height.
   //
-  // Publishes the header's real height as --header-h so the hero can
-  // be exactly one viewport tall from the top of the window, and
-  // swaps the bar from transparent to solid once the hero is behind
-  // us. Pages with no hero get the solid bar immediately.
+  // Publishes the bar's real height as --header-h so the hero can be
+  // exactly one viewport tall from the top of the window.
+  //
+  // This used to also swap the bar between two appearances as the hero
+  // scrolled past. The bar now keeps one appearance throughout, so the
+  // scroll listener and the .is-stuck class are gone — all that is left
+  // is the measurement.
   // ---------------------------------------------------------------
 
   var header = document.querySelector(".site-header");
-  var heroEl = document.querySelector(".hero");
 
   if (header) {
     var measure = function () {
@@ -206,30 +163,6 @@
     };
     measure();
     window.addEventListener("resize", measure);
-
-    if (!heroEl) {
-      header.classList.add("is-stuck");
-    } else {
-      var stickFrame = null;
-      var restick = function () {
-        // Flip just before the hero's bottom edge reaches the bar, so
-        // the fill is already there when content arrives under it. The
-        // margin has to clear #about's scroll-margin-top, or a nav jump
-        // to #about lands exactly in the gap and leaves the bar
-        // transparent over the last strip of artwork.
-        var past = heroEl.getBoundingClientRect().bottom <= header.offsetHeight + 24;
-        header.classList.toggle("is-stuck", past);
-      };
-      window.addEventListener("scroll", function () {
-        if (stickFrame) return;
-        stickFrame = requestAnimationFrame(function () {
-          stickFrame = null;
-          restick();
-        });
-      }, { passive: true });
-      window.addEventListener("resize", restick);
-      restick();
-    }
   }
 
   // ---------------------------------------------------------------
@@ -261,11 +194,13 @@
       var p = room > 0 ? clamp01(-hero.getBoundingClientRect().top / room) : 0;
 
       hero.style.setProperty("--hero-p", p.toFixed(4));
-      // The beats are spread across most of the range on purpose: finish
-      // them early and the rest of the pinned stage is a dead tail where
-      // scrolling does nothing visible.
-      hero.style.setProperty("--reveal-badges", ease(sub(p, 0.04, 0.40)).toFixed(4));
-      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.34, 0.78)).toFixed(4));
+
+      // --field-in is the main event: the two coloured fields closing on
+      // the disc. The badges follow it in and the buttons arrive early,
+      // so the call to action is there long before the sequence ends.
+      hero.style.setProperty("--field-in", ease(sub(p, 0.00, 0.45)).toFixed(4));
+      hero.style.setProperty("--reveal-badges", ease(sub(p, 0.10, 0.42)).toFixed(4));
+      hero.style.setProperty("--reveal-cta", ease(sub(p, 0.12, 0.40)).toFixed(4));
     };
 
     window.addEventListener("scroll", function () {

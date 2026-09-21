@@ -150,7 +150,10 @@
       <div class="spread">
         <p class="spread__label">Who's at the table</p>
         <div class="spread__body">
-          <div class="grid grid--2">
+          <!-- --bleed pulls the row out by the cards' own padding and border,
+               so the text inside them lines up with the plain prose in every
+               other section rather than sitting 25px further right. -->
+          <div class="grid grid--2 spread__body--bleed">
             <article class="card card--domain">
               <!-- Sparkle and gear are how the printed cards separate the two
                    sides before you have read a word. Same job here. -->
@@ -176,14 +179,6 @@
               <p>They design and build the model itself, choosing what data to use and how. More complex data means a stronger model — but a harder one for anyone else in the room to follow.</p>
             </article>
           </div>
-          <!-- The supplied version of this paragraph listed the scored
-               dimensions by name. Rewritten to say the same thing about the
-               tension without naming them — HTML comments are readable by
-               anyone who views source, so do not restore them here either. -->
-          <!-- The photographs of the two printed role cards used to sit here
-               and repeated what the cards above already say. They are in the
-               gallery under "In the box" instead. -->
-          <p class="spread__close">Both teams are building the same model and want the same things from it, but the pressure reaches them from different directions — and that is where the game's real tension lives. What the two of them end up having to answer for, they answer for together: whether the choices they made can survive being written down and shown to someone outside the room.</p>
         </div>
       </div>
 
@@ -196,57 +191,32 @@
       <div class="spread">
         <p class="spread__label">How it runs</p>
         <div class="spread__body">
-          <!-- The track is the visual; the detail lives in one panel that
-               swaps underneath it. main.js adds .is-live and the tab
-               behaviour. With no script every panel is shown and it reads
-               as a plain ordered list, so nothing is lost. -->
-          <div class="runner">
-            <ol class="run" role="tablist" aria-label="The shape of a session">
-              <li class="run__stop">
-                <button class="run__trigger" type="button" role="tab" id="run-t-1" aria-controls="run-p-1" aria-selected="true">
-                  <h3>Kickoff</h3>
-                  <span class="run__meta">15 min</span>
-                </button>
-              </li>
-              <li class="run__stop run__stop--long">
-                <button class="run__trigger" type="button" role="tab" id="run-t-2" aria-controls="run-p-2" aria-selected="false">
-                  <h3>Sprints <span class="run__count">×8</span></h3>
-                  <span class="run__meta">85 min</span>
-                </button>
-              </li>
-              <li class="run__stop">
-                <button class="run__trigger" type="button" role="tab" id="run-t-3" aria-controls="run-p-3" aria-selected="false">
-                  <h3>Disclosure</h3>
-                  <span class="run__meta">20 min</span>
-                </button>
-              </li>
-              <li class="run__stop">
-                <button class="run__trigger" type="button" role="tab" id="run-t-4" aria-controls="run-p-4" aria-selected="false">
-                  <h3>Debrief</h3>
-                  <span class="run__meta">30 min</span>
-                </button>
-              </li>
-            </ol>
+          <!-- Four stops on a line, all of them readable at once. This was a
+               tablist: you clicked a stop to reveal prose that had previously
+               just been on the page. The shape of a session is a picture, not
+               an interaction, so the mechanism is gone.
 
-            <div class="runner__panels">
-              <div class="runner__panel is-current" id="run-p-1" role="tabpanel" aria-labelledby="run-t-1">
-                <h3>Kickoff</h3>
-                <p>Teams split, read their briefs and say out loud what they are going for. It gets written down, and it comes back out at the end. Neither team has seen the other one's brief.</p>
-              </div>
-              <div class="runner__panel" id="run-p-2" role="tabpanel" aria-labelledby="run-t-2">
-                <h3>Sprints <span class="run__count">×8</span></h3>
-                <p>Each sprint opens with a stand-up — what you did, what you are doing next, what is in your way — and then you build. Partway through, something lands on the table that neither team planned for, and it has to be answered before the sprint closes.</p>
-              </div>
-              <div class="runner__panel" id="run-p-3" role="tabpanel" aria-labelledby="run-t-3">
-                <h3>Disclosure</h3>
-                <p>The model goes on the public record. The two teams have to agree, in writing, what to say about it — and they will not have room to say everything.</p>
-              </div>
-              <div class="runner__panel" id="run-p-4" role="tabpanel" aria-labelledby="run-t-4">
-                <h3>Debrief</h3>
-                <p>What each team wrote down at kickoff comes back out, and they read it against what they actually built. This is the part people remember.</p>
-              </div>
-            </div>
-          </div>
+               The per-stop durations came out with it — they totalled 150
+               minutes against a session that runs 2 hours. The total is
+               stated once, under "What it needs". -->
+          <ol class="run">
+            <li class="run__stop">
+              <h3>Kickoff</h3>
+              <p>Teams split, read their briefs and say out loud what they are going for. It gets written down, and it comes back out at the end. Neither team has seen the other one's brief.</p>
+            </li>
+            <li class="run__stop run__stop--long">
+              <h3>Sprints <span class="run__count">×8</span></h3>
+              <p>Each sprint opens with a stand-up, then you build. Partway through, something lands on the table that neither team planned for, and it has to be answered before the sprint closes.</p>
+            </li>
+            <li class="run__stop">
+              <h3>Disclosure</h3>
+              <p>The model goes on the public record. The two teams have to agree, in writing, what to say about it — and they will not have room to say everything.</p>
+            </li>
+            <li class="run__stop">
+              <h3>Debrief</h3>
+              <p>What each team wrote down at kickoff comes back out, and they read it against what they actually built. This is the part people remember.</p>
+            </li>
+          </ol>
         </div>
       </div>
 
@@ -259,20 +229,24 @@
       <div class="spread">
         <p class="spread__label">In the box</p>
         <div class="spread__body">
-          <p>Designed and produced for the table, not adapted from a workshop deck: two data decks, a deck of events, a role board and development board per team, the placemat the model gets assembled on, and the forms the teams fill in as they go.</p>
+          <!-- Every slide is forced to 3:2 and object-fit: cover by the CSS,
+               so the photographs do not have to share a shape — but they do
+               have to exist. decks.jpg and board.jpg were removed from the
+               folder; the two team boards replaced them.
 
-          <!-- Sources in order: DSCF6664, DSCF6641, DSCF6674, DSCF6646,
-               DSCF6687, DSCF6685. To add a photograph, add an <li> — the
-               dots and the arrows are built from whatever is here. -->
-          <div class="gallery" data-gallery style="margin-top:1.75rem">
+               All seven are lowercase .jpg, deliberately. macOS is
+               case-insensitive and GitHub Pages is not, so a stray .JPG
+               here 404s only once it is published — the one place you
+               cannot see it. Keep new photographs lowercase. -->
+          <div class="gallery" data-gallery>
             <div class="gallery__viewport">
               <ul class="gallery__track">
                 <li class="gallery__slide"><img src="assets/img/photos/box.jpg" alt="The Beyond the Algorithm box standing on a table" data-caption="The box. It arrives with us and goes home with us."></li>
-                <li class="gallery__slide"><img src="assets/img/photos/table.jpg" alt="The box, the model board and the card decks set out on a table" data-caption="Everything out of the box and on the table."></li>
-                <li class="gallery__slide"><img src="assets/img/photos/decks.jpg" alt="The open box with the card decks stacked in front of it" data-caption="The decks. Data, events and the forms teams fill in as they go."></li>
-                <li class="gallery__slide"><img src="assets/img/photos/board.jpg" alt="A database board laid flat on a table" data-caption="A database board. One per team, and they do not hold the same things."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/table.jpg" alt="The box, the boards and the card decks set out on a table" data-caption="Everything out of the box and on the table."></li>
                 <li class="gallery__slide"><img src="assets/img/photos/role-cards.jpg" alt="The two role cards resting in the open box" data-caption="The two role cards, and the form the teams end the session on."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/domain-board.jpg" alt="The Domain Team board laid flat on a table" data-caption="The Domain team's board."></li>
                 <li class="gallery__slide"><img src="assets/img/photos/domain-card.jpg" alt="The Domain Team role card standing in front of its board" data-caption="Domain team: what they can do, and what it costs them."></li>
+                <li class="gallery__slide"><img src="assets/img/photos/tech-board.jpg" alt="The Tech Team board laid flat on a table" data-caption="The Tech team's board. The same shape, holding different things."></li>
                 <li class="gallery__slide"><img src="assets/img/photos/tech-card.jpg" alt="The Tech Team role card standing in front of its board" data-caption="Tech team: the same card, a different set of moves."></li>
               </ul>
             </div>
@@ -289,27 +263,55 @@
       <div class="spread">
         <p class="spread__label">What it needs</p>
         <div class="spread__body">
+          <!-- The symbols are the box's own: the player count and the clock
+               are printed on the lid, and the sparkle and gear are the marks
+               the two teams carry throughout. Drawn here rather than lifted —
+               the print pack is Illustrator PDFs with no isolated icon files,
+               so these are traced to match the pair already in motif.svg. -->
           <div class="facts">
             <div class="facts__item">
-              <p class="facts__value">4 players</p>
-              <p class="facts__note">Minimum. Two per team.</p>
+              <span class="facts__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="4.2"/>
+                  <path d="M3.5 25.5a7.5 7.5 0 0 1 15 0"/>
+                  <circle cx="22" cy="12.5" r="3.4"/>
+                  <path d="M17.5 23.5a6.2 6.2 0 0 1 11 1.4"/>
+                </svg>
+              </span>
+              <p class="facts__value">4–8 players</p>
+              <p class="facts__note">Two per team, minimum.</p>
             </div>
             <div class="facts__item">
+              <span class="facts__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="17" r="11"/>
+                  <path d="M16 10.5V17l4.5 3"/>
+                  <path d="M12.5 3.5h7"/>
+                </svg>
+              </span>
+              <p class="facts__value">2 hours</p>
+              <p class="facts__note">Start to finish, debrief included.</p>
+            </div>
+            <div class="facts__item">
+              <span class="facts__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                  <path d="M8.5 3c0 4.6-1.7 6.3-6.3 8 4.6 1.7 6.3 3.4 6.3 8 1.7-4.6 3.4-6.3 8-8-4.6-1.7-6.3-3.4-8-8Z" fill="currentColor" stroke="none"/>
+                  <circle cx="22" cy="21" r="7.2"/>
+                  <circle cx="22" cy="21" r="2.6"/>
+                </svg>
+              </span>
               <p class="facts__value">Two backgrounds</p>
               <p class="facts__note">It works when people hold the roles for real — domain on one side, technical on the other.</p>
-            </div>
-            <div class="facts__item">
-              <p class="facts__value">2½ hours</p>
-              <p class="facts__note">Start to finish, debrief included.</p>
             </div>
           </div>
 
           <div class="cta">
-            <h2>Play it at your organisation</h2>
-            <p>We bring the box and run the session ourselves. Tell us roughly who would be in the room and we will take it from there.</p>
+            <div class="cta__text">
+              <h2>Play it at your organisation</h2>
+              <p>We bring the box and run the session ourselves. Tell us roughly who would be in the room and we will take it from there.</p>
+            </div>
             <div class="btn-row">
               <a class="btn btn--primary" href="contact.html">Get in touch</a>
-              <a class="btn btn--ghost" href="research.html">The research behind it</a>
             </div>
           </div>
         </div>
@@ -326,10 +328,13 @@
       <img src="assets/img/mark.svg" alt="">
       <span>Beyond the Algorithm</span>
     </a>
-    <!-- Both logo files are placeholders. See assets/img/logos/. -->
+    <!-- gamelab.png is a screen capture, not a supplied asset: opaque white
+         background, page artefacts top and bottom, and mostly padding. It
+         needs replacing with a transparent PNG or an SVG from the Gamelab.
+         tu-delft.svg is the real house-style file. -->
     <div class="site-footer__logos">
       <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
-      <img src="assets/img/logos/serious-game-lab.svg" alt="Serious Game Lab">
+      <img class="logo--raster" src="assets/img/logos/gamelab.png" alt="TU Delft Gamelab">
     </div>
   </div>
 </footer>

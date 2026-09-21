@@ -733,9 +733,13 @@ body:not(:has(.hero)) #main {
    15. Footer — one short line
    --------------------------------------------------------- */
 
+/* Light, because the two institutional logos are black artwork with one
+   accent each and both need a pale ground to read on. Peach rather than
+   plain paper so the footer still closes the page — it is the same tone
+   the nav bar takes once the hero is behind you. */
 .site-footer {
-  background: var(--data-dark);
-  color: #f5efec;
+  background: var(--paper-header);
+  color: var(--ink);
   padding-block: 1.75rem;
   margin-top: 2rem;
   font-family: var(--font-mono);
@@ -743,7 +747,7 @@ body:not(:has(.hero)) #main {
 }
 
 .site-footer a {
-  color: #f5efec;
+  color: var(--ink);
 }
 
 .site-footer__inner {
@@ -756,7 +760,7 @@ body:not(:has(.hero)) #main {
 
 .site-footer p {
   margin: 0;
-  color: #f5efecc4;
+  color: var(--ink-soft);
   max-width: none;
 }
 
@@ -765,7 +769,7 @@ body:not(:has(.hero)) #main {
   align-items: center;
   gap: 0.6rem;
   text-decoration: none;
-  color: #f5efec;
+  color: var(--ink);
 }
 
 .site-footer__brand img {
@@ -780,12 +784,41 @@ body:not(:has(.hero)) #main {
   gap: 1.5rem;
 }
 
-/* Knocked back to the footer's own paper tone so two logos drawn in
-   different colours still sit together. */
+/* Full strength: these are institutional marks and neither TU Delft's
+   house style nor the Gamelab's allows theirs to be faded.
+
+   The two are not measured the same way, so their heights cannot match
+   on paper and look right on screen. tu-delft.svg is cropped tight to
+   its artwork, so its height is all mark; gamelab.png is a screen
+   capture whose mark sits inside a lot of empty canvas, so most of its
+   height is padding the multiply blend makes invisible. Matching the
+   printed marks means the numbers below have to disagree. */
 .site-footer__logos img {
-  height: 30px;
+  height: 64px;
   width: auto;
-  opacity: 0.85;
+}
+
+/* INTERIM. gamelab.png is a screen capture: opaque white background,
+   page artefacts along the top and bottom edges, and the mark itself
+   sitting in a lot of empty padding.
+
+   The white cannot be edited out of the file from here, but it can be
+   made to disappear optically — multiply leaves any colour darker than
+   the backdrop alone and lets anything white through to it, so the
+   background and the padding both drop out against the peach. It only
+   works because the footer is light; on a dark ground this would need
+   the real asset.
+
+   The clip crops the two artefact lines, which are grey and pink and so
+   survive the blend. The negative margin pulls the surviving whitespace
+   back in so the two logos sit at a sensible distance.
+
+   Delete this whole rule the moment a transparent PNG or an SVG lands. */
+.site-footer__logos .logo--raster {
+  height: 72px;
+  mix-blend-mode: multiply;
+  clip-path: inset(4% 0 6% 0);
+  margin-inline: -1.75rem;
 }
 
 /* ---------------------------------------------------------
@@ -863,13 +896,16 @@ body:not(:has(.hero)) #main {
   }
 }
 
-/* A closing statement under a grid. It answers both cards at once, so it
-   spans them rather than sitting at the reading measure under the left one. */
-.spread__close {
-  margin-top: 1.75rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--rule);
-  max-width: none;
+/* A row of cards carries its own padding and border, so its text starts
+   further right than the plain prose in every other spread. Pulling the
+   row out by exactly that inset puts the two back on one line. Only
+   above 820px: below it the label stacks, the cards go single-column
+   and everything already starts at the same place, so bleeding there
+   would just push them under the edge of the window. */
+@media (min-width: 820px) {
+  .spread__body--bleed {
+    margin-inline: calc(-1 * (1.5rem + 1px));
+  }
 }
 
 /* A .lede opening a spread is a standfirst, not a hero paragraph. It runs
@@ -923,8 +959,11 @@ body:not(:has(.hero)) #main {
   text-wrap: balance;
 }
 
+/* Colour carries the emphasis on its own. The slant was doing the
+   same job twice and tipped the line into sounding insistent. */
 .storyline em {
   color: var(--risk-text);
+  font-style: normal;
 }
 
 /* ---------------------------------------------------------
@@ -1095,12 +1134,28 @@ figure.shot-fig figcaption {
   border-bottom: 1px solid var(--rule);
 }
 
+/* The heavy top rules that used to sit here read as a timeline — three
+   segments on a line — which is not what this strip is. The box's own
+   symbols carry each item instead. */
 @media (min-width: 700px) {
   .facts__item {
     border-bottom: 0;
-    border-top: 2px solid var(--ink);
-    padding: 0.9rem 1.5rem 0 0;
+    padding: 0 1.5rem 0 0;
   }
+}
+
+.facts__icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 0.7rem;
+  color: var(--deep);
+}
+
+.facts__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .facts__value {
@@ -1122,26 +1177,67 @@ figure.shot-fig figcaption {
    21. Call to action
    --------------------------------------------------------- */
 
+/* A prompt at the foot of the page, not a panel demanding its own screen.
+   Text on the left, the one action on the right.
+
+   In the cover blue, which is the disc on the box lid and the table the
+   whole game happens on. It was in the warm Domain colour, which quietly
+   took one team's side on a page that belongs to both. This is the one
+   saturated block in the lower half of the page, and it is the last
+   thing read before the footer. */
 .cta {
-  background: var(--domain-bg);
-  border: 1px solid var(--domain-accent);
+  background: var(--deep);
+  border: 1px solid var(--deep);
   border-radius: var(--radius-lg);
-  padding: clamp(1.75rem, 5vw, 2.75rem);
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (min-width: 720px) {
+  .cta {
+    grid-template-columns: 1fr auto;
+    column-gap: 2rem;
+  }
+
+  .cta .btn-row {
+    margin-top: 0;
+  }
+}
+
+.cta__text > *:last-child {
+  margin-bottom: 0;
 }
 
 /* Held back from the h2 scale. This is a prompt, not a section heading —
    at display size it shouted louder than the page title. */
 .cta h2 {
-  color: #b0762a;
+  color: var(--cream);
   font-size: clamp(1.15rem, 2vw, 1.35rem);
   max-width: 30ch;
   margin-bottom: 0.5rem;
 }
 
+/* Dimmed rather than transparent: an alpha here would blend toward the
+   blue behind it and land under 4.5:1. This is a measured 5:1. */
 .cta p {
-  color: #7a5620;
+  color: #e8e2da;
   max-width: 46ch;
   margin-bottom: 0;
+}
+
+/* The button has to invert on this ground — .btn--primary is the deep
+   blue itself, which would vanish. Same treatment the hero uses. */
+.cta .btn--primary {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--deep);
+}
+
+.cta .btn--primary:hover {
+  background: #fff;
+  border-color: #fff;
 }
 
 .cta .btn-row {
@@ -1209,7 +1305,6 @@ figure.shot-fig figcaption {
 .ack p {
   color: var(--ink-soft);
   font-size: 1rem;
-  font-style: italic;
   max-width: none;
 }
 
@@ -1413,11 +1508,10 @@ h2 {
   border-color: var(--deep-mid);
 }
 
-/* ---- Footer --------------------------------------------- */
-
-.site-footer {
-  background: var(--deep);
-}
+/* ---- Footer ---------------------------------------------
+   The V2 pass put this on the cover blue. It is light again,
+   because the two institutional logos are black artwork and
+   have to sit on a pale ground. See the base rule. */
 
 /* ---- Real photographs -----------------------------------
    A .shot holding an <img> is no longer a placeholder, so it
@@ -1492,85 +1586,12 @@ h2 {
   padding-top: 0;
 }
 
-/* ---- The session track, now selectable -------------------
-   Four stops that swap a panel beneath them. Without JS every
-   panel is visible and it reads as a plain list, which is the
-   behaviour to keep if you ever rip the script out. */
-
-.runner__panels > .runner__panel {
-  display: block;
-}
-
-.runner.is-live .runner__panel {
-  display: none;
-}
-
-.runner.is-live .runner__panel.is-current {
-  display: block;
-}
-
-.runner .run__stop {
-  padding: 0;
-}
-
-/* The stop becomes a button, so it has to lose the button
-   chrome and keep the dot-on-a-line it already had. */
-.runner.is-live .run__trigger {
-  appearance: none;
-  background: none;
-  border: 0;
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
-  padding: 0.25rem 0 0.5rem;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, opacity 0.2s ease;
-  opacity: 0.55;
-}
-
-.runner.is-live .run__trigger:hover {
-  opacity: 0.85;
-}
-
-.runner.is-live .run__trigger[aria-selected="true"] {
-  opacity: 1;
-  border-bottom-color: var(--deep);
-}
-
-.runner.is-live .run__trigger:focus-visible {
-  outline: 2px solid var(--deep);
-  outline-offset: 3px;
-}
-
-.run__meta {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--ink-faint);
-  margin-top: 0.15rem;
-}
-
-.runner__panel {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--rule);
-}
-
-.runner.is-live .runner__panel {
-  min-height: 7.5rem;
-}
-
-.runner__panel h3 {
-  color: var(--deep);
-  margin-bottom: 0.4rem;
-}
-
-.runner__panel p {
-  margin-bottom: 0;
-  max-width: 58ch;
-}
+/* The .runner tablist that used to live here is gone — the session
+   track is a plain timeline again, which is what §18's .run rules
+   were written for. Note that `.runner .run__stop { padding: 0 }`
+   had been quietly beating the 780px rule that gives each stop its
+   1.75rem of clearance under the dot, so removing it puts the
+   dot-on-a-line back the way it was designed. */
 
 /* ---- Gallery ---------------------------------------------
    A scroll-snap strip. Without JS it is a horizontally
@@ -1611,11 +1632,18 @@ h2 {
   margin: 0;
 }
 
+/* Every slide is the same 3:2 window regardless of what shape the
+   photograph is: it fills the window and is cropped from the centre,
+   so a portrait shot and a landscape one still step through at an
+   identical size. object-position is the default, but it is stated
+   here because it is the half of this that is easy to lose. */
 .gallery__slide img {
   display: block;
   width: 100%;
+  height: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
+  object-position: center;
 }
 
 .gallery__bar {
@@ -1718,26 +1746,37 @@ h2 {
   --cream: #fbf5ee;
 }
 
-/* ---- Type: display serif, heavy ------------------------- */
+/* ---- Type: display serif, quiet -------------------------
+   This was 800 at -0.025em with the optical size pinned to the
+   top of its axis, which is Fraunces at its most shouting. For
+   an academic research game that is the wrong register. Weight
+   600, tracking close to normal, a mid optical size so it stops
+   using the tightest display cut, and a high SOFT to round the
+   terminals off. Same face, much calmer voice. */
 
 h1,
 h2,
 h3,
-.storyline,
-.facts__value,
 .cta h2 {
   font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  /* Fraunces is an optical-size variable font: at display sizes
-     the high end of the axis gives the tighter, chunkier cut. */
-  font-variation-settings: "opsz" 108, "SOFT" 20;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  font-variation-settings: "opsz" 48, "SOFT" 60;
+}
+
+.storyline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  /* Half the size it was, so a lower optical size again — Fraunces at
+     "opsz" 48 is cut for display and looks coarse at 1.5rem. */
+  font-variation-settings: "opsz" 24, "SOFT" 60;
 }
 
 h3 {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.25rem;
-  font-variation-settings: "opsz" 24, "SOFT" 20;
+  font-variation-settings: "opsz" 24, "SOFT" 60;
 }
 
 h2 {
@@ -1754,14 +1793,25 @@ h2 {
 /* The opening statement spans the full width of the spread body rather
    than sitting as a narrow block above the left-hand column — it is a
    headline over the two columns, so it should measure like one. */
+/* Half of what it was — it was running to 3rem, which on a page this
+   quiet read as a banner rather than an opening sentence. Line-height
+   opens up to suit: 1.04 is display leading and would look cramped at
+   this size. */
 .storyline {
-  font-size: clamp(1.7rem, 4.2vw, 3rem);
-  line-height: 1.04;
+  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  line-height: 1.3;
   max-width: none;
 }
 
+/* Out of the display face altogether. These are figures, not a
+   headline — the sans reads them as data, and it sets up a
+   proper contrast with the mono note underneath. */
 .facts__value {
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+  letter-spacing: -0.01em;
+  font-variation-settings: normal;
 }
 
 /* ---- The opening screen ---------------------------------- */
@@ -1920,51 +1970,16 @@ h2 {
   padding-top: calc(var(--header-h, 3.5rem) + clamp(2.5rem, 7vh, 4.5rem));
 }
 
-/* Over the artwork the bar is invisible and its links are cream.
-   Once the hero has scrolled past, it takes its paper fill back
-   so it stays readable over the content. */
+/* One state, everywhere. The bar used to swap to a peach fill once the
+   hero had scrolled past; it now keeps the frosted glass it opens with,
+   all the way down. That removes the .is-stuck / :not(.is-stuck) pair
+   entirely — it was carrying a second set of link, pill, toggle and
+   mobile-menu colours for a state that no longer looks different. */
 .site-header {
   background: #f8f4efc4;
   -webkit-backdrop-filter: blur(12px) saturate(1.15);
   backdrop-filter: blur(12px) saturate(1.15);
   border-bottom: 1px solid #22405a1f;
-  transition: background 0.25s ease, border-color 0.25s ease;
-}
-
-.site-header.is-stuck {
-  background: #ecc2a3e6;
-  border-bottom-color: #0819121a;
-}
-
-.site-header:not(.is-stuck) .brand__text,
-.site-header:not(.is-stuck) .nav a,
-.site-header:not(.is-stuck) .nav-toggle {
-  color: var(--cream);
-}
-
-.site-header:not(.is-stuck) .nav a[aria-current="page"] {
-  background: #fbf5ee26;
-}
-
-.site-header:not(.is-stuck) .nav-toggle {
-  border-color: #fbf5ee66;
-}
-
-/* The mark is drawn in the ink palette, so on the blue it has to
-   be knocked out rather than recoloured. */
-.site-header:not(.is-stuck) .brand__mark {
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
-}
-
-/* Below the nav breakpoint the open menu needs a surface of its
-   own — cream links on a transparent panel over artwork is not
-   readable. */
-@media (max-width: 800px) {
-  .site-header:not(.is-stuck) .nav.is-open {
-    background: var(--deep);
-    border-radius: var(--radius);
-  }
 }
 
 /* =========================================================
@@ -2045,36 +2060,29 @@ h2 {
 
 .hero__tagline {
   font-family: var(--font-body);
-  font-style: italic;
   font-size: clamp(1rem, 1.8vw, 1.25rem);
   color: var(--lid-paper);           /* was var(--lid-ink) — 2.5:1 on the disc */
   margin: 0 auto clamp(1.75rem, 4vh, 2.5rem);
   max-width: 40ch;
 }
 
-/* ---- Back to ink on a light field ------------------------ */
+/* ---- Ink on a light field, in every state ---------------- */
 
-.site-header:not(.is-stuck) .brand__text,
-.site-header:not(.is-stuck) .nav a,
-.site-header:not(.is-stuck) .nav-toggle {
+.site-header .nav a,
+.site-header .nav-toggle {
   color: var(--ink);
 }
 
-.site-header:not(.is-stuck) .nav a[aria-current="page"] {
+.site-header .nav a[aria-current="page"] {
   background: #ffffff8c;
 }
 
-.site-header:not(.is-stuck) .nav-toggle {
+.site-header .nav-toggle {
   border-color: var(--ink-faint);
 }
 
-.site-header:not(.is-stuck) .brand__mark {
-  filter: none;
-  opacity: 1;
-}
-
 @media (max-width: 800px) {
-  .site-header:not(.is-stuck) .nav.is-open {
+  .site-header .nav.is-open {
     background: var(--lid-paper);
     box-shadow: var(--shadow-lift);
   }
@@ -2183,11 +2191,11 @@ h2 {
   color: var(--paper);
 }
 
-.site-header:not(.is-stuck) .nav__cta {
+.site-header .nav__cta {
   border-color: #22405a4d;
 }
 
-.site-header:not(.is-stuck) .nav__cta:hover {
+.site-header .nav__cta:hover {
   background: var(--lid-ink);
   border-color: var(--lid-ink);
   color: var(--lid-paper);
@@ -2266,13 +2274,34 @@ h2 {
   transform: none;
 }
 
-/* Three planes moving at different rates. The ground scales up from
-   its centre rather than sliding — the fields are anchored to the
-   canvas edges, so a translate would open strips of bare paper. */
+/* The two teams arriving at the table.
+   The disc is the table. At rest it sits alone on the paper and the two
+   coloured fields are pulled back off either side; scrolling brings them
+   in until they meet it, which is the composition printed on the lid.
+
+   They travel outward to their start position rather than inward from
+   it, and that is what stops a gap opening. The warm field spans x
+   0→524, so at −300 its left edge is off-canvas at −300 and the canvas
+   edge stays covered; the cool field spans 676→1200, so at +300 its
+   right edge is at 1500. Neither can ever expose bare paper at the
+   edge it owns.
+
+   Fallback 1 = arrived, so with no JS the lid renders exactly as
+   printed rather than half-built. */
+.lid__field--warm {
+  translate: calc((1 - var(--field-in, 1)) * -300px) 0;
+}
+
+.lid__field--cool {
+  translate: calc((1 - var(--field-in, 1)) * 300px) 0;
+}
+
+/* Held well back now that the fields carry the movement — at the old
+   0.06 the zoom competed with them. */
 .lid__ground {
   transform-box: view-box;
   transform-origin: center;
-  transform: scale(calc(1 + var(--hero-p, 0) * 0.06));
+  transform: scale(calc(1 + var(--hero-p, 0) * 0.03));
 }
 
 .lid__disc {                          /* composes on top of the ground scale */
@@ -2314,7 +2343,8 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   .hero { height: auto; min-height: 100svh; }
   .hero__stage { position: static; height: auto; min-height: 100svh; }
-  .lid__ground, .lid__disc, .lid__badge__in, .hero__inner, .hero__foot {
+  .lid__ground, .lid__disc, .lid__badge__in, .lid__field,
+  .hero__inner, .hero__foot {
     transform: none; translate: none; opacity: 1;
   }
 }
@@ -2323,8 +2353,7 @@ h2 {
    without backdrop-filter — otherwise the nav sits directly on the
    artwork again, which is the bug this phase fixes. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .site-header          { background: var(--lid-paper); }
-  .site-header.is-stuck { background: var(--paper-header); }
+  .site-header { background: var(--lid-paper); }
 }
 
 /* A long pinned stage costs more on a phone, where a screen of scrolling
