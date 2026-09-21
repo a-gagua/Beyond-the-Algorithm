@@ -32,9 +32,9 @@
 
 <main id="main">
 
-  <!-- One section, no page banner. The heading belongs inside the form
-       column here: a full-width banner above would push the form below
-       the fold and cut the illustration in half.
+  <!-- One section, no page banner. The heading belongs inside the panel
+       column here: a full-width banner above would push it below the
+       fold and cut the illustration in half.
 
        The illustration is the box lid seen from above rather than a new
        piece of artwork - the same two curved fields, the same disc, the
@@ -114,60 +114,29 @@
       <div class="contact__panel">
         <h1 class="contact__title">Contact</h1>
 
-        <!-- ENDPOINT NOT SET. GitHub Pages serves static files and cannot
-             send mail, so a working form needs an external handler.
+        <!-- No form. There is nowhere for a static site to send one to
+             yet, and a form with no endpoint risks losing a real message
+             the moment someone actually uses it - safer to give people a
+             plain address that works today. -->
+        <div class="contact__section">
+          <p class="spread__label">Get in touch</p>
+          <p>Questions, collaboration, press — write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
+          <p class="contact__social">
+            <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+        </div>
 
-             To connect it, pick one and set the action below:
-
-               Formspree  - sign up at formspree.io with agagua@tudelft.nl,
-                            create a form, then
-                            action="https://formspree.io/f/YOUR_ID"
-               Web3Forms  - get a key at web3forms.com, then
-                            action="https://api.web3forms.com/submit"
-                            plus <input type="hidden" name="access_key"
-                            value="YOUR_KEY">
-
-             Both accept a plain POST of the name/email/message fields
-             below, so only the action changes. Then delete the
-             data-endpoint-pending attribute - while it is there, main.js
-             blocks submission and points people at the email address
-             instead of letting the form silently swallow a message. -->
-        <form class="form form--contact" data-endpoint-pending method="POST">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
+        <!-- Moved from the home page's footer, where it was merged in
+             alongside the two institutional logos. It reads oddly next
+             to a partner's crest and has more room to make its case
+             here, right beside the one way to act on it. -->
+        <div class="contact__section">
+          <p class="spread__label">Play it at your organisation</p>
+          <p>Want to see how your domain and technical teams would actually reason through trade-offs like these, in a safe setting? Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="mailto:agagua@tudelft.nl">Email me</a>
           </div>
-
-          <div class="field">
-            <label for="email">Your email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
-          </div>
-
-          <!-- Filled in by main.js when the endpoint is unset, and left
-               empty otherwise. aria-live so the notice is announced
-               rather than only seen. -->
-          <p class="form__notice" data-form-notice role="status" aria-live="polite"></p>
-
-          <button class="btn-block" type="submit">Send</button>
-        </form>
-
-        <!-- The address stays on the page whatever happens to the form.
-             It is the fallback while the endpoint is unset, and it is
-             what anyone who would rather not type into a form will use
-             regardless. -->
-        <p class="contact__direct">
-          Or write directly to
-          <a href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>
-        </p>
-
-        <p class="contact__social">
-          <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
+        </div>
       </div>
 
     </div>

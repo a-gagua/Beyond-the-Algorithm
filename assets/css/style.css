@@ -749,49 +749,6 @@ body:not(:has(.hero)) #main {
 }
 
 /* ---------------------------------------------------------
-   14. Form
-   --------------------------------------------------------- */
-
-.form {
-  display: grid;
-  gap: 1rem;
-  max-width: 32rem;
-}
-
-.field label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  margin-bottom: 0.35rem;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  font-family: var(--font-mono);
-  font-size: 0.92rem;
-  color: inherit;
-  background: #fffdfb;
-  border: 1px solid #08191226;
-  border-radius: var(--radius);
-  padding: 0.65rem 0.8rem;
-}
-
-.field textarea {
-  min-height: 8.5rem;
-  resize: vertical;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: 2px solid var(--paper-accent);
-  outline-offset: 0;
-  border-color: transparent;
-}
-
-/* ---------------------------------------------------------
    15. Footer — one short line
    --------------------------------------------------------- */
 
@@ -810,16 +767,6 @@ body:not(:has(.hero)) #main {
 
 .site-footer a {
   color: var(--ink);
-}
-
-/* .site-footer a is a class-plus-type selector, which beats a plain
-   .btn--primary on specificity regardless of which comes later in the
-   file — so without this, the one button inside the merged footer
-   silently lost its cream text back to ink the moment .invite's own
-   colour override was removed. This restores it to the same cream on
-   deep blue every other primary button on the site uses. */
-.site-footer .btn--primary {
-  color: #f7f2ee;
 }
 
 /* Centred, because the footer now holds one thing. This was
@@ -841,29 +788,6 @@ body:not(:has(.hero)) #main {
   max-width: none;
 }
 
-/* Home page only. .invite sits directly in the footer's .wrap here
-   instead of .site-footer__inner, because the two rows need different
-   alignment: the invite reads left, the logos read centred, and
-   forcing both through the same flex container fights the layout that
-   suits either one. */
-.site-footer--invite {
-  padding-block: clamp(2.5rem, 6vw, 4rem) 1.75rem;
-}
-
-/* A hairline rather than a second band of colour — the invite and the
-   logos already share one background, so the divider only needs to
-   mark where the ask ends and the credits begin, not separate two
-   surfaces. */
-.site-footer--invite .invite {
-  padding-bottom: clamp(1.75rem, 4vw, 2.5rem);
-  margin-bottom: 1.75rem;
-  border-bottom: 1px solid var(--rule);
-}
-
-.site-footer--invite .site-footer__logos {
-  justify-content: center;
-}
-
 .site-footer__logos {
   display: flex;
   align-items: center;
@@ -880,7 +804,7 @@ body:not(:has(.hero)) #main {
    height is padding the multiply blend makes invisible. Matching the
    printed marks means the numbers below have to disagree. */
 .site-footer__logos img {
-  height: 64px;
+  height: 77px;
   width: auto;
 }
 
@@ -910,10 +834,10 @@ body:not(:has(.hero)) #main {
 
    Delete this whole rule the moment a transparent PNG or an SVG lands. */
 .site-footer__logos .logo--raster {
-  height: 72px;
+  height: 86px;
   mix-blend-mode: multiply;
   clip-path: inset(4% 0 6% 0);
-  margin-inline: -1.75rem 0;
+  margin-inline: -2.1rem 0;
 }
 
 /* ---------------------------------------------------------
@@ -1356,131 +1280,6 @@ figure.shot-fig figcaption {
   color: var(--ink-soft);
   margin: 0;
   max-width: 30ch;
-}
-
-/* ---------------------------------------------------------
-   21a. Invite — merged into the footer
-
-   Was its own full-bleed blue band between "What it needs" and the
-   footer: one blue strip for the ask, one peach strip for the logos
-   right after it, with the blue never actually relating to the marks
-   it sat beside. Ana asked for the two to merge, and pointed out the
-   blue was the wrong choice for that anyway — the institutional logos
-   need a pale ground to read on, which blue isn't.
-
-   So .invite now lives inside .site-footer--invite (see section 15)
-   instead of its own band, on the peach the footer already used. No
-   .band--invite left to style: it had no other callers. */
-
-.invite {
-  max-width: 62ch;
-}
-
-/* Bigger than the .cta h2 it replaces, and in the mono face at caps —
-   the rest of the site uses that treatment for section labels, so it
-   reads as a heading for the whole band rather than for a panel.
-   Coloured like every other heading on the site now that the ground
-   is peach, not white-on-blue. */
-.invite h2 {
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: clamp(1.3rem, 3vw, 1.9rem);
-  line-height: 1.2;
-  color: var(--deep);
-  margin: 0 0 1rem;
-}
-
-.invite p {
-  color: var(--ink-soft);
-  font-size: 1.02rem;
-  max-width: 62ch;
-  margin: 0;
-}
-
-.invite .btn-row {
-  margin-top: 1.75rem;
-}
-
-/* No colour override needed here any more. .btn--primary is already
-   deep blue on cream, which was only invisible against the old blue
-   band — against peach it's the strongest thing in the footer, which
-   is what the one action on the page should be. */
-
-/* ---------------------------------------------------------
-   21. Call to action
-   --------------------------------------------------------- */
-
-/* A prompt at the foot of the page, not a panel demanding its own screen.
-   Text on the left, the one action on the right.
-
-   In the cover blue, which is the disc on the box lid and the table the
-   whole game happens on. It was in the warm Domain colour, which quietly
-   took one team's side on a page that belongs to both. This is the one
-   saturated block in the lower half of the page, and it is the last
-   thing read before the footer. */
-.cta {
-  background: var(--deep);
-  border: 1px solid var(--deep);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.1rem, 3vw, 1.6rem);
-  display: grid;
-  gap: 1rem;
-  align-items: center;
-}
-
-@media (min-width: 720px) {
-  .cta {
-    grid-template-columns: 1fr auto;
-    column-gap: 2rem;
-  }
-
-  .cta .btn-row {
-    margin-top: 0;
-  }
-}
-
-.cta__text > *:last-child {
-  margin-bottom: 0;
-}
-
-/* Held back from the h2 scale. This is a prompt, not a section heading —
-   at display size it shouted louder than the page title. */
-.cta h2 {
-  color: var(--cream);
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  max-width: 30ch;
-  margin-bottom: 0.5rem;
-}
-
-/* Dimmed rather than transparent: an alpha here would blend toward the
-   blue behind it and land under 4.5:1. This is a measured 5:1. */
-/* 46ch here was tuned to a two-sentence panel. The copy is now a
-   question plus an explanation, and at 46ch it wrapped to six lines
-   inside a cell nearly twice that wide — a narrow ribbon of text with
-   a column of dead space beside it. 68ch stays inside the comfortable
-   reading measure while actually using the cell. */
-.cta p {
-  color: #e8e2da;
-  max-width: 68ch;
-  margin-bottom: 0;
-}
-
-/* The button has to invert on this ground — .btn--primary is the deep
-   blue itself, which would vanish. Same treatment the hero uses. */
-.cta .btn--primary {
-  background: var(--cream);
-  border-color: var(--cream);
-  color: var(--deep);
-}
-
-.cta .btn--primary:hover {
-  background: #fff;
-  border-color: #fff;
-}
-
-.cta .btn-row {
-  margin-top: 1.4rem;
 }
 
 /* ---------------------------------------------------------
@@ -2735,91 +2534,33 @@ h2 {
   }
 }
 
-/* ---- The form, enlarged ----------------------------------
-   Section 14 sets the shared form look, which is sized for a
-   field tucked inside a page of prose. Here the form IS the
-   page, so everything grows: taller inputs, more air between
-   them, and labels that read as instructions rather than
-   annotations. */
+/* ---- Two sections, no form -------------------------------
+   The form asked for an inbox this site doesn't have yet, and
+   silently risked losing a message the moment someone actually
+   used it. Gone. In its place: the plain address people can act
+   on right now, and the invitation that used to sit in the
+   home page's footer, given a proper home instead of getting
+   dropped when the merge came apart. */
 
-.form--contact {
-  max-width: none;
-  gap: 1.5rem;
+.contact__section + .contact__section {
+  margin-top: clamp(2.25rem, 6vw, 3.25rem);
+  padding-top: clamp(2.25rem, 6vw, 3.25rem);
+  border-top: 1px solid var(--rule);
 }
 
-.form--contact .field label {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0;
-  margin-bottom: 0.5rem;
-}
-
-.form--contact .field input,
-.form--contact .field textarea {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  padding: 0.85rem 1rem;
-  background: #ffffff;
-  border-color: #08191233;
-}
-
-.form--contact .field textarea {
-  min-height: 10rem;
-}
-
-/* Full-width and dark — the single obvious end of the page. Deliberately
-   not a .btn--primary variant: .btn is used across every page at a size
-   that suits a button sitting beside prose, and widening it there would
-   change all of them. */
-.btn-block {
-  display: block;
-  width: 100%;
-  font-family: var(--font-mono);
-  font-size: 0.92rem;
-  letter-spacing: 0.02em;
-  padding: 1.05rem 1.2rem;
-  border: 1px solid var(--ink);
-  border-radius: var(--radius);
-  background: var(--ink);
-  color: var(--paper);
-  cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease;
-}
-
-.btn-block:hover {
-  background: #143024;
-  border-color: #143024;
-}
-
-.btn-block:focus-visible {
-  outline: 2px solid var(--deep);
-  outline-offset: 3px;
-}
-
-/* Empty until main.js has something to say, and empty elements with
-   margins leave a hole — so the margin only arrives with the text. */
-.form__notice {
-  margin: 0;
-  font-size: 0.9rem;
+.contact__section p {
+  margin: 0.6rem 0 0;
   color: var(--ink-soft);
 }
 
-.form__notice:not(:empty) {
-  margin: -0.5rem 0 0;
-  padding: 0.8rem 1rem;
-  background: #ecc2a333;
-  border-radius: var(--radius);
-  color: var(--ink);
+.contact__section .btn-row {
+  margin-top: 1.5rem;
 }
 
-.contact__direct {
-  margin: 1.75rem 0 0;
-  font-size: 1rem;
-  color: var(--ink-soft);
-}
-
-.contact__direct a {
+/* Set on the link itself rather than a wrapping paragraph — the address
+   now sits inline in a sentence instead of on its own line, so the
+   emphasis has to be the anchor's, not a parent's. */
+.contact__email {
   color: var(--ink);
   font-weight: 600;
   text-decoration-color: var(--paper-accent);
