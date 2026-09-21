@@ -196,12 +196,18 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   `assets/img/team/` and replace each `.person__photo` div with
   `<img class="person__photo" src="assets/img/team/name.jpg" alt="Name">`.
 
-  Two things on that page still want a decision. The cards no longer say who
-  supervises the PhD — Haiko's and Alexander's cards previously read "PhD
-  supervisor", and that fact is not in either supplied bio, so it was dropped
-  rather than reinstated from memory. And Gracia's bio says **TBM Gamelab**
-  while the footer logo is captioned **TU Delft Gamelab**; TBM is the Dutch
-  name for the same faculty, but the site currently uses both.
+  **The two lines on a card do different jobs.** `.person__role` is the
+  person's role *on this project* — lead researcher, game designer, PhD
+  supervisor. The bio underneath is who they are academically, in their own
+  words. Do not collapse these into one: putting the academic title in both
+  makes the card read as the same sentence twice, and leaves the page unable
+  to say why any given person is on it. Haiko, Alexander and Nihit are all
+  PhD supervisors.
+
+  One thing still open: Gracia's bio says **TBM Gamelab** while the footer
+  logo is captioned **TU Delft Gamelab**. TBM is the Dutch name for the same
+  faculty that Ana's bio calls TPM in English, so the site currently uses
+  both names for one lab.
 - **Publications.** `research.html` has an empty publications section.
 
 ## Design
