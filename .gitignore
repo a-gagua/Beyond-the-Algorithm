@@ -5,3 +5,16 @@
 # git history is permanent — keep that material outside the repo.
 brandbook/
 *.docx
+
+# The game design document. This repository is PUBLIC, and that file
+# spells out the scoring model, every event card by name, and the
+# mechanics the site spends so much effort not revealing — see "What the
+# site deliberately does not say" in the README. It was tracked here
+# from the first commit and has been purged from history. It now lives
+# at ~/Desktop/bta-design-doc/. Do not add it back.
+beyond-the-algorithm-website-context.md
+
+# Personal tool state, not project content. settings.local.json holds an
+# allow list with absolute paths, and launch.json points at a scratchpad
+# directory that exists on no other machine.
+.claude/

@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Montserrat:wght@800&family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -16,9 +16,8 @@
 
 <header class="site-header">
   <div class="wrap site-header__inner">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img class="brand__mark" src="assets/img/mark.svg" alt="">
-      <span class="brand__text">Beyond the Algorithm</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
@@ -26,7 +25,7 @@
       <a href="index.html#about">About the game</a>
       <a href="research.html">Research</a>
       <a href="team.html">Team</a>
-      <a href="contact.html">Contact</a>
+      <a class="nav__cta" href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -112,14 +111,16 @@
 
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
-    <a class="site-footer__brand" href="index.html">
+    <!-- aria-label is load-bearing: the img is alt="" and the wordmark
+         span is gone, so without it this link has no accessible name. -->
+    <a class="site-footer__brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img src="assets/img/mark.svg" alt="">
-      <span>Beyond the Algorithm</span>
     </a>
-    <!-- Both logo files are placeholders. See assets/img/logos/. -->
+    <!-- gamelab.png is a screen capture, not a supplied asset. See the
+         note in index.html. -->
     <div class="site-footer__logos">
       <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
-      <img src="assets/img/logos/serious-game-lab.svg" alt="Serious Game Lab">
+      <img class="logo--raster" src="assets/img/logos/gamelab.png" alt="TU Delft Gamelab">
     </div>
   </div>
 </footer>

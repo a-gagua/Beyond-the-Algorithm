@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Montserrat:wght@800&family=Source+Code+Pro:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -16,9 +16,8 @@
 
 <header class="site-header">
   <div class="wrap site-header__inner">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img class="brand__mark" src="assets/img/mark.svg" alt="">
-      <span class="brand__text">Beyond the Algorithm</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
@@ -26,7 +25,7 @@
       <a href="index.html#about">About the game</a>
       <a href="research.html">Research</a>
       <a href="team.html">Team</a>
-      <a href="contact.html">Contact</a>
+      <a class="nav__cta" href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -42,57 +41,78 @@
   <section>
     <div class="wrap">
 
-      <!-- Bios are drafts and each person should approve their own
-           wording before this page goes public. Swap .person__photo for
-           <img class="person__photo" src="assets/img/team/name.jpg"
-           alt="Name"> once you have headshots. -->
+      <!-- These bios are supplied text, not drafts. Do not paraphrase them
+           or extend anyone's title beyond what their own bio states.
+
+           The two lines do different jobs, deliberately. The role line is
+           the person's role ON THIS PROJECT — lead researcher, designer,
+           supervisor. The bio is who they are academically, in their own
+           words. Putting the academic title in both made the card read as
+           the same sentence twice, and left the page unable to say why any
+           given person was on it.
+
+           Only Ana and Gracia carry a .person__role line. The three
+           supervisors state their project role in the last sentence of
+           their bio instead — a subtitle reading "PhD supervisor" three
+           times down the page said less than the sentence does.
+
+           The photographs are ordinary colour headshots. The greyscale
+           and the coloured frame are both CSS, not baked into the
+           files. alt is empty on purpose: the name is in the h3
+           directly below, and alt="Name" would make a screen reader
+           announce each person twice. -->
 
       <div class="grid grid--3">
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true">A</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/ana-gagua.jpg" alt="">
+          </div>
           <div class="person__body">
-            <h3>Ana</h3>
-            <p class="person__role">PhD researcher, TU Delft</p>
-            <p>Leads the research the game comes out of: an ethnographic study of how Responsible AI principles are operationalised inside Dutch regulatory inspectorates. She designed the research direction behind the game and runs the sessions.</p>
+            <h3>Ana Gagua</h3>
+            <p class="person__role">PhD researcher</p>
+            <p>Ana Gagua is a PhD researcher at Delft University of Technology (TU Delft), in the Faculty of Technology, Policy, and Management (TPM). She studies the governance and organisational practice of AI in the public sector, with a focus on how Responsible AI moves from principle to everyday work.</p>
           </div>
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--domain-accent)">G</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/gracia-bovenberg-murris.jpg" alt="">
+          </div>
           <div class="person__body">
-            <h3>Gracia</h3>
+            <h3>Gracia Bovenberg-Murris</h3>
             <p class="person__role">Game designer</p>
-            <p>Responsible for the game design, the mechanics and their tuning across versions, and all of the physical materials — cards, role boards, placemat and forms.</p>
+            <p>Gracia Bovenberg-Murris is a project leader and game designer at the TBM Gamelab, in the Faculty of Technology, Policy, and Management (TPM), where she designs game concepts and their visual design together with researchers and other game designers (for board, digital, and hybrid games). Gracia also facilitates serious gaming sessions and workshops.</p>
           </div>
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--data-light)">H</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/haiko-van-der-voort.jpg" alt="">
+          </div>
           <div class="person__body">
-            <h3>Haiko</h3>
-            <p class="person__role">PhD supervisor</p>
-            <p>Supervises the dissertation, with input on the game design and how it fits the wider research.</p>
+            <h3>Haiko van der Voort</h3>
+            <p>Haiko van der Voort is an associate professor of organisation &amp; governance at Delft University of Technology (TU Delft). His research examines the governance of enforcement in the digital age, and how machine learning, AI, and data science are reshaping inspection work, regulatory arrangements, and the way norms develop. He is also Director of the MSc programme in Engineering and Policy Analysis. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
         <article class="person">
-          <div class="person__photo" aria-hidden="true" style="background:var(--data-light)">A</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/alexander-verbraeck.jpg" alt="">
+          </div>
           <div class="person__body">
-            <h3>Alexander</h3>
-            <p class="person__role">PhD supervisor</p>
-            <p>Supervises the dissertation, with input on the game design and how it fits the wider research.</p>
+            <h3>Alexander Verbraeck</h3>
+            <p>Alexander Verbraeck is a full professor at Delft University of Technology (TU Delft). His research focuses on modelling and simulation, with applications in logistics and transportation, safety, and security, including simulation and serious games as research methods. He also holds a position as visiting professor at the R.H. Smith School of Business, University of Maryland. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
         <article class="person">
-          <!-- ROLE AND BIO NEEDED for Nihit. Everything below this line
-               is a placeholder — do not publish it as written. -->
-          <div class="person__photo" aria-hidden="true" style="background:var(--tech-accent)">N</div>
+          <div class="person__figure">
+            <img class="person__photo" src="assets/img/team/nihit-goyal.jpg" alt="">
+          </div>
           <div class="person__body">
-            <h3>Nihit</h3>
-            <p class="person__role">Role to be confirmed</p>
-            <p>Bio to be written. Send the role and a couple of sentences and this card fills in.</p>
+            <h3>Nihit Goyal</h3>
+            <p>Nihit Goyal is an assistant professor of public policy at Delft University of Technology (TU Delft). He studies the politics of policy innovation, combining qualitative, quantitative, and computational methods to examine how governments address complex societal challenges, such as the digital transformation or the energy transition, and evaluate the effectiveness, equity, and legitimacy of their policies. He supervises the PhD research behind Beyond the Algorithm.</p>
           </div>
         </article>
 
@@ -100,7 +120,10 @@
 
       <div class="ack">
         <h2>Acknowledgements</h2>
-        <p>Sessions are only possible because colleagues at public inspection authorities make room for them and bring the people who know the work. They are not part of the project team, and we are grateful to them.</p>
+        <!-- The site deliberately does not name the host organisations.
+             This paragraph now says so outright, and why, which settles
+             the question rather than leaving it open. -->
+        <p>Beyond the Algorithm is built on research carried out with Dutch inspectorates. The organisations that took part cannot be named, because they took part on the understanding that they would stay anonymous — but the game exists because their staff gave their time and spoke openly about how the work is really done. We are grateful to them.</p>
       </div>
 
     </div>
@@ -110,14 +133,16 @@
 
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
-    <a class="site-footer__brand" href="index.html">
+    <!-- aria-label is load-bearing: the img is alt="" and the wordmark
+         span is gone, so without it this link has no accessible name. -->
+    <a class="site-footer__brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img src="assets/img/mark.svg" alt="">
-      <span>Beyond the Algorithm</span>
     </a>
-    <!-- Both logo files are placeholders. See assets/img/logos/. -->
+    <!-- gamelab.png is a screen capture, not a supplied asset. See the
+         note in index.html. -->
     <div class="site-footer__logos">
       <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
-      <img src="assets/img/logos/serious-game-lab.svg" alt="Serious Game Lab">
+      <img class="logo--raster" src="assets/img/logos/gamelab.png" alt="TU Delft Gamelab">
     </div>
   </div>
 </footer>

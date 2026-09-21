@@ -24,25 +24,17 @@ a `#`, so the home page does not mark two items as current.
 The header and footer are duplicated in each file rather than templated. That is
 the cost of having no build step; if you edit the nav, edit it in all four.
 
-## `v2/` — the visual pass
+## One site, at the root
 
-`v2/` is a full, self-contained copy of the site carrying a makeover drawn from
-the printed box: the cover blue on headings and buttons, section labels as
-printed strips, the sparkle and gear marking the two teams, and real
-photographs in place of the empty slots. Open `v2/index.html` next to
-`index.html` to compare.
+The repository used to hold three copies: the original at the root, a `v2/`
+visual pass, and `v3/`, which was the one being worked on. That made sense while
+a direction was being chosen and stopped making sense once it had been. `v3/`
+has been promoted to the root and the other two are deleted. There is now one
+set of files, and the thing you edit is the thing that publishes.
 
-It has its own `assets/`, so editing one version never touches the other. If
-you keep it, move its four HTML files and `assets/` up to the root and delete
-`v2/`. If you do not, delete the folder — nothing outside it refers to it.
-
-The makeover CSS is appended at the bottom of `v2/assets/css/style.css` under a
-`V2 MAKEOVER` banner rather than woven through the file, so deleting that block
-returns v2 to the v1 look while keeping the photographs.
-
-Photographs live in `v2/assets/img/photos/` as web-sized JPEGs (70–200 KB). The
-originals are the 24 MB camera files in `~/Desktop/game`; each `<img>` carries
-an HTML comment naming its `DSCF` source so a swap is a one-line change.
+Both old versions remain in git history if anyone ever wants to look — including
+two gallery photographs, `board.jpg` and `decks.jpg`, which `v3/` deliberately
+replaced with the two team-board shots.
 
 ## Running locally
 
@@ -60,7 +52,7 @@ the browser caches the stylesheet.
 
 **Player count and duration.** The box lid states **2–8 players** and **90m**.
 Both are wrong. The correct figures are **4–8 players** and **2 hours**, and
-that is what `v3/` now says. The site is the authority; anyone comparing it to
+that is what the site now says. The site is the authority; anyone comparing it to
 a printed box will find the box lower on players and shorter on time.
 
 The per-stop durations that used to sit in "How it runs" (15 + 85 + 20 + 30)
@@ -68,7 +60,7 @@ totalled 150 minutes — the old, also-wrong 2½ hours. They were removed rather
 than re-guessed. The total is stated once, in "What it needs".
 
 **The print pack is not in this repository, deliberately.** There was briefly a
-`v3/assets/brandbook/` holding sixteen Illustrator PDFs with
+`assets/brandbook/` holding sixteen Illustrator PDFs with
 `/Separation /ContourCut` die-cut channels — the files a printer is sent. It
 was 280 MB and has been removed: git history is permanent, GitHub rejects
 single files over 100 MB, and the site loaded none of it.
@@ -88,7 +80,7 @@ licence to assume; Fredericka is on Google Fonts. Unresolved.
 
 ## Photographs: lowercase, and web-sized
 
-Two rules for `v3/assets/img/photos/`, both learned the hard way.
+Two rules for `assets/img/photos/`, both learned the hard way.
 
 **Filenames are lowercase `.jpg`. Always.** macOS is case-insensitive and
 GitHub Pages is not, so `box.JPG` on disk against `box.jpg` in the HTML works
@@ -111,7 +103,7 @@ Originals are kept outside the repo at `~/Desktop/bta-original-photos/`. If a
 photograph ever needs recropping, go back to those rather than upscaling what
 is in here.
 
-**The same two rules cover `v3/assets/img/team/`**, and it is worth saying why:
+**The same two rules cover `assets/img/team/`**, and it is worth saying why:
 three of the five headshots arrived capitalised (`Ana-gagua.jpg`) and one
 arrived as a PNG. Both were normalised before the first commit, because a
 capitalised filename is invisible on macOS and only fails once published.
@@ -150,24 +142,31 @@ compress to about eight words a line and the cards get *taller*.
 Participants can read this site before playing, so it holds back anything that
 would spoil a session. Keep this in mind when adding copy:
 
+> **This repository is public.** The game design document — which names the
+> scoring model, every event card and every mechanic — is deliberately *not* in
+> it. It lives at `~/Desktop/bta-design-doc/` and is listed in `.gitignore`. It
+> was tracked here from the first commit and has since been purged from the
+> whole history. Do not commit it, and do not paste its contents into a commit
+> message, a code comment or this file.
+
 - **No scoring axes — with one settled exception.** The scored dimensions are
   not named as the things being *measured*, in copy or in HTML comments, which
   anyone can read via view-source. But **effectiveness and explainability do
   appear**, in the Sprints stop of "How it runs", and that is deliberate: they
   are also the goal the teams are openly briefed on at kickoff, so a
   participant learns them in the first ten minutes of a session. Naming them
-  spoils nothing. What stays hidden is that they are scored, and how.
+  spoils nothing. What stays hidden is the measurement model behind them.
 
   The Sprints copy is phrased as a direction of travel, not a menu — "rarely a
   clean split between the two" — because presenting it as a binary choice
   would imply a scoring model that the site should not be describing.
 - **No disclosure detail.** The site says the model goes on the public record
-  and that you cannot say everything. It does not mention six fields, or
-  choosing three.
+  and that you cannot say everything. It does not describe the form itself.
 - **No event card names.** The site says events interrupt the build, not which
   ones exist.
-- **No mechanics.** Gear ratings, the Ambition Card, Consult Party and the MVP
-  threshold are all absent.
+- **No mechanics.** The game's named mechanics — the ones printed on the cards
+  and boards — are listed in the design document, which is kept outside this
+  repo. None of them appear here.
 
 The line drawn: mechanics and scoring stay hidden, what the experience is like
 and why it is worth doing stays open, because that is what convinces an
@@ -189,8 +188,8 @@ information requests, and that you cannot know when they will land — without
 naming a single card. Describing the weather is fine; printing the deck is not.
 
 "How it runs" also used to say the teams agree "how ambitious to be" at
-kickoff. That was changed to "what the goal is" — the original sat too close
-to the Ambition Card, which is listed as hidden two bullets up.
+kickoff. That was changed to "what the goal is" — the original sat too close to
+one of the named mechanics listed as hidden two bullets up.
 
 One deliberate exception: "explainability tools" survives in the Research
 standfirst, as one item in a list of checklist artefacts (registers,
@@ -202,8 +201,8 @@ field, not a statement that the game scores it.
 Every item below is marked with an HTML comment at the place it belongs, so
 you can also just search the source for `NEEDED` and `TO CONFIRM`.
 
-- **Logos.** In `v3/` the footer is light (peach), because both institutional
-  marks are black artwork and need a pale ground. `v3/assets/img/logos/`
+- **Logos.** The footer is light (peach), because both institutional
+  marks are black artwork and need a pale ground. `assets/img/logos/`
   now holds the real `tu-delft.svg` from the house-style portal — do not
   redraw it, it is a trademark.
 
@@ -225,9 +224,9 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   TU Delft mark as much as you like; never pull it rightward past the
   container.
 
-  The lab is **TU Delft Gamelab**, not "Serious Game Lab". The root and
-  `v2/` copies still carry the old name and the dashed-box placeholders;
-  they follow whenever a version is promoted.
+  The lab is **TU Delft Gamelab**, not "Serious Game Lab". The two older
+  copies of the site carried the old name and the dashed-box placeholders;
+  both have been deleted, so the correct name is now the only one present.
 - **Contact form.** `contact.html` posts to `https://formspree.io/f/FORM_ID`.
   Create a free [Formspree](https://formspree.io) form and paste the real
   endpoint. GitHub Pages is static, so a form needs an external handler. Until
@@ -348,17 +347,25 @@ Copy uses British spelling.
 
 ## Publishing to GitHub Pages
 
+The repository is **[a-gagua/Beyond-the-Algorithm](https://github.com/a-gagua/Beyond-the-Algorithm)**,
+and `origin` is already configured. Publishing is now just:
+
 ```bash
-git init
 git add .
-git commit -m "Initial site"
-git branch -M main
-git remote add origin git@github.com:USER/REPO.git
-git push -u origin main
+git commit -m "…"
+git push
 ```
 
-Then: **Settings → Pages → Source: Deploy from a branch → `main` / `/ (root)`**.
-The site appears at `https://USER.github.io/REPO/` within a minute or two.
+Pages serves `main` from `/ (root)`, which is why the site lives at the root
+rather than in a subfolder. Check **Settings → Pages → Deploy from a branch →
+`main` / `(root)`** if it ever stops updating. The site appears at
+`https://a-gagua.github.io/Beyond-the-Algorithm/` within a minute or two of a
+push.
 
 All internal links are relative, so it works from a project subpath.
 `.nojekyll` is included so GitHub serves the files as-is.
+
+**The history was rewritten once**, on 21 September 2026, to purge the game
+design document from all 23 commits — see the note in "What the site
+deliberately does not say". If you have a clone made before that date, delete it
+and clone again rather than pulling; its history no longer matches.
