@@ -204,10 +204,11 @@ you can also just search the source for `NEEDED` and `TO CONFIRM`.
   to say why any given person is on it. Haiko, Alexander and Nihit are all
   PhD supervisors.
 
-  One thing still open: Gracia's bio says **TBM Gamelab** while the footer
-  logo is captioned **TU Delft Gamelab**. TBM is the Dutch name for the same
-  faculty that Ana's bio calls TPM in English, so the site currently uses
-  both names for one lab.
+  Gracia's bio keeps her own "TBM Gamelab" but now names the faculty in full,
+  matching how Ana's bio writes it — TBM is simply the Dutch form of TPM, and
+  spelling it out means a reader does not have to know that. The footer logo
+  is still captioned **TU Delft Gamelab**, so the lab appears under two names
+  across the site; harmless, but worth settling if anyone cares.
 - **Publications.** `research.html` has an empty publications section.
 
 ## Design
