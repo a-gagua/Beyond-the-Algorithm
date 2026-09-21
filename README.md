@@ -149,8 +149,8 @@ would spoil a session. Keep this in mind when adding copy:
 > whole history. Do not commit it, and do not paste its contents into a commit
 > message, a code comment or this file.
 
-- **No scoring axes — with one settled exception.** The scored dimensions are
-  not named as the things being *measured*, in copy or in HTML comments, which
+- **No assessment detail — with one settled exception.** What the game measures
+  is never named as such, in copy or in HTML comments, which
   anyone can read via view-source. But **effectiveness and explainability do
   appear**, in the Sprints stop of "How it runs", and that is deliberate: they
   are also the goal the teams are openly briefed on at kickoff, so a
@@ -173,8 +173,9 @@ and why it is worth doing stays open, because that is what convinces an
 organisation to book a session.
 
 **The team cards may now describe what each team is for.** They used to be
-scrubbed of anything resembling the scored dimensions, on the rule that naming
-them as a shared goal was fine but naming them as a team's objective was not.
+scrubbed of anything resembling what the game measures, on the rule that naming
+those things as a shared goal was fine but naming them as a team's objective was
+not.
 That rule has been relaxed by decision: the Tech card says its job is to make
 sure the model *performs well* and the Domain card that its job is to make sure
 the model *reflects real inspection practice*. Both are vaguer than the scored
