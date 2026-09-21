@@ -32,76 +32,142 @@
 
 <main id="main">
 
-  <div class="page-banner page-banner--bare">
-    <div class="wrap">
-      <h1>Contact</h1>
-    </div>
-  </div>
+  <!-- One section, no page banner. The heading belongs inside the form
+       column here: a full-width banner above would push the form below
+       the fold and cut the illustration in half.
 
-  <section>
-    <div class="wrap">
+       The illustration is the box lid seen from above rather than a new
+       piece of artwork - the same two curved fields, the same disc, the
+       same gear and sparkle badges as the hero, recomposed upright with
+       the two team cards meeting over the middle. Anyone who has seen
+       the front page recognises it; nobody has to learn a second visual
+       language on the last page of the site. -->
+  <section class="contact">
+    <div class="contact__grid">
 
-      <div class="spread">
-        <p class="spread__label">Email</p>
-        <div class="spread__body lead-split">
-          <p class="storyline"><a href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a></p>
-          <div class="lead-split__body">
-            <p>Ana leads the project and reads this address. Playing a session at your organisation, the research itself, collaboration, press — all of it goes here.</p>
+      <div class="contact__art" aria-hidden="true">
+        <svg viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="c-warm" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ecd9bd"/>
+              <stop offset="1" stop-color="#faf2e7"/>
+            </linearGradient>
+            <linearGradient id="c-cool" x1="1" y1="0" x2="0" y2="0">
+              <stop offset="0" stop-color="#a3d2cd"/>
+              <stop offset="1" stop-color="#dbeeea"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="600" height="900" fill="#f8f4ef"/>
+
+          <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".4">
+            <!-- The warm field, left, and the cool field, right, pinched
+                 toward each other exactly as they are on the lid. -->
+            <path d="M0 0 H196 Q326 450 196 900 H0 Z" fill="url(#c-warm)"/>
+            <path d="M600 0 H404 Q274 450 404 900 H600 Z" fill="url(#c-cool)"/>
+            <circle cx="300" cy="450" r="212" fill="#4e7192" stroke-opacity=".25"/>
+          </g>
+
+          <!-- The two teams, meeting over the table. Domain leans in from
+               the left, Tech from the right, and they overlap in the
+               middle - which is the whole argument of the game. -->
+          <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45">
+            <g transform="translate(258 452) rotate(-11)">
+              <rect x="-62" y="-92" width="124" height="184" rx="11" fill="#ffe8c7"/>
+              <rect x="-62" y="-92" width="124" height="34" rx="11" fill="#f3cc92" stroke="none"/>
+              <g stroke="#c98b45" stroke-width="5" stroke-linecap="round" stroke-opacity=".55">
+                <path d="M-38 -24 H38"/>
+                <path d="M-38 4 H38"/>
+                <path d="M-38 32 H10"/>
+              </g>
+            </g>
+            <g transform="translate(346 452) rotate(9)">
+              <rect x="-62" y="-92" width="124" height="184" rx="11" fill="#d0ebeb"/>
+              <rect x="-62" y="-92" width="124" height="34" rx="11" fill="#8fc7cc" stroke="none"/>
+              <g stroke="#5f9ba1" stroke-width="5" stroke-linecap="round" stroke-opacity=".55">
+                <path d="M-38 -24 H38"/>
+                <path d="M-38 4 H38"/>
+                <path d="M-38 32 H10"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- Tech: the gear. Same cog path as the hero lid. -->
+          <g transform="translate(436 214)">
+            <circle r="52" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+            <path d="M0.0 -19.5 L2.9 -25.8 A26.0 26.0 0 0 1 7.3 -25.0 L7.5 -18.0 A19.5 19.5 0 0 1 13.8 -13.8 L20.3 -16.3 A26.0 26.0 0 0 1 22.8 -12.5 L18.0 -7.5 A19.5 19.5 0 0 1 19.5 0.0 L25.8 2.9 A26.0 26.0 0 0 1 25.0 7.3 L18.0 7.5 A19.5 19.5 0 0 1 13.8 13.8 L16.3 20.3 A26.0 26.0 0 0 1 12.5 22.8 L7.5 18.0 A19.5 19.5 0 0 1 0.0 19.5 L-2.9 25.8 A26.0 26.0 0 0 1 -7.3 25.0 L-7.5 18.0 A19.5 19.5 0 0 1 -13.8 13.8 L-20.3 16.3 A26.0 26.0 0 0 1 -22.8 12.5 L-18.0 7.5 A19.5 19.5 0 0 1 -19.5 0.0 L-25.8 -2.9 A26.0 26.0 0 0 1 -25.0 -7.3 L-18.0 -7.5 A19.5 19.5 0 0 1 -13.8 -13.8 L-16.3 -20.3 A26.0 26.0 0 0 1 -12.5 -22.8 L-7.5 -18.0 Z" fill="#7cc3bc" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5" stroke-linejoin="round"/>
+            <circle r="9.5" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5"/>
+          </g>
+
+          <!-- Domain: the sparkles. -->
+          <g transform="translate(166 690)">
+            <circle r="52" fill="#f9ead6" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
+            <g fill="#e2a869" stroke="#c98b45" stroke-width="1.4">
+              <path d="M-8-22C-8-13-13-8-22-8-13-8-8-3-8 6-8-3-3-8 6-8-3-8-8-13-8-22Z"/>
+              <path d="M12 2C12 8 9 11 3 11 9 11 12 14 12 20 12 14 15 11 21 11 15 11 12 8 12 2Z"/>
+              <path d="M-2 14C-2 18-4 20-8 20-4 20-2 22-2 26-2 22 0 20 4 20 0 20-2 18-2 14Z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="contact__panel">
+        <h1 class="contact__title">Contact</h1>
+
+        <!-- ENDPOINT NOT SET. GitHub Pages serves static files and cannot
+             send mail, so a working form needs an external handler.
+
+             To connect it, pick one and set the action below:
+
+               Formspree  - sign up at formspree.io with agagua@tudelft.nl,
+                            create a form, then
+                            action="https://formspree.io/f/YOUR_ID"
+               Web3Forms  - get a key at web3forms.com, then
+                            action="https://api.web3forms.com/submit"
+                            plus <input type="hidden" name="access_key"
+                            value="YOUR_KEY">
+
+             Both accept a plain POST of the name/email/message fields
+             below, so only the action changes. Then delete the
+             data-endpoint-pending attribute - while it is there, main.js
+             blocks submission and points people at the email address
+             instead of letting the form silently swallow a message. -->
+        <form class="form form--contact" data-endpoint-pending method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
           </div>
-        </div>
-      </div>
 
-      <div class="spread">
-        <p class="spread__label">Or send a message</p>
-        <div class="spread__body">
-          <!-- The form posts to Formspree. Replace FORM_ID with the real
-               endpoint. GitHub Pages is static, so a working form needs
-               an external handler like this one. -->
-          <form class="form" action="https://formspree.io/f/FORM_ID" method="POST">
-            <div class="field">
-              <label for="topic">What is this about?</label>
-              <select id="topic" name="topic">
-                <option>Playing a session at your organisation</option>
-                <option>The research</option>
-                <option>Contributing to the project</option>
-                <option>Press or media</option>
-                <option>Something else</option>
-              </select>
-            </div>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
 
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-            </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
 
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-            </div>
+          <!-- Filled in by main.js when the endpoint is unset, and left
+               empty otherwise. aria-live so the notice is announced
+               rather than only seen. -->
+          <p class="form__notice" data-form-notice role="status" aria-live="polite"></p>
 
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
+          <button class="btn-block" type="submit">Send</button>
+        </form>
 
-            <div>
-              <button class="btn btn--primary" type="submit">Send</button>
-            </div>
-          </form>
-        </div>
-      </div>
+        <!-- The address stays on the page whatever happens to the form.
+             It is the fallback while the endpoint is unset, and it is
+             what anyone who would rather not type into a form will use
+             regardless. -->
+        <p class="contact__direct">
+          Or write directly to
+          <a href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>
+        </p>
 
-      <!-- TO CONFIRM: which profiles Ana wants linked, and their URLs.
-           Both links below are placeholders and resolve to nothing.
-           Delete the whole spread if she would rather not list any. -->
-      <div class="spread">
-        <p class="spread__label">Elsewhere</p>
-        <div class="spread__body">
-          <ul class="social">
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Bluesky</a></li>
-          </ul>
-        </div>
+        <p class="contact__social">
+          <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
       </div>
 
     </div>
@@ -111,11 +177,6 @@
 
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
-    <!-- aria-label is load-bearing: the img is alt="" and the wordmark
-         span is gone, so without it this link has no accessible name. -->
-    <a class="site-footer__brand" href="index.html" aria-label="Beyond the Algorithm — home">
-      <img src="assets/img/mark.svg" alt="">
-    </a>
     <!-- gamelab.png is a screen capture, not a supplied asset. See the
          note in index.html. -->
     <div class="site-footer__logos">
