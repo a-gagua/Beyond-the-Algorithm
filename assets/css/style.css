@@ -766,6 +766,27 @@ body:not(:has(.hero)) #main {
   gap: 1.5rem;
 }
 
+/* gamelab.png is 204px wide at this height, and the pair does not fit
+   beside each other on a narrow phone: 12px of horizontal scrollbar at
+   360px, which is one of the commonest Android widths, and 52px at
+   320px. Let them stack instead of shrinking them — these are
+   institutional marks and the house styles do not allow them to be
+   scaled down to fit.
+
+   The pull-in margin goes with it. It exists to close the dead canvas
+   between this logo and the TU Delft mark to its left, and there is no
+   mark to its left once they are on separate lines. */
+@media (max-width: 420px) {
+  .site-footer__logos {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .site-footer__logos .logo--raster {
+    margin-inline: 0;
+  }
+}
+
 /* Its own full-width row under the logos. .site-footer__inner is a
    centred wrapping flex, so a basis of 100% is what forces the break —
    without it the line sits beside the logos and the footer reads as one
@@ -2237,11 +2258,32 @@ h2 {
   /* Slightly over-width so the band is tall enough that the plate
      sits between the two badges rather than covering the gear,
      which is how the lid is actually printed. The overflow costs
-     a sliver of each field and is worth it. */
+     a sliver of each field and is worth it.
+
+     max-width: none is doing the actual work here. The global
+     `img, svg { max-width: 100% }` reset is a bare type selector, so
+     `.hero__lid svg` outranks it on specificity for width — but it
+     never declared max-width, and an unbeaten max-width: 100% clamps
+     a width: 126% straight back to 100%. This whole rule was therefore
+     inert: the svg stayed at 100% while the -13% margin still applied,
+     which shoved the artwork half a phone-width to the left and left
+     the disc noticeably off-centre with the tagline hanging off it.
+     Set the width and you must unset the cap, or you get the offset
+     without the width that justifies it. */
   .hero__lid svg {
     width: 126%;
+    max-width: none;
     margin-left: -13%;
     height: auto;
+  }
+
+  /* The tagline is paper-coloured so it reads on the dark disc, which
+     makes anything that slips off the disc onto the pale fields beside
+     it effectively invisible. At 40ch it did exactly that on a phone.
+     20ch wraps it to three lines and keeps every corner inside 90% of
+     the disc's radius, measured rather than guessed. */
+  .hero__tagline {
+    max-width: 20ch;
   }
 }
 
