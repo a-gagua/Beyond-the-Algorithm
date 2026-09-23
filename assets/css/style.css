@@ -2554,17 +2554,15 @@ h2 {
 }
 
 /* ---- The two contact cards -------------------------------
-   Both cards are stretched to the same height by the grid. These push
-   the LinkedIn pill to the bottom of the height it was given, so the
-   two cards read as a matched pair rather than as one card that
-   happens to be taller. */
-.contact-cards .card {
-  display: flex;
-  flex-direction: column;
-}
-
+   The pill used to be pushed to the bottom of the card with an auto top
+   margin, which read well while it was the last thing in there. It is
+   not any more — the Gamelab address follows it — and an auto margin
+   would have opened a gap above the pill and dropped that address below
+   it, splitting the address from the sentence introducing it. Ordinary
+   flow instead, so the pill stays attached to the address it belongs
+   to. .card > *:last-child already zeroes the trailing margin. */
 .contact-cards .contact__social {
-  margin-top: auto;
+  margin-bottom: 1.25rem;
 }
 
 /* h2 inside a card, not across a page. The global h2 is
