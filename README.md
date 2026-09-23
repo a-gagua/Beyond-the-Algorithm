@@ -13,7 +13,7 @@ no framework. Open `index.html` in a browser and it works.
 | `index.html`    | Landing, then About the game as a second half at `#about` |
 | `research.html` | Why the project exists and why it uses a game              |
 | `team.html`     | The people involved, plus acknowledgements                 |
-| `contact.html`  | The address, a message form, and social links              |
+| `contact.html`  | Two cards: the invitation to play, and where to send questions |
 
 About the game used to be `about.html`. It is now the lower half of the
 landing page, because the landing page alone was too short to be worth a
@@ -268,12 +268,24 @@ the same text with a label beside it reads as a spec sheet, and it stops long
 pages from running as one thin ribbon down the left. Inside a spread,
 `.spread__body--split` breaks prose into two columns above 820px.
 
-Long sections open with a full-width display line (`.storyline`) or standfirst
-(`.lede`) and then run in those two columns — that is what stops them hugging
-the left edge. `.spread__close` is the counterpart at the other end: a closing
-paragraph that spans a grid above it rather than sitting at reading width under
-its first column. `.lead-split` puts a display line and its supporting prose
-side by side; only Contact still uses it.
+The home page's "About the game" opens with a full-width display line
+(`.storyline`) and then runs in those two columns. Research used to open its
+sections with an oversized standfirst as well; both are plain body text now, so
+`.lede`, `.spread__close` and `.lead-split` have all gone.
+
+`.spread__body--aside` is the third modifier of a spread body: prose left,
+photographs right, used by "Where it has been played". It splits at **980px**,
+not the 820px `--split` uses, because the gallery's caption, dots and arrows
+need about 392px on one line and a narrower column wraps them into two cramped
+rows.
+
+`.spread__body--bleed` pulls a card row out by the cards' own padding so their
+text lines up with plain prose. It starts at **1130px**, and that number is
+arithmetic: `.wrap` is `min(100% - 2.5rem, var(--page))`, so below
+`--page + 2.5rem` the page has only 20px of gutter while the rule pulls 25px.
+A negative margin shrinks an element's layout slot but not the box it paints,
+so those 5px used to sit outside the viewport and put a horizontal scrollbar on
+every page with a card row, at every width from 820px to 1130px.
 
 Other pieces worth knowing: `.run` is the four-stop session track on
 the landing page, `.facts` is the requirements strip, `.shot` is a photograph slot,
@@ -290,11 +302,12 @@ which reads as a fault rather than a choice. All four dots are identical now;
 Sprints used to be the only filled one, which made it look like the single
 marker on the track rather than one stop of four.
 
-`.band--invite` is the closing blue section. It was `.cta`, a box inside "What it
-needs", which filed the page's one ask as a fourth requirement. `.cta` still
-exists because `contact.html` uses it. Note that `.btn--primary` resolves to
-`var(--deep)`, the same blue as the band, so both patterns have to invert the
-button to cream — leave that out and the only action on the page disappears.
+The home page's closing invitation has moved to `contact.html`, so `.cta` and
+`.band--invite` are both gone. Note that `.btn--primary` resolves to
+`var(--deep)` rather than the peach `--paper-accent` its base rule names — a
+later stratum overrides it — so anything placing a primary button on a blue
+ground has to invert the label to cream, or the only action on the page
+disappears.
 
 The hero's two buttons are **always visible**. They used to fade in from
 `opacity: 0` on a `--reveal-cta` variable driven by scroll position, which meant

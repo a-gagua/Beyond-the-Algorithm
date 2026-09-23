@@ -44,27 +44,43 @@
       <!-- No form. There is nowhere for a static site to send one to
            yet, and a form with no endpoint risks losing a real message
            the moment someone actually uses it - safer to give people a
-           plain address that works today. -->
+           plain address that works today.
+
+           One spread, one label, two cards: the same
+           .grid.grid--2.spread__body--bleed row "Who's at the table"
+           uses on the home page. These were two stacked spreads with a
+           rule between them, which read as two unrelated sections when
+           they are two ways of doing the same thing - both end at the
+           same address. The invitation leads, because it is the one
+           thing this page is actually asking for. -->
       <div class="spread">
         <p class="spread__label">Get in touch</p>
         <div class="spread__body">
-          <p>Questions, collaboration, press — write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
-          <p class="contact__social">
-            <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">LinkedIn</a>
-          </p>
-        </div>
-      </div>
+          <div class="grid grid--2 spread__body--bleed contact-cards">
 
-      <!-- Moved from the home page's footer, where it was merged in
-           alongside the two institutional logos. It reads oddly next
-           to a partner's crest and has more room to make its case
-           here, right beside the one way to act on it. -->
-      <div class="spread">
-        <p class="spread__label">Play it at your organisation</p>
-        <div class="spread__body">
-          <p>Want to see how your domain and technical teams would actually reason through trade-offs like these, in a safe setting? Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations.</p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="mailto:agagua@tudelft.nl">Email me</a>
+            <!-- Moved from the home page's footer, where it was merged
+                 in alongside the two institutional logos and read oddly
+                 next to a partner's crest. --invite is the warm fill
+                 that marks it as the emphasised one of the pair. -->
+            <article class="card card--invite">
+              <h2>Play it at your organisation</h2>
+              <p>Want to see how your domain and technical teams would actually reason through trade-offs like these, in a safe setting? Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations.</p>
+              <p>To arrange a session, write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
+            </article>
+
+            <article class="card">
+              <h2>Questions about the game</h2>
+              <p>Anything about how a session runs, the research behind it, or the study it feeds into — collaboration and press too. Write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
+              <!-- Official LinkedIn mark, monochrome on currentColor,
+                   inline like every other icon on the site. -->
+              <p class="contact__social">
+                <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.4 8.75 22 11.05 22 14v7h-4v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.6-2.38 3.27V21h-4V9Z"/></svg>
+                  LinkedIn
+                </a>
+              </p>
+            </article>
+
           </div>
         </div>
       </div>
@@ -82,6 +98,12 @@
       <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
       <img class="logo--raster" src="assets/img/logos/gamelab.png" alt="TU Delft Gamelab">
     </div>
+    <!-- The work, not a person. The game has several authors - the
+         research, the game design and the supervision are different
+         people - so naming one of them here would quietly under-credit
+         the rest. TU Delft is deliberately absent: asserting
+         institutional copyright is not this page's call to make. -->
+    <p class="site-footer__legal">&copy; 2026 Beyond the Algorithm</p>
   </div>
 </footer>
 

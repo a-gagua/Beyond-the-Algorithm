@@ -48,8 +48,8 @@
                home page, without the larger display line that opens it
                there - both paragraphs are plain body text. -->
           <div class="spread__body--split">
-            <p>We've seen, repeatedly, how things can go wrong when governments use AI, and a set of "Responsible AI" principles has emerged in response. But principles are easy to agree on and hard to practise. This game is part of a PhD project studying how public-sector organisations actually put Responsible AI into their everyday work.</p>
-            <p>The project has approached this through several methods: reviewing current empirical work on what makes Responsible AI efforts succeed or fail, followed by a year-long ethnographic study inside a Dutch inspection organisation tracing how those conditions actually show up in practice. This game is the project's third piece, currently being written up.</p>
+            <p>This game is part of a <a href="https://www.tudelft.nl/staff/a.g.gagua/" target="_blank" rel="noopener">PhD project</a> studying how public-sector organisations actually put Responsible AI into their everyday work. We've seen, repeatedly, how things can go wrong when governments use AI, and a set of "Responsible AI" principles has emerged in response. But principles are easy to agree on and hard to practise.</p>
+            <p>The project has approached this through several methods: <a href="https://research.tudelft.nl/en/publications/responsible-ai-governance-in-the-public-sector-explaining-context-3/" target="_blank" rel="noopener">reviewing current empirical work</a> on what makes Responsible AI efforts succeed or fail, followed by a year-long ethnographic study inside a Dutch inspection organisation tracing how those conditions actually show up in practice. This game is the project's third piece.</p>
           </div>
         </div>
       </div>
@@ -57,15 +57,12 @@
       <div class="spread">
         <p class="spread__label">Why a game</p>
         <div class="spread__body">
-          <!-- Five paragraphs, all plain body text, in one split - the
-               consent paragraph used to sit apart in a highlighted box.
-               It's still here, just no longer set apart from the rest. -->
+          <!-- Four paragraphs, all plain body text, in one split. -->
           <div class="spread__body--split">
             <p>Through those earlier studies, we learned what one team, in one place, actually did. However, it can't show you what a different team would have done facing the exact same dilemma.</p>
             <p>A game can. It puts different teams through the same kickoff, event cards, disclosure form, and lets us watch what each one does with it. It's a safe space to see how teams handle a challenge before it happens for real.</p>
             <p>It's also a more honest way to get people talking. Roles, turns, and a shared task produce more natural back-and-forth than a formal interview does, and less of the "performing the right answer" that can creep into conversations about ethics and compliance.</p>
             <p>Beyond the Algorithm was built directly from what the fieldwork surfaced, a way of simulating the pressures we'd observed inside real organisations. It took about a year to develop: internal playtests, sessions with our target audience of inspectorates, and several rounds of changes, before it reached its current form.</p>
-            <p>The game is a research instrument as much as it is a game. Sessions are run with participants' informed consent, and what is recorded is explained in advance. Findings are reported as patterns across teams, never as an assessment of an individual organisation.</p>
           </div>
         </div>
       </div>
@@ -93,21 +90,38 @@
         <div class="spread__body">
           <!-- The individual inspectorates stay unnamed, as everywhere else
                on the site. The festival is a public event with a public
-               programme, so it is named and linked. -->
-          <p>So far sessions have been run within Dutch inspection authorities, and at festivals such as <a href="https://www.toezichtfestival.nl/programma-onderdelen/sessie/b47aa6a3/" target="_blank" rel="noopener">Toezichtfestival 2026</a> (Dutch Supervision Festival 2026).</p>
-          <!-- Stacked under the sentence, matching "Developing it" above,
-               rather than set beside it - two adjacent sections that read
-               as a pair instead of a third layout on one page.
-               The caption names the festival, which is public, and no
-               attending organisation. -->
-          <figure class="shot-fig">
-            <div class="shot shot--wide shot--photo shot--floor">
-              <img src="assets/img/research/festival.jpg"
-                   alt="A hotel lounge at the Toezichtfestival, with several groups seated around tables working through the game and a presentation screen behind the bar."
-                   loading="lazy" width="1600" height="1200">
+               programme, so it is named and linked.
+
+               Prose left, photographs right. There are four festival shots
+               now, and a four-slide gallery stacked under a single
+               sentence left that sentence stranded on a line of its own.
+               --aside only splits above 980px; narrower than that, this is
+               the paragraph with the gallery beneath it, exactly as it
+               was when there was one photograph. -->
+          <div class="spread__body--aside">
+            <div>
+              <p>So far sessions have been run within Dutch inspection authorities, and at festivals such as <a href="https://www.toezichtfestival.nl/programma-onderdelen/sessie/b47aa6a3/" target="_blank" rel="noopener">Toezichtfestival 2026</a> (Dutch Supervision Festival 2026).</p>
             </div>
-            <figcaption>A session at Toezichtfestival 2026.</figcaption>
-          </figure>
+
+            <!-- Same component as "In the box" on the home page: the
+                 script builds the dots, the arrows and the caption, and
+                 the caption text lives in data-caption, which is where
+                 the old figcaption went.
+
+                 Captions name the festival, which is public, and never an
+                 attending organisation. Lowercase .jpg on all four, for
+                 the reason set out beside the home page's gallery. -->
+            <div class="gallery" data-gallery>
+              <div class="gallery__viewport">
+                <ul class="gallery__track">
+                  <li class="gallery__slide gallery__slide--floor"><img src="assets/img/research/festival.jpg" alt="A hotel lounge at the Toezichtfestival, with several groups seated around tables working through the game and a presentation screen behind the bar." data-caption="A session at Toezichtfestival 2026"></li>
+                  <li class="gallery__slide"><img src="assets/img/research/festival-2.jpg" alt="Four people leaning over a table, reading the game's boards and cards together." data-caption="A team working through a round"></li>
+                  <li class="gallery__slide"><img src="assets/img/research/festival-3.jpg" alt="Five people seated around a table with the game laid out between them, while a facilitator stands and talks them through it." data-caption="A session being facilitated"></li>
+                  <li class="gallery__slide gallery__slide--tall"><img src="assets/img/research/festival-banner.jpg" alt="Tall Toezichtfestival 2026 banners in the venue foyer, with the registration desk behind them." data-caption="Toezichtfestival 2026, in the foyer"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -124,6 +138,12 @@
       <img src="assets/img/logos/tu-delft.svg" alt="TU Delft">
       <img class="logo--raster" src="assets/img/logos/gamelab.png" alt="TU Delft Gamelab">
     </div>
+    <!-- The work, not a person. The game has several authors - the
+         research, the game design and the supervision are different
+         people - so naming one of them here would quietly under-credit
+         the rest. TU Delft is deliberately absent: asserting
+         institutional copyright is not this page's call to make. -->
+    <p class="site-footer__legal">&copy; 2026 Beyond the Algorithm</p>
   </div>
 </footer>
 

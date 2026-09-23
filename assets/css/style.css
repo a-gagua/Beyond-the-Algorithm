@@ -468,20 +468,16 @@ body:not(:has(.hero)) #main {
   color: #3d6b70;
 }
 
-.card--data {
-  background: var(--data-dark);
-  border-color: #5a5f76;
-  color: #f5efec;
-}
-.card--data h3 {
-  color: #f5efec;
-}
-.card--data p {
-  color: #f5efecd6;
-}
-.card--data .card__tab {
-  background: var(--data-light);
-  color: #3f4459;
+/* The emphasised card, currently the invitation on the contact page.
+   Warm fill rather than the dark --data slate that used to occupy this
+   slot: every other surface on that page is warm paper, and slate is a
+   game-artefact colour rather than a site surface.
+
+   Same specificity as .card (0,1,0), so it has to stay below it.
+   .card:hover is (0,2,0) and still wins, so the lift survives. */
+.card--invite {
+  background: var(--wedge-warm);
+  border-color: #e3bd91;
 }
 
 /* ---------------------------------------------------------
@@ -770,6 +766,16 @@ body:not(:has(.hero)) #main {
   gap: 1.5rem;
 }
 
+/* Its own full-width row under the logos. .site-footer__inner is a
+   centred wrapping flex, so a basis of 100% is what forces the break —
+   without it the line sits beside the logos and the footer reads as one
+   long row of unrelated things. */
+.site-footer__legal {
+  flex: 1 0 100%;
+  text-align: center;
+  color: var(--ink-faint);
+}
+
 /* Full strength: these are institutional marks and neither TU Delft's
    house style nor the Gamelab's allows theirs to be faded.
 
@@ -893,43 +899,62 @@ body:not(:has(.hero)) #main {
 
 /* A row of cards carries its own padding and border, so its text starts
    further right than the plain prose in every other spread. Pulling the
-   row out by exactly that inset puts the two back on one line. Only
-   above 820px: below it the label stacks, the cards go single-column
-   and everything already starts at the same place, so bleeding there
-   would just push them under the edge of the window. */
-@media (min-width: 820px) {
+   row out by exactly that inset puts the two back on one line.
+
+   1130px, and the number is arithmetic rather than taste. .wrap is
+   `min(100% - 2.5rem, var(--page))`, so until the viewport reaches
+   --page + 2.5rem = 1120px the page has exactly 20px of gutter on each
+   side — and this rule pulls 25px. A negative margin shrinks an
+   element's layout slot but not the box it actually paints, so those
+   extra 5px landed outside the viewport and put a horizontal scrollbar
+   on every page carrying a card row, at every width from 820px to
+   1130px. Exactly the failure documented on .logo--raster in the
+   footer, in the other direction.
+
+   At 1130px the gutter is (1130 - 1080) / 2 = 25px, which is the first
+   width where the bleed fits. Below it the cards simply do not bleed:
+   their text sits 25px right of the prose, which is a misalignment
+   nobody will notice and not a scrollbar, which everybody does. */
+@media (min-width: 1130px) {
   .spread__body--bleed {
     margin-inline: calc(-1 * (1.5rem + 1px));
   }
 }
 
-/* A display line and its supporting prose, side by side. The statement
-   holds the left half, the explanation the right, and together they use
-   the full measure instead of stacking in one narrow column. */
-.lead-split {
-  display: grid;
-  gap: 1.5rem;
-  align-items: start;
-}
+/* Prose left, a photograph column right. The third modifier of a spread
+   body, after --split (two prose columns) and --bleed (a card row pulled
+   back to the prose edge).
 
-@media (min-width: 820px) {
-  .lead-split {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1.75rem, 3.5vw, 3rem);
+   980px, not the 820px the other two use. The gallery carries a caption,
+   its dots and two 38px arrows on one line, which needs about 392px; at
+   820px this column is 334px and that bar wraps into two cramped rows.
+   At 980px the column is 409px and it holds. Below the query this is
+   plain block flow — the paragraph, then the gallery under it, which is
+   what the section looked like before it had more than one photograph.
+
+   The gallery is the wider half: a photograph at 456px earns the space,
+   a single sentence at 397px does not need it.
+
+   minmax(0, …) on both tracks is load-bearing. .gallery__track is a flex
+   scroll container, and its default min-width: auto would let four
+   slides push this column past its share of the row. */
+@media (min-width: 980px) {
+  .spread__body--aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
+    align-items: start;
   }
 
-  .lead-split .storyline {
-    max-width: none;
-    margin-bottom: 0;
-  }
-
-  .lead-split__body > *:first-child {
+  .spread__body--aside > *:first-child {
     margin-top: 0;
   }
+}
 
-  .lead-split__body p {
-    max-width: none;
-  }
+/* Keeps the dots and arrows against the right edge on the narrow widths
+   where a long caption still wraps the bar onto two lines. */
+.spread__body--aside .gallery__nav {
+  margin-left: auto;
 }
 
 /* ---------------------------------------------------------
@@ -1652,6 +1677,27 @@ h2 {
   object-position: center;
 }
 
+/* Two of the festival photographs do not survive a centred crop, so they
+   name their own focal point. Both selectors below are (0,1,1), exactly
+   like the rule above, so it is position in the file and nothing else
+   that lets them win. Keep them here.
+
+   Cropping these in the file instead would be tidier, but sips on macOS
+   only does a centred crop — which is what object-fit: cover already
+   does — so there is nothing to be gained by baking it in.
+
+   --floor: close to half of that frame is suspended ceiling.
+   --tall: the one portrait in the set. A 3:4 frame keeps only its middle
+   half in a 3:2 window, and centred that half cuts the lettering off the
+   banner the caption is naming. */
+.gallery__slide--floor img {
+  object-position: center 85%;
+}
+
+.gallery__slide--tall img {
+  object-position: center 90%;
+}
+
 .gallery__bar {
   display: flex;
   align-items: center;
@@ -1762,8 +1808,7 @@ h2 {
 
 h1,
 h2,
-h3,
-.cta h2 {
+h3 {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.008em;
@@ -2438,21 +2483,29 @@ h2 {
    It uses the site's standard page-banner + .spread pattern
    (see sections 16 and the page banner rules) like Research and
    Team do, rather than carrying its own grid for that. Only what
-   still has no equivalent elsewhere stays here: the email link
-   and the social pill.
+   still has no equivalent elsewhere stays here: the email link,
+   the social pill and the two-card row.
    --------------------------------------------------------- */
 
-/* ---- No form -----------------------------------------------
+/* ---- No form, and no buttons either ------------------------
    The form asked for an inbox this site doesn't have yet, and
    silently risked losing a message the moment someone actually
    used it. Gone. In its place: the plain address people can act
    on right now, and the invitation that used to sit in the
    home page's footer, given a proper home instead of getting
-   dropped when the merge came apart. Both sections are ordinary
-   .spread blocks — the divider between them, the label column
-   and the spacing all come from section 16, same as every other
-   page. Only the address styling below is specific to this
-   page. */
+   dropped when the merge came apart.
+
+   The two were stacked .spread blocks with a rule between them,
+   which read as two unrelated sections when they are two ways of
+   doing the same thing — both end at the same address. They are
+   now one spread holding a .grid.grid--2 row of two cards, the
+   same row "Who's at the table" uses on the home page.
+
+   Neither card has a button. Each one ended in a mailto: button
+   sitting directly beneath the address it linked to, which gave
+   a visitor two identical things to click and said nothing the
+   sentence had not already said. The address is simply inline in
+   the prose. */
 
 /* Set on the link itself rather than a wrapping paragraph — the address
    now sits inline in a sentence instead of on its own line, so the
@@ -2467,11 +2520,15 @@ h2 {
 }
 
 .contact__social {
-  margin: 1rem 0 0;
+  margin: 1.25rem 0 0;
 }
 
+/* inline-flex, not inline-block: the pill now carries the LinkedIn mark
+   beside its label, and the two have to sit on a shared centre line. */
 .contact__social a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--font-mono);
   font-size: 0.74rem;
   padding: 0.35rem 0.8rem;
@@ -2481,8 +2538,42 @@ h2 {
   color: var(--ink);
 }
 
+/* Load-bearing, not polish. The global `img, svg { max-width: 100%;
+   height: auto }` leaves an inline svg that carries a viewBox and no
+   dimensions at the replaced-element default of 300x150. */
+.contact__social svg {
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+
+/* The pill sits on white in one card and on the warm fill in the other,
+   and the old #ffffff99 was invisible against both. */
 .contact__social a:hover {
-  background: #ffffff99;
+  background: #0819120f;
+}
+
+/* ---- The two contact cards -------------------------------
+   Both cards are stretched to the same height by the grid. These push
+   the LinkedIn pill to the bottom of the height it was given, so the
+   two cards read as a matched pair rather than as one card that
+   happens to be taller. */
+.contact-cards .card {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-cards .contact__social {
+  margin-top: auto;
+}
+
+/* h2 inside a card, not across a page. The global h2 is
+   clamp(1.8rem, 4vw, 2.9rem) — sized for a section opener, and far too
+   large inside a box with 1.5rem of padding. */
+.contact-cards h2 {
+  font-size: 1.35rem;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
 }
 
 /* ---------------------------------------------------------
@@ -2520,13 +2611,3 @@ h2 {
   object-position: center 72%;
 }
 
-/* The festival frame has the same problem twice over: close to half of
-   that 4:3 phone shot is acoustic ceiling. 72% still leaves a broad
-   empty band across the top, so this one anchors to the bottom edge -
-   the 16/9 slot then opens on the room, the tables and the screen.
-
-   Same specificity as the rule above (two classes + a type), so it is
-   position in the file, not weight, that decides it. Keep it below. */
-.shot--wide.shot--floor img {
-  object-position: center 100%;
-}
