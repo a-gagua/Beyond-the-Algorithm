@@ -19,7 +19,12 @@
     <a class="brand" href="index.html" aria-label="Beyond the Algorithm — home">
       <img class="brand__mark" src="assets/img/mark.svg" alt="">
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <!-- aria-label carries the name now that the word is gone; the two
+         icons swap on aria-expanded, which main.js already maintains. -->
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+      <svg class="nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="index.html#about">About the game</a>

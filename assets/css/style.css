@@ -291,11 +291,45 @@ body:not(:has(.hero)) #main {
   background: transparent;
   border: 1px solid #08191233;
   border-radius: var(--radius);
-  padding: 0.4rem 0.7rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  padding: 0;
   color: var(--ink);
   cursor: pointer;
+}
+
+/* A burger rather than the word "Menu". The label lives on aria-label,
+   so the button still announces itself to a screen reader.
+
+   Stroke, not fill: the two icons are open paths, and the global
+   `img, svg { max-width: 100% }` would otherwise leave a viewBox-only
+   svg at the 300x150 replaced-element default - the same trap the
+   LinkedIn mark on the contact page had to dodge. */
+.nav-toggle svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Open swaps to a close cross, driven off the same aria-expanded the
+   script already maintains — no second state to keep in sync.
+
+   Written as a descendant rather than the bare `.nav-toggle__close`,
+   because `.nav-toggle svg { display: block }` above is a class plus a
+   type and would otherwise beat a lone class and leave both icons
+   showing at once. Two classes clears it. */
+.nav-toggle .nav-toggle__close {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__open {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__close {
+  display: block;
 }
 
 .nav {
@@ -323,8 +357,14 @@ body:not(:has(.hero)) #main {
 }
 
 @media (max-width: 800px) {
+  /* grid + a 44px floor rather than display:block with padding: the
+     icon is 20.8px, so padding alone would leave a ~38px button, under
+     the size a thumb reliably hits. */
   .nav-toggle {
-    display: block;
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .nav {
@@ -2280,6 +2320,38 @@ h2 {
     max-width: none;
     margin-left: -32.5%;
     height: auto;
+
+    /* 165% is sized for the finished composition, where the two fields
+       close in and frame the disc. At rest they are pulled off to the
+       sides and the disc is alone on the paper, where that same width
+       makes it 91% of a phone screen - a blue ball spanning edge to
+       edge rather than a circle sitting on a page.
+
+       So the lid grows with the fields instead of waiting at full size
+       for them: 0.8 at rest, where the disc is 73% of the screen, up to
+       1 as they arrive. The fallback of 1 matters - if the script never
+       runs, or under reduced motion where the reveal is skipped
+       entirely, this resolves to the finished size rather than leaving
+       the lid stuck small. */
+    transform-origin: center;
+    transform: scale(calc(0.8 + var(--field-in, 1) * 0.2));
+  }
+
+  /* The tagline is HTML, so it does not scale with the lid — which
+     means shrinking the disc at rest shrinks the circle out from under
+     fixed-size text. Below about 380px that is exactly what happened:
+     three lines are taller than a disc at 0.8, and the text broke out
+     of the top and bottom of it, where paper-coloured type on paper is
+     not type at all.
+
+     Narrowing the tagline does not help; the binding dimension is
+     vertical, and a narrower cap only adds a fourth line and makes it
+     worse. Measured: 20ch, 18ch and 16ch all land on the same overflow,
+     14ch is worse. So the disc shrinks less here instead. */
+  @media (max-width: 380px) {
+    .hero__lid svg {
+      transform: scale(calc(0.9 + var(--field-in, 1) * 0.1));
+    }
   }
 
   /* Only the two coloured fields — never the disc, never the badges.
@@ -2308,6 +2380,7 @@ h2 {
   .hero__tagline {
     max-width: 20ch;
   }
+
 }
 
 /* ---- Header: mark left, nav right, Contact set apart -----
@@ -2375,6 +2448,23 @@ h2 {
 .hero__foot .btn {
   font-size: 0.92rem;
   padding: 0.95rem 1.7rem;
+}
+
+/* ...but not on a phone, where that size gives two 55px slabs filling
+   90% of the width, reading as one block under the artwork rather than
+   as two choices. Roughly the body button again, held above a 44px tap
+   target so it stays comfortable under a thumb.
+
+   This has to sit *below* the rule it overrides. Both selectors are
+   (0,2,0) and a media query contributes no specificity, so source
+   order is the only thing separating them - the same version of this
+   rule, written into the mobile block higher up the file, was simply
+   overwritten by the rule above and did nothing at all. */
+@media (max-width: 760px) {
+  .hero__foot .btn {
+    font-size: 0.84rem;
+    padding: 0.85rem 1.3rem;
+  }
 }
 
 /* The ghost variant is near-invisible at this size on the lid artwork —
