@@ -175,12 +175,6 @@ i {
   font-style: italic;
 }
 
-.lede {
-  font-size: clamp(1.1rem, 1.9vw, 1.3rem);
-  line-height: 1.45;
-  max-width: 46ch;
-}
-
 /* Mono micro-labels: eyebrows, card tabs, nav, buttons, inputs */
 .eyebrow {
   font-family: var(--font-mono);
@@ -678,24 +672,6 @@ body:not(:has(.hero)) #main {
 }
 
 /* ---------------------------------------------------------
-   12. Callout
-   --------------------------------------------------------- */
-
-.note {
-  background: #ffffff9c;
-  border-left: 2px solid var(--paper-accent);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 1rem 1.2rem;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  max-width: var(--measure);
-}
-
-.note > *:last-child {
-  margin-bottom: 0;
-}
-
-/* ---------------------------------------------------------
    13. Bands
    --------------------------------------------------------- */
 
@@ -924,15 +900,6 @@ body:not(:has(.hero)) #main {
 @media (min-width: 820px) {
   .spread__body--bleed {
     margin-inline: calc(-1 * (1.5rem + 1px));
-  }
-}
-
-/* A .lede opening a spread is a standfirst, not a hero paragraph. It runs
-   wider than the 46ch reading measure so it spans the two prose columns
-   below it rather than sitting as a narrow block at the left edge. */
-@media (min-width: 820px) {
-  .spread__body > .lede {
-    max-width: 62ch;
   }
 }
 
@@ -1858,8 +1825,8 @@ h2 {
 
    Scoped to the split that follows the display line, not to
    .spread__body--split generally: research.html uses the same layout
-   twice, after a .lede rather than a .storyline, and those sections are
-   long enough that they do not want the extra size. */
+   twice with no display line above it at all, and those sections carry
+   enough prose that they do not want the extra size. */
 .storyline + .spread__body--split p {
   font-size: 1.05rem;
   line-height: 1.6;
@@ -2464,98 +2431,28 @@ h2 {
 /* ---------------------------------------------------------
    25. Contact
 
-   The one page that is a single task rather than something to
-   read, so it drops the spread layout the rest of the site
-   uses and gives the form its own screen: artwork on the left,
-   running to the viewport edge, form on the right.
+   Used to be the one page with its own layout: artwork bleeding
+   off the left edge, a form on the right. Both are gone now —
+   the artwork sat oddly once the form it was paired with came
+   out, and the page underneath it is just two short sections.
+   It uses the site's standard page-banner + .spread pattern
+   (see sections 16 and the page banner rules) like Research and
+   Team do, rather than carrying its own grid for that. Only what
+   still has no equivalent elsewhere stays here: the email link
+   and the social pill.
    --------------------------------------------------------- */
 
-.contact {
-  padding-block: 0;
-}
-
-.contact__grid {
-  display: grid;
-  align-items: stretch;
-}
-
-/* Below the breakpoint the artwork becomes a short band above the
-   heading. It is decoration, not content, so on a phone it earns a
-   glance and no more — a full column of it would push the first input
-   most of a screen down. */
-.contact__art {
-  height: clamp(140px, 28vh, 220px);
-  overflow: hidden;
-}
-
-.contact__art svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.contact__panel {
-  /* Matches .wrap's gutter so the form lines up with the header and
-     footer above and below it. */
-  padding: clamp(2.25rem, 6vw, 4rem) 1.25rem clamp(2.75rem, 7vw, 4.5rem);
-  width: min(100%, 34rem);
-  margin-inline: auto;
-}
-
-.contact__title {
-  margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
-  font-size: clamp(2.4rem, 7vw, 3.4rem);
-  line-height: 1.05;
-}
-
-@media (min-width: 900px) {
-  .contact__grid {
-    /* The artwork takes the smaller share: it is the backdrop, and the
-       form is what the page is for. */
-    grid-template-columns: 42fr 58fr;
-    min-height: min(82svh, 760px);
-  }
-
-  .contact__art {
-    height: auto;
-  }
-
-  /* Pulled off the left edge of the wrap and out to the viewport, so the
-     artwork bleeds rather than sitting in a box. The grid column is
-     already at the page edge — this only undoes the section's own
-     inline padding, of which there is none — so there is nothing here to
-     push a scrollbar the way the footer logo once did. */
-  /* Centred in its own column rather than pinned to the artwork's edge.
-     Left-aligned, the form hugged the illustration and left a couple of
-     hundred pixels of nothing down the right-hand side of the page. */
-  .contact__panel {
-    padding-inline: clamp(2rem, 5vw, 3.5rem);
-    align-self: center;
-  }
-}
-
-/* ---- Two sections, no form -------------------------------
+/* ---- No form -----------------------------------------------
    The form asked for an inbox this site doesn't have yet, and
    silently risked losing a message the moment someone actually
    used it. Gone. In its place: the plain address people can act
    on right now, and the invitation that used to sit in the
    home page's footer, given a proper home instead of getting
-   dropped when the merge came apart. */
-
-.contact__section + .contact__section {
-  margin-top: clamp(2.25rem, 6vw, 3.25rem);
-  padding-top: clamp(2.25rem, 6vw, 3.25rem);
-  border-top: 1px solid var(--rule);
-}
-
-.contact__section p {
-  margin: 0.6rem 0 0;
-  color: var(--ink-soft);
-}
-
-.contact__section .btn-row {
-  margin-top: 1.5rem;
-}
+   dropped when the merge came apart. Both sections are ordinary
+   .spread blocks — the divider between them, the label column
+   and the spacing all come from section 16, same as every other
+   page. Only the address styling below is specific to this
+   page. */
 
 /* Set on the link itself rather than a wrapping paragraph — the address
    now sits inline in a sentence instead of on its own line, so the
@@ -2621,4 +2518,15 @@ h2 {
    table, the boards and the people rather than centring on empty air. */
 .shot--wide.shot--photo img {
   object-position: center 72%;
+}
+
+/* The festival frame has the same problem twice over: close to half of
+   that 4:3 phone shot is acoustic ceiling. 72% still leaves a broad
+   empty band across the top, so this one anchors to the bottom edge -
+   the 16/9 slot then opens on the room, the tables and the screen.
+
+   Same specificity as the rule above (two classes + a type), so it is
+   position in the file, not weight, that decides it. Keep it below. */
+.shot--wide.shot--floor img {
+  object-position: center 100%;
 }

@@ -11,8 +11,16 @@ brandbook/
 # mechanics the site spends so much effort not revealing — see "What the
 # site deliberately does not say" in the README. It was tracked here
 # from the first commit and has been purged from history. It now lives
-# at ~/Desktop/bta-design-doc/. Do not add it back.
+# in OneDrive, at "Paper IV/website/" — synced off this machine rather
+# than sitting as the only copy on a laptop. Do not add it back.
 beyond-the-algorithm-website-context.md
+
+# Full-resolution camera originals, kept so a photo can be re-cropped
+# without asking for it again. These are straight off a phone: EXIF
+# intact, device and timestamp included, tens of megabytes each. Only
+# the resized, EXIF-stripped copies under assets/img/ belong in a
+# public repo.
+bta-original-photos/
 
 # Personal tool state, not project content. settings.local.json holds an
 # allow list with absolute paths, and launch.json points at a scratchpad

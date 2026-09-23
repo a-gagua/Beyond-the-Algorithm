@@ -44,27 +44,27 @@
       <div class="spread">
         <p class="spread__label">Background</p>
         <div class="spread__body">
-          <!-- First paragraph runs full width as a standfirst; the rest sits in
-               two columns so the section does not hug the left edge. -->
-          <p class="lede">We've seen, repeatedly, how things can go wrong when governments use AI, and a set of "Responsible AI" principles has emerged in response. But principles are easy to agree on and hard to practise. This game is part of a PhD project studying how public-sector organisations actually put Responsible AI into their everyday work.</p>
-          <!-- Not in .spread__body--split. There is only one paragraph left
-               here now, and a single paragraph in a two-column wrapper fills
-               the first column and leaves the second one empty. -->
-          <p style="margin-top:1.5rem">The project has approached this through several methods: reviewing current empirical work on what makes Responsible AI efforts succeed or fail, followed by a year-long ethnographic study inside a Dutch inspection organisation tracing how those conditions actually show up in practice. This game is the project's third piece, currently being written up.</p>
+          <!-- Same two-column treatment the storyline section uses on the
+               home page, without the larger display line that opens it
+               there - both paragraphs are plain body text. -->
+          <div class="spread__body--split">
+            <p>We've seen, repeatedly, how things can go wrong when governments use AI, and a set of "Responsible AI" principles has emerged in response. But principles are easy to agree on and hard to practise. This game is part of a PhD project studying how public-sector organisations actually put Responsible AI into their everyday work.</p>
+            <p>The project has approached this through several methods: reviewing current empirical work on what makes Responsible AI efforts succeed or fail, followed by a year-long ethnographic study inside a Dutch inspection organisation tracing how those conditions actually show up in practice. This game is the project's third piece, currently being written up.</p>
+          </div>
         </div>
       </div>
 
       <div class="spread">
         <p class="spread__label">Why a game</p>
         <div class="spread__body">
-          <p class="lede">Through those earlier studies, we learned what one team, in one place, actually did. However, it can't show you what a different team would have done facing the exact same dilemma.</p>
-          <div class="spread__body--split" style="margin-top:1.75rem">
+          <!-- Five paragraphs, all plain body text, in one split - the
+               consent paragraph used to sit apart in a highlighted box.
+               It's still here, just no longer set apart from the rest. -->
+          <div class="spread__body--split">
+            <p>Through those earlier studies, we learned what one team, in one place, actually did. However, it can't show you what a different team would have done facing the exact same dilemma.</p>
             <p>A game can. It puts different teams through the same kickoff, event cards, disclosure form, and lets us watch what each one does with it. It's a safe space to see how teams handle a challenge before it happens for real.</p>
             <p>It's also a more honest way to get people talking. Roles, turns, and a shared task produce more natural back-and-forth than a formal interview does, and less of the "performing the right answer" that can creep into conversations about ethics and compliance.</p>
             <p>Beyond the Algorithm was built directly from what the fieldwork surfaced, a way of simulating the pressures we'd observed inside real organisations. It took about a year to develop: internal playtests, sessions with our target audience of inspectorates, and several rounds of changes, before it reached its current form.</p>
-          </div>
-
-          <div class="note" style="margin-top:1.75rem">
             <p>The game is a research instrument as much as it is a game. Sessions are run with participants' informed consent, and what is recorded is explained in advance. Findings are reported as patterns across teams, never as an assessment of an individual organisation.</p>
           </div>
         </div>
@@ -95,6 +95,19 @@
                on the site. The festival is a public event with a public
                programme, so it is named and linked. -->
           <p>So far sessions have been run within Dutch inspection authorities, and at festivals such as <a href="https://www.toezichtfestival.nl/programma-onderdelen/sessie/b47aa6a3/" target="_blank" rel="noopener">Toezichtfestival 2026</a> (Dutch Supervision Festival 2026).</p>
+          <!-- Stacked under the sentence, matching "Developing it" above,
+               rather than set beside it - two adjacent sections that read
+               as a pair instead of a third layout on one page.
+               The caption names the festival, which is public, and no
+               attending organisation. -->
+          <figure class="shot-fig">
+            <div class="shot shot--wide shot--photo shot--floor">
+              <img src="assets/img/research/festival.jpg"
+                   alt="A hotel lounge at the Toezichtfestival, with several groups seated around tables working through the game and a presentation screen behind the bar."
+                   loading="lazy" width="1600" height="1200">
+            </div>
+            <figcaption>A session at Toezichtfestival 2026.</figcaption>
+          </figure>
         </div>
       </div>
 

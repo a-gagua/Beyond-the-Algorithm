@@ -32,106 +32,36 @@
 
 <main id="main">
 
-  <!-- One section, no page banner. The heading belongs inside the panel
-       column here: a full-width banner above would push it below the
-       fold and cut the illustration in half.
+  <div class="page-banner page-banner--bare">
+    <div class="wrap">
+      <h1>Contact</h1>
+    </div>
+  </div>
 
-       The illustration is the box lid seen from above rather than a new
-       piece of artwork - the same two curved fields, the same disc, the
-       same gear and sparkle badges as the hero, recomposed upright with
-       the two team cards meeting over the middle. Anyone who has seen
-       the front page recognises it; nobody has to learn a second visual
-       language on the last page of the site. -->
-  <section class="contact">
-    <div class="contact__grid">
+  <section>
+    <div class="wrap">
 
-      <div class="contact__art" aria-hidden="true">
-        <svg viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="c-warm" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#ecd9bd"/>
-              <stop offset="1" stop-color="#faf2e7"/>
-            </linearGradient>
-            <linearGradient id="c-cool" x1="1" y1="0" x2="0" y2="0">
-              <stop offset="0" stop-color="#a3d2cd"/>
-              <stop offset="1" stop-color="#dbeeea"/>
-            </linearGradient>
-          </defs>
-
-          <rect width="600" height="900" fill="#f8f4ef"/>
-
-          <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".4">
-            <!-- The warm field, left, and the cool field, right, pinched
-                 toward each other exactly as they are on the lid. -->
-            <path d="M0 0 H196 Q326 450 196 900 H0 Z" fill="url(#c-warm)"/>
-            <path d="M600 0 H404 Q274 450 404 900 H600 Z" fill="url(#c-cool)"/>
-            <circle cx="300" cy="450" r="212" fill="#4e7192" stroke-opacity=".25"/>
-          </g>
-
-          <!-- The two teams, meeting over the table. Domain leans in from
-               the left, Tech from the right, and they overlap in the
-               middle - which is the whole argument of the game. -->
-          <g stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45">
-            <g transform="translate(258 452) rotate(-11)">
-              <rect x="-62" y="-92" width="124" height="184" rx="11" fill="#ffe8c7"/>
-              <rect x="-62" y="-92" width="124" height="34" rx="11" fill="#f3cc92" stroke="none"/>
-              <g stroke="#c98b45" stroke-width="5" stroke-linecap="round" stroke-opacity=".55">
-                <path d="M-38 -24 H38"/>
-                <path d="M-38 4 H38"/>
-                <path d="M-38 32 H10"/>
-              </g>
-            </g>
-            <g transform="translate(346 452) rotate(9)">
-              <rect x="-62" y="-92" width="124" height="184" rx="11" fill="#d0ebeb"/>
-              <rect x="-62" y="-92" width="124" height="34" rx="11" fill="#8fc7cc" stroke="none"/>
-              <g stroke="#5f9ba1" stroke-width="5" stroke-linecap="round" stroke-opacity=".55">
-                <path d="M-38 -24 H38"/>
-                <path d="M-38 4 H38"/>
-                <path d="M-38 32 H10"/>
-              </g>
-            </g>
-          </g>
-
-          <!-- Tech: the gear. Same cog path as the hero lid. -->
-          <g transform="translate(436 214)">
-            <circle r="52" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
-            <path d="M0.0 -19.5 L2.9 -25.8 A26.0 26.0 0 0 1 7.3 -25.0 L7.5 -18.0 A19.5 19.5 0 0 1 13.8 -13.8 L20.3 -16.3 A26.0 26.0 0 0 1 22.8 -12.5 L18.0 -7.5 A19.5 19.5 0 0 1 19.5 0.0 L25.8 2.9 A26.0 26.0 0 0 1 25.0 7.3 L18.0 7.5 A19.5 19.5 0 0 1 13.8 13.8 L16.3 20.3 A26.0 26.0 0 0 1 12.5 22.8 L7.5 18.0 A19.5 19.5 0 0 1 0.0 19.5 L-2.9 25.8 A26.0 26.0 0 0 1 -7.3 25.0 L-7.5 18.0 A19.5 19.5 0 0 1 -13.8 13.8 L-20.3 16.3 A26.0 26.0 0 0 1 -22.8 12.5 L-18.0 7.5 A19.5 19.5 0 0 1 -19.5 0.0 L-25.8 -2.9 A26.0 26.0 0 0 1 -25.0 -7.3 L-18.0 -7.5 A19.5 19.5 0 0 1 -13.8 -13.8 L-16.3 -20.3 A26.0 26.0 0 0 1 -12.5 -22.8 L-7.5 -18.0 Z" fill="#7cc3bc" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5" stroke-linejoin="round"/>
-            <circle r="9.5" fill="#e9f4f1" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".5"/>
-          </g>
-
-          <!-- Domain: the sparkles. -->
-          <g transform="translate(166 690)">
-            <circle r="52" fill="#f9ead6" stroke="#2c4a63" stroke-width="1.6" stroke-opacity=".45"/>
-            <g fill="#e2a869" stroke="#c98b45" stroke-width="1.4">
-              <path d="M-8-22C-8-13-13-8-22-8-13-8-8-3-8 6-8-3-3-8 6-8-3-8-8-13-8-22Z"/>
-              <path d="M12 2C12 8 9 11 3 11 9 11 12 14 12 20 12 14 15 11 21 11 15 11 12 8 12 2Z"/>
-              <path d="M-2 14C-2 18-4 20-8 20-4 20-2 22-2 26-2 22 0 20 4 20 0 20-2 18-2 14Z"/>
-            </g>
-          </g>
-        </svg>
-      </div>
-
-      <div class="contact__panel">
-        <h1 class="contact__title">Contact</h1>
-
-        <!-- No form. There is nowhere for a static site to send one to
-             yet, and a form with no endpoint risks losing a real message
-             the moment someone actually uses it - safer to give people a
-             plain address that works today. -->
-        <div class="contact__section">
-          <p class="spread__label">Get in touch</p>
+      <!-- No form. There is nowhere for a static site to send one to
+           yet, and a form with no endpoint risks losing a real message
+           the moment someone actually uses it - safer to give people a
+           plain address that works today. -->
+      <div class="spread">
+        <p class="spread__label">Get in touch</p>
+        <div class="spread__body">
           <p>Questions, collaboration, press — write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
           <p class="contact__social">
             <a href="https://www.linkedin.com/in/ana-gagua/" target="_blank" rel="noopener">LinkedIn</a>
           </p>
         </div>
+      </div>
 
-        <!-- Moved from the home page's footer, where it was merged in
-             alongside the two institutional logos. It reads oddly next
-             to a partner's crest and has more room to make its case
-             here, right beside the one way to act on it. -->
-        <div class="contact__section">
-          <p class="spread__label">Play it at your organisation</p>
+      <!-- Moved from the home page's footer, where it was merged in
+           alongside the two institutional logos. It reads oddly next
+           to a partner's crest and has more room to make its case
+           here, right beside the one way to act on it. -->
+      <div class="spread">
+        <p class="spread__label">Play it at your organisation</p>
+        <div class="spread__body">
           <p>Want to see how your domain and technical teams would actually reason through trade-offs like these, in a safe setting? Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="mailto:agagua@tudelft.nl">Email me</a>

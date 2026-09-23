@@ -119,10 +119,10 @@ would spoil a session. Keep this in mind when adding copy:
 
 > **This repository is public.** The game design document — which names the
 > scoring model, every event card and every mechanic — is deliberately *not* in
-> it. It lives at `~/Desktop/bta-design-doc/` and is listed in `.gitignore`. It
-> was tracked here from the first commit and has since been purged from the
-> whole history. Do not commit it, and do not paste its contents into a commit
-> message, a code comment or this file.
+> it. It lives in OneDrive, under `Paper IV/website/`, and is listed in
+> `.gitignore`. It was tracked here from the first commit and has since been
+> purged from the whole history. Do not commit it, and do not paste its
+> contents into a commit message, a code comment or this file.
 
 - **No assessment detail — with one settled exception.** What the game measures
   is never named as such, in copy or in HTML comments, which
