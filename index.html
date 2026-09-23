@@ -50,6 +50,30 @@
               <stop offset="0" stop-color="#a3d2cd"/>
               <stop offset="1" stop-color="#dbeeea"/>
             </linearGradient>
+
+            <!-- A top-and-bottom fade for the two coloured fields, used on
+                 phones only. There the lid renders as a band across the
+                 middle of the paper, and the fields - which run the full
+                 height of this canvas - stopped at a hard horizontal line
+                 at each end, so the artwork read as a rectangle laid on the
+                 page. The ground behind them is already --lid-paper, so
+                 fading them simply lets the page through and the edge stops
+                 existing.
+
+                 Nothing references this until the max-width: 760px block in
+                 style.css does, which is what keeps the desktop lid - where
+                 the fields are meant to reach the top and bottom of the
+                 screen - exactly as it was. -->
+            <linearGradient id="lid-fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0"    stop-color="#fff" stop-opacity="0"/>
+              <stop offset="0.20" stop-color="#fff" stop-opacity="1"/>
+              <stop offset="0.80" stop-color="#fff" stop-opacity="1"/>
+              <stop offset="1"    stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+
+            <mask id="lid-fade-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="800">
+              <rect width="1200" height="800" fill="url(#lid-fade)"/>
+            </mask>
           </defs>
 
           <g class="lid__ground">

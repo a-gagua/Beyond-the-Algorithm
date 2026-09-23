@@ -2255,26 +2255,49 @@ h2 {
     align-content: center;
   }
 
-  /* Slightly over-width so the band is tall enough that the plate
-     sits between the two badges rather than covering the gear,
-     which is how the lid is actually printed. The overflow costs
-     a sliver of each field and is worth it.
+  /* Over-width so the band is tall enough that the plate sits between
+     the two badges rather than covering the gear, which is how the lid
+     is actually printed. At 165% the disc comes out around 356px on a
+     390px phone and the badges land on its edge. The overflow costs the
+     outer part of each field and is worth it.
 
-     max-width: none is doing the actual work here. The global
+     margin-left is always half the overhang, so the artwork stays
+     centred. Change one of these two numbers and you must change the
+     other.
+
+     max-width: none is load-bearing. The global
      `img, svg { max-width: 100% }` reset is a bare type selector, so
      `.hero__lid svg` outranks it on specificity for width — but it
      never declared max-width, and an unbeaten max-width: 100% clamps
-     a width: 126% straight back to 100%. This whole rule was therefore
-     inert: the svg stayed at 100% while the -13% margin still applied,
-     which shoved the artwork half a phone-width to the left and left
-     the disc noticeably off-centre with the tagline hanging off it.
-     Set the width and you must unset the cap, or you get the offset
-     without the width that justifies it. */
+     any over-width straight back to 100%. This rule was inert for that
+     reason: the svg stayed at 100% while the negative margin still
+     applied, which shoved the artwork half a phone-width left and left
+     the disc badly off-centre with the tagline hanging off it. Set the
+     width and you must unset the cap, or you get the offset without the
+     width that justifies it. */
   .hero__lid svg {
-    width: 126%;
+    width: 165%;
     max-width: none;
-    margin-left: -13%;
+    margin-left: -32.5%;
     height: auto;
+  }
+
+  /* Only the two coloured fields — never the disc, never the badges.
+     The rectangle on a phone was those two shapes ending at a hard
+     horizontal line; the ground behind them is already --lid-paper, so
+     fading them lets the page show through and the edge stops existing.
+
+     Set from CSS rather than a mask="" attribute in the markup exactly
+     so it can sit behind this media query. Above 760px the lid covers
+     the viewport and the fields are supposed to run to the top and
+     bottom of the screen, where a fade would be wrong.
+
+     Sizing and fading are one change, not two: the fade is what frees
+     the width above to be chosen for the composition rather than kept
+     small to keep the seam inconspicuous. */
+  .lid__field {
+    -webkit-mask: url(#lid-fade-mask);
+    mask: url(#lid-fade-mask);
   }
 
   /* The tagline is paper-coloured so it reads on the dark disc, which
