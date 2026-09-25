@@ -144,7 +144,7 @@
         <!-- The title plate, as printed on the lid: peach band, two lines,
              the second in the lighter blue with the darker outline. -->
         <div class="hero__plate">
-          <h1>Beyond the<span>Algorithm</span></h1>
+          <h1>Beyond the <span>Algorithm</span></h1>
         </div>
 
         <p class="hero__tagline">A research game about trade-offs of Responsible AI</p>
@@ -172,7 +172,7 @@
     <div class="wrap">
 
       <div class="spread">
-        <p class="spread__label">Storyline</p>
+        <h2 class="spread__label">Storyline</h2>
         <div class="spread__body">
           <!-- The display line is the opening sentence of the supplied copy,
                lifted out so the section has a hook. The list that followed it
@@ -203,7 +203,7 @@
     <div class="wrap">
 
       <div class="spread">
-        <p class="spread__label">Who's at the table</p>
+        <h2 class="spread__label">Who's at the table</h2>
         <div class="spread__body">
           <!-- --bleed pulls the row out by the cards' own padding and border,
                so the text inside them lines up with the plain prose in every
@@ -244,40 +244,33 @@
     <div class="wrap">
 
       <div class="spread">
-        <p class="spread__label">How it runs</p>
+        <h2 class="spread__label">How it runs</h2>
         <div class="spread__body">
-          <!-- Four stops on a line, all four readable at once. This was
-               once a tablist that hid three quarters of the text behind
-               clicks; that is not what is happening here. Every word stays
-               on the page and a click only emphasises one stop, so the
-               section still reads as a picture of a session for anyone
-               who never touches it.
-
-               The heading is a <button> because it does something on
-               click. Nothing here is a link and nothing navigates, so a
-               button is the honest element — it also gets keyboard
-               operation and a focus ring for free, which a div would not.
-               aria-pressed carries the state, since this is a toggle
-               rather than a tab over hidden panels.
+          <!-- Four stops on a line, all four readable at once and at equal
+               weight — a picture of a session, not an interactive control.
+               This used to be a click-to-emphasise toggle; it dimmed the
+               other three stops below the accessible contrast floor with
+               no visible affordance and no obvious way back, so the
+               interaction is gone and these are now plain headings.
 
                The per-stop durations are gone for good — they totalled
                150 minutes against a session that runs 2 hours. The total
                is stated once, under "What it needs". -->
-          <ol class="run" data-run>
+          <ol class="run">
             <li class="run__stop">
-              <h3><button class="run__trigger" type="button" aria-pressed="false">Kickoff</button></h3>
+              <h3>Kickoff</h3>
               <p>Teams split into Domain and Tech, get briefed on the project, and look through what's on the table — the data available to them, what they could build. Together, you agree what the goal is.</p>
             </li>
             <li class="run__stop run__stop--long">
-              <h3><button class="run__trigger" type="button" aria-pressed="false">Sprints <span class="run__count">×8</span></button></h3>
+              <h3>Sprints <span class="run__count">×8</span></h3>
               <p>You work sprint by sprint, one task per sprint. Each one pushes the model somewhere — towards effectiveness, towards explainability, rarely a clean split between the two — and stay ready, because events neither team planned for can land mid-sprint.</p>
             </li>
             <li class="run__stop">
-              <h3><button class="run__trigger" type="button" aria-pressed="false">Disclosure</button></h3>
+              <h3>Disclosure</h3>
               <p>At the end, the model goes on the public record. Together, you fill out a disclosure form — choosing what to tell the public, knowing you won't have room to say everything.</p>
             </li>
             <li class="run__stop">
-              <h3><button class="run__trigger" type="button" aria-pressed="false">Debrief</button></h3>
+              <h3>Debrief</h3>
               <p>We talk through the choices you made and why — what tipped a decision one way, what you'd do differently.</p>
             </li>
           </ol>
@@ -291,7 +284,7 @@
     <div class="wrap">
 
       <div class="spread">
-        <p class="spread__label">In the box</p>
+        <h2 class="spread__label">In the box</h2>
         <div class="spread__body">
           <!-- Every slide is forced to 3:2 and object-fit: cover by the CSS,
                so the photographs do not have to share a shape — but they do
@@ -325,7 +318,7 @@
     <div class="wrap">
 
       <div class="spread">
-        <p class="spread__label">What it needs</p>
+        <h2 class="spread__label">What it needs</h2>
         <div class="spread__body">
           <!-- The symbols are the box's own: the player count and the clock
                are printed on the lid, and the sparkle and gear are the marks
@@ -373,11 +366,28 @@
     </div>
   </section>
 
+  <!-- The page used to end on "What it needs" with no close: a reader who
+       arrived convinced had nowhere to go but the nav. This reuses
+       contact.html's "Play it at your organisation" paragraph verbatim —
+       same promise, same address — rather than stating a new claim, and
+       adds the one line the page never said: that this is part of a PhD
+       project, with a route to the full account on Research. -->
+  <section class="band band--tint">
+    <div class="wrap">
+
+      <div class="spread">
+        <h2 class="spread__label">Bring it to your organisation</h2>
+        <div class="spread__body">
+          <p>Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations. To arrange a session, write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
+          <p>Curious about the research behind the game? <a href="research.html">Read more about the project</a>.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </main>
 
-<!-- "Play it at your organisation" used to live here, merged into this
-     footer. It has moved to contact.html, where it sits beside the one
-     way to actually act on it, instead of next to a partner's crest. -->
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
     <!-- gamelab.png is a screen capture, not a supplied asset: opaque white

@@ -26,3 +26,8 @@ bta-original-photos/
 # allow list with absolute paths, and launch.json points at a scratchpad
 # directory that exists on no other machine.
 .claude/
+
+# Impeccable design-skill workspace: critique snapshots, live-editing
+# session state, and local config — all machine-local working state,
+# not project content.
+.impeccable/

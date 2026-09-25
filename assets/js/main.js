@@ -273,46 +273,4 @@
     });
   }
 
-  // ---- Run track -------------------------------------------------
-  // Clicking a stop emphasises it and dims the other three. Nothing is
-  // revealed or hidden: all four paragraphs are in the markup and stay
-  // readable, so a visitor who never clicks — or who has JS off — sees
-  // the whole section at equal weight, which is the default state.
-  //
-  // .is-selecting only goes on after the first click. Without it the
-  // page would load with three quarters of the section greyed out,
-  // which reads as a rendering fault rather than as a choice.
-  //
-  // Clicking the selected stop again clears the selection, so there is
-  // always a way back to the default view without reloading.
-  var run = document.querySelector("[data-run]");
-
-  if (run) {
-    var stops = Array.prototype.slice.call(run.querySelectorAll(".run__stop"));
-
-    var select = function (stop) {
-      var clearing = stop === null || stop.classList.contains("is-current");
-
-      stops.forEach(function (s) {
-        var on = !clearing && s === stop;
-        s.classList.toggle("is-current", on);
-        var trigger = s.querySelector(".run__trigger");
-        if (trigger) trigger.setAttribute("aria-pressed", String(on));
-      });
-
-      run.classList.toggle("is-selecting", !clearing);
-    };
-
-    run.addEventListener("click", function (e) {
-      var trigger = e.target.closest(".run__trigger");
-      if (!trigger) return;
-      select(trigger.closest(".run__stop"));
-    });
-
-    // Escape returns to the default view, matching the toggle-off click.
-    run.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") select(null);
-    });
-  }
-
 })();
