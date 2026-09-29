@@ -993,34 +993,19 @@ body:not(:has(.hero)) #main {
   }
 }
 
-/* Prose left, a photograph column right. The third modifier of a spread
-   body, after --split (two prose columns) and --bleed (a card row pulled
-   back to the prose edge).
+/* Used to split into a prose column and a narrower photograph column at
+   980px. The gallery is the point of the section, so it now stays full
+   width at every size instead of being squeezed to ~54% of the row.
+   Plain block flow — paragraph, then gallery under it — at all
+   viewports. */
 
-   980px, not the 820px the other two use. The gallery carries a caption,
-   its dots and two 38px arrows on one line, which needs about 392px; at
-   820px this column is 334px and that bar wraps into two cramped rows.
-   At 980px the column is 409px and it holds. Below the query this is
-   plain block flow — the paragraph, then the gallery under it, which is
-   what the section looked like before it had more than one photograph.
-
-   The gallery is the wider half: a photograph at 456px earns the space,
-   a single sentence at 397px does not need it.
-
-   minmax(0, …) on both tracks is load-bearing. .gallery__track is a flex
-   scroll container, and its default min-width: auto would let four
-   slides push this column past its share of the row. */
-@media (min-width: 980px) {
-  .spread__body--aside {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: clamp(1.75rem, 3.5vw, 2.75rem);
-    align-items: start;
-  }
-
-  .spread__body--aside > *:first-child {
-    margin-top: 0;
-  }
+/* The paragraph above the gallery is a single short sentence, not
+   several — .spread__body--split's two-column flow would just leave it
+   stuck in the first (half-width) column, so the fix here is simpler:
+   drop the site-wide 64ch prose cap so it runs the same full width as
+   the gallery beneath it, instead of leaving the rest of the row empty. */
+.spread__body--aside p {
+  max-width: none;
 }
 
 /* Keeps the dots and arrows against the right edge on the narrow widths
@@ -1420,7 +1405,7 @@ h2 {
 
 /* ---- Team icons ----------------------------------------
    The sparkle and the gear are how the printed game tells the
-   two sides apart at a glance, before you have read anything. */
+   two sides apart at a glance, before you have read a word. */
 
 .card__head {
   display: flex;
@@ -2006,33 +1991,6 @@ h2 {
   color: var(--deep-light);
 }
 
-.hero .btn-row {
-  justify-content: center;
-}
-
-/* On the blue field the primary button inverts: cream fill,
-   dark type. The ghost button outlines in cream. */
-.hero .btn--primary {
-  background: var(--cream);
-  border-color: var(--cream);
-  color: var(--deep);
-}
-
-.hero .btn--primary:hover {
-  background: #fff;
-  border-color: #fff;
-}
-
-.hero .btn--ghost {
-  border-color: #fbf5ee66;
-  color: var(--cream);
-}
-
-.hero .btn--ghost:hover {
-  border-color: var(--cream);
-  background: #fbf5ee1a;
-}
-
 /* The header sits over the blue hero, so it cannot carry its
    own paper fill until the page has scrolled past it. */
 .site-header {
@@ -2040,12 +1998,6 @@ h2 {
 }
 
 /* ---- Everything after the hero --------------------------- */
-
-/* The banner that opens "About the game" is the seam between
-   the loud open and the calm middle. */
-.page-banner {
-  background: var(--paper-accent);
-}
 
 /* ---- The header rides on the hero ------------------------
    The hero is pulled up under the sticky header so the opening
@@ -2182,50 +2134,16 @@ h2 {
   }
 }
 
-.hero .btn--primary {
-  background: var(--lid-ink);
-  border-color: var(--lid-ink);
-  color: var(--lid-paper);
-}
-
-.hero .btn--primary:hover {
-  background: var(--lid-disc);
-  border-color: var(--lid-disc);
-}
-
-.hero .btn--ghost {
-  border-color: #22405a59;
-  color: var(--lid-ink);
-  background: #ffffff6b;
-}
-
-.hero .btn--ghost:hover {
-  border-color: var(--lid-ink);
-  background: #ffffffb3;
-}
-
 /* ---- Hero rows -------------------------------------------
-   Three rows: empty, the lockup, the actions. With 1fr on the
-   outer two the middle row lands on the vertical centre of the
+   Three rows: empty, the lockup, empty. With 1fr on the outer
+   two the middle row lands on the vertical centre of the
    screen, which is where the disc is, which is where the
-   wordmark is printed. The actions then sit in the bottom row
-   without dragging the lockup upward. */
+   wordmark is printed. Row 3 stays in grid-template-rows as a
+   symmetric spacer even with nothing in it. */
 
 .hero__inner {
   grid-row: 2;
   align-self: center;
-}
-
-.hero__foot {
-  grid-row: 3;
-  align-self: end;
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.hero__foot .btn-row {
-  justify-content: center;
 }
 
 /* ---- The lid on narrow screens ---------------------------
@@ -2374,63 +2292,6 @@ h2 {
   }
 }
 
-/* ---- The hero buttons sit under the lockup ---------------
-   They were pinned to the bottom of the viewport, which left
-   them marooned a long way below the artwork. Anchoring them
-   to the top of the last row puts them just under the tagline,
-   still clear of it. */
-
-.hero__foot {
-  align-self: start;
-  /* Was clamp(0.9rem, 2.5vh, 1.6rem). Lifted again, and only a little:
-     these two are the only things on the opening screen a visitor can
-     act on, so they should sit closer to the lockup than to the fold
-     without crowding the artwork. */
-  padding-top: clamp(0.4rem, 1.4vh, 0.9rem);
-}
-
-/* Bigger than the site's default button. Everywhere else a button sits
-   beside prose that has already made the case; here it IS the case, on
-   a screen with nothing else to read. */
-.hero__foot .btn {
-  font-size: 0.92rem;
-  padding: 0.95rem 1.7rem;
-}
-
-/* ...but not on a phone, where that size gives two 55px slabs filling
-   90% of the width, reading as one block under the artwork rather than
-   as two choices. Roughly the body button again, held above a 44px tap
-   target so it stays comfortable under a thumb.
-
-   This has to sit *below* the rule it overrides. Both selectors are
-   (0,2,0) and a media query contributes no specificity, so source
-   order is the only thing separating them - the same version of this
-   rule, written into the mobile block higher up the file, was simply
-   overwritten by the rule above and did nothing at all. */
-@media (max-width: 760px) {
-  .hero__foot .btn {
-    font-size: 0.84rem;
-    padding: 0.85rem 1.3rem;
-  }
-}
-
-/* The ghost variant is near-invisible at this size on the lid artwork —
-   it read as a caption rather than a second option. Giving it a solid
-   ground and a full-strength border makes the pair read as two choices,
-   which is what they are.
-
-   The ground and the border do that work on their own; a bolder weight
-   on top of them made this the louder of the two, which is backwards —
-   "How to play" is the primary. Weight stays at the site default. */
-.hero__foot .btn--ghost {
-  background: #fffffff0;
-  border-color: var(--lid-ink);
-}
-
-.hero__foot .btn--ghost:hover {
-  background: #ffffff;
-}
-
 .hero__stage {
   padding-bottom: clamp(2rem, 5vh, 3rem);
 }
@@ -2469,22 +2330,6 @@ h2 {
   transform:
     translateY(calc((1 - var(--reveal-badges, 1)) * 26px))
     scale(calc(0.86 + var(--reveal-badges, 1) * 0.14));
-}
-
-/* These two used to fade in on scroll, off --reveal-cta, which meant
-   that at rest — the state every visitor sees first — the only two
-   things on the opening screen you can act on were at opacity 0. You
-   had to scroll a pinned hero 12% before they existed. That is the
-   opposite of prominent, so the reveal is gone and they are simply
-   present.
-
-   The badges still animate; the lockup still builds. The actions just
-   no longer wait their turn. This also retires a focus-within hack that
-   existed only because opacity: 0 leaves an element in the tab order,
-   so a keyboard user could land on an invisible "How to play". */
-.hero__foot {
-  opacity: 1;
-  transform: none;
 }
 
 /* The two teams arriving at the table.
@@ -2557,9 +2402,32 @@ h2 {
   .hero { height: auto; min-height: 100svh; }
   .hero__stage { position: static; height: auto; min-height: 100svh; }
   .lid__ground, .lid__disc, .lid__badge__in, .lid__field,
-  .hero__inner, .hero__foot {
+  .hero__inner {
     transform: none; translate: none; opacity: 1;
   }
+}
+
+/* ---- Section reveal on scroll ------------------------------
+   Home-page only in practice: main.js only ever adds .reveal-pending
+   on a page with a .hero, so Research/Team/Contact never get this
+   class at all and are untouched. Each section fades and lifts in the
+   first time it crosses into view, one at a time as you scroll rather
+   than all at once.
+
+   .reveal-pending is added by main.js right before it starts
+   observing, never by default: if JS fails, is disabled, or
+   IntersectionObserver is unsupported, every section simply renders
+   at its final, visible state instead of staying hidden forever. */
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-pending.is-revealed {
+  opacity: 1;
+  transform: none;
 }
 
 /* Frosted glass needs a fallback surface for the handful of browsers
@@ -2713,4 +2581,3 @@ h2 {
 .shot--wide.shot--photo img {
   object-position: center 72%;
 }
-

@@ -273,4 +273,33 @@
     });
   }
 
+  // ---------------------------------------------------------------
+  // Section reveal on scroll.
+  //
+  // Each section after the hero fades and lifts in the first time it
+  // crosses into view, one section at a time as you scroll rather than
+  // all at once. .reveal-pending is added here, never in the CSS, so a
+  // failed script or an unsupported browser leaves every section in
+  // its normal, fully visible state instead of stuck hidden.
+  // ---------------------------------------------------------------
+
+  if (hero && !still && "IntersectionObserver" in window) {
+    var sections = Array.prototype.slice.call(
+      document.querySelectorAll("main > section:not(.hero)")
+    );
+
+    var reveal = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        reveal.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+    sections.forEach(function (s) {
+      s.classList.add("reveal-pending");
+      reveal.observe(s);
+    });
+  }
+
 })();

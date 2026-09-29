@@ -149,16 +149,6 @@
 
         <p class="hero__tagline">A research game about trade-offs of Responsible AI</p>
       </div>
-
-      <!-- The actions are ours, not the lid's, so they sit below the artwork
-           rather than inside it. Keeping them out of the centred block is what
-           lets the wordmark land on the middle of the disc, as printed. -->
-      <div class="wrap hero__foot">
-        <div class="btn-row">
-          <a class="btn btn--primary" href="#about">How to play</a>
-          <a class="btn btn--ghost" href="contact.html">Host a session</a>
-        </div>
-      </div>
     </div>
 
   </section>
@@ -367,19 +357,25 @@
   </section>
 
   <!-- The page used to end on "What it needs" with no close: a reader who
-       arrived convinced had nowhere to go but the nav. This reuses
-       contact.html's "Play it at your organisation" paragraph verbatim —
-       same promise, same address — rather than stating a new claim, and
-       adds the one line the page never said: that this is part of a PhD
-       project, with a route to the full account on Research. -->
+       arrived convinced had nowhere to go but the nav. Same text, word for
+       word, as contact.html's "Play it at your organisation" card — same
+       promise, same address, kept on both pages rather than moved, so a
+       reader who never makes it to Contact still meets it here. The
+       opening question is promoted to a .storyline display line and the
+       rest runs in two columns beneath it, matching the "Storyline"
+       section's own big-line-then-split treatment further up this page. -->
   <section class="band band--tint">
     <div class="wrap">
 
       <div class="spread">
-        <h2 class="spread__label">Bring it to your organisation</h2>
+        <h2 class="spread__label">Play it at your organisation</h2>
         <div class="spread__body">
-          <p>Beyond the Algorithm is a research game that brings both sides to the same table, and playing it also contributes to ongoing PhD research on Responsible AI practices in public sector organisations. To arrange a session, write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
-          <p>Curious about the research behind the game? <a href="research.html">Read more about the project</a>.</p>
+          <p class="storyline">Want to know how your teams would make decisions on <em>Responsible AI trade-offs?</em></p>
+          <div class="spread__body--split">
+            <p>Beyond the Algorithm simulates how organisations build AI models for risk-based inspections. Your teams design the model together across a series of sprints — weighing effectiveness, explainability, and legitimacy — while handling unexpected events and preparing it for public disclosure.</p>
+            <p>It's also a research game, so playing it contributes to ongoing PhD research on Responsible AI practices in public-sector organisations.</p>
+            <p>To arrange a session, write to <a class="contact__email" href="mailto:agagua@tudelft.nl">agagua@tudelft.nl</a>.</p>
+          </div>
         </div>
       </div>
 
