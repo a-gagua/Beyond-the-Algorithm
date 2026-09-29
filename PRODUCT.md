@@ -46,7 +46,7 @@ Played so far inside Dutch inspection authorities, and publicly at Toezichtfesti
 ## Capabilities and Constraints
 
 - **Plain static site.** HTML, CSS and one small JavaScript file. No build step, no dependencies, no server, no framework. This is a deliberate constraint, not a stage to grow out of.
-- **Published via GitHub Pages** from `main` at `https://a-gagua.github.io/Beyond-the-Algorithm/`. A *project* site, so the repository name sits in the URL path — confirmed with the user.
+- **Published via GitHub Pages** from `main`, on the custom domain `https://beyondthealgorithm.nl/` (a `CNAME` file at the repo root; DNS pointed at GitHub Pages by Ana on 29 September 2026). The `a-gagua.github.io/Beyond-the-Algorithm/` GitHub Pages URL still resolves but is no longer the canonical address — every page's `canonical`/`og:url`/`og:image` points at the custom domain.
 - **The repository is public.** Everything committed is world-readable, permanently.
 - **No form backend exists.** Contact is a plain `mailto:`; a form with no endpoint would silently lose real messages.
 - **Filenames must be lowercase.** macOS is case-insensitive and GitHub Pages is not, so a mis-cased asset works locally and 404s only once published — the one class of fault local testing cannot catch.
